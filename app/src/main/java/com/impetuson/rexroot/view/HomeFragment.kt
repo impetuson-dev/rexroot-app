@@ -5,6 +5,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.activity.addCallback
 import androidx.databinding.DataBindingUtil
 import com.impetuson.rexroot.R
 import com.impetuson.rexroot.databinding.FragmentHomeBinding
@@ -18,7 +19,7 @@ class HomeFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        binding = DataBindingUtil.inflate(inflater, R.layout.fragment_home ,container, false)
+        binding = DataBindingUtil.inflate(inflater, R.layout.fragment_home, container, false)
         return binding!!.root
     }
 
@@ -27,6 +28,11 @@ class HomeFragment : Fragment() {
 
         binding?.apply {
             lifecycleOwner = viewLifecycleOwner
+        }
+
+        // Exit app
+        requireActivity().onBackPressedDispatcher.addCallback(this) {
+            activity?.finish()
         }
     }
 }

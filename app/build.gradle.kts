@@ -54,6 +54,9 @@ dependencies {
     androidTestImplementation(libs.androidx.test.ext.junit)
     androidTestImplementation(libs.espresso.core)
 
+    // Firestore
+    implementation("com.google.firebase:firebase-firestore-ktx:24.6.1")
+
     // Livedata
     implementation("androidx.lifecycle:lifecycle-livedata-ktx:2.3.1")
 
