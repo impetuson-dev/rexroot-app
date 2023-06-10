@@ -6,6 +6,9 @@
         <variable
             name="signupFragment"
             type="com.impetuson.rexroot.view.SignupFragment" />
+        <variable
+            name="signupViewModel"
+            type="com.impetuson.rexroot.viewmodel.SignupViewModel" />
     </data>
 
     <RelativeLayout
@@ -76,6 +79,8 @@
                         android:layout_height="wrap_content"
                         app:boxStrokeColor="#2196F3"
                         app:hintTextColor="#2196F3"
+                        app:errorEnabled="true"
+                        app:error="@{signupViewModel.userFullNameError}"
                         app:placeholderText="Eg: John Steve"
                         app:startIconDrawable="@drawable/baseline_account_circle_24">
 
@@ -83,6 +88,7 @@
                             android:id="@+id/et_fullname"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
+                            android:text="@={signupViewModel.signupModel.userFullName}"
                             android:hint="Full Name" />
 
                     </com.google.android.material.textfield.TextInputLayout>
@@ -101,6 +107,8 @@
                         android:layout_height="wrap_content"
                         app:boxStrokeColor="#2196F3"
                         app:hintTextColor="#2196F3"
+                        app:errorEnabled="true"
+                        app:error="@{signupViewModel.userEmailError}"
                         app:placeholderText="Eg: john@example.com"
                         app:startIconDrawable="@drawable/baseline_mail_24">
 
@@ -108,6 +116,7 @@
                             android:id="@+id/et_email"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
+                            android:text="@={signupViewModel.signupModel.userEmail}"
                             android:hint="Email Address" />
 
                     </com.google.android.material.textfield.TextInputLayout>
@@ -125,6 +134,8 @@
                         android:layout_height="wrap_content"
                         app:boxStrokeColor="#2196F3"
                         app:hintTextColor="#2196F3"
+                        app:errorEnabled="true"
+                        app:error="@{signupViewModel.userMobileNumberError}"
                         app:placeholderText="Eg: 987654210"
                         app:startIconDrawable="@drawable/baseline_phone_24">
 
@@ -132,6 +143,7 @@
                             android:id="@+id/et_mobilenumber"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
+                            android:text="@={signupViewModel.signupModel.userMobileNumber}"
                             android:hint="Mobile Number" />
 
                     </com.google.android.material.textfield.TextInputLayout>
@@ -151,6 +163,8 @@
                         app:boxStrokeColor="#2196F3"
                         app:hintTextColor="#2196F3"
                         app:passwordToggleEnabled="true"
+                        app:errorEnabled="true"
+                        app:error="@{signupViewModel.userPasswordError}"
                         app:placeholderText="Enter your password"
                         app:startIconDrawable="@drawable/baseline_lock_24">
 
@@ -158,6 +172,7 @@
                             android:id="@+id/et_password"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
+                            android:text="@={signupViewModel.signupModel.userPassword}"
                             android:hint="Password"
                             android:inputType="textPassword" />
 
@@ -176,7 +191,8 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="By signing up, you agree to our Terms &amp; Conditions, and Privacy Policy of our application"
-                        android:textColor="@color/black"></TextView>
+                        android:textColor="@color/black">
+                    </TextView>
 
                 </LinearLayout>
 
@@ -192,7 +208,9 @@
                     android:backgroundTint="@color/primary_red"
                     android:textAllCaps="false"
                     android:textColor="@color/white"
-                    android:textStyle="bold"></Button>
+                    android:onClick="@{() -> signupFragment.btnSignUpHandler()}"
+                    android:textStyle="bold">
+                </Button>
 
 
             </LinearLayout>
