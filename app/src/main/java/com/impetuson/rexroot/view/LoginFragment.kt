@@ -18,6 +18,7 @@ import kotlinx.coroutines.launch
 
 class LoginFragment : Fragment() {
 
+
     private var binding: FragmentLoginBinding? = null
     private val viewmodel: LoginViewModel by activityViewModels()
 
@@ -55,6 +56,9 @@ class LoginFragment : Fragment() {
             MainScope().launch {
                 val (authStatus,authMsg) = viewmodel.loginAuthentication()
                 Toast.makeText(context,"$authMsg",Toast.LENGTH_LONG).show()
+                if (authStatus as Boolean){
+                    findNavController().navigate(R.id.action_loginFragment_to_homeFragment)
+                }
             }
         }
     }
