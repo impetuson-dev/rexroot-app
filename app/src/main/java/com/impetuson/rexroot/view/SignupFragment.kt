@@ -11,6 +11,8 @@ import androidx.navigation.fragment.findNavController
 import com.impetuson.rexroot.R
 import com.impetuson.rexroot.databinding.FragmentSignupBinding
 import com.impetuson.rexroot.viewmodel.SignupViewModel
+import kotlinx.coroutines.MainScope
+import kotlinx.coroutines.launch
 
 class SignupFragment : Fragment() {
 
@@ -46,10 +48,11 @@ class SignupFragment : Fragment() {
     fun btnSignUpHandler(){
         val validation: Boolean = viewmodel.signupFormValidation()
         if (validation){
-            Toast.makeText(context,"Signup Successful",Toast.LENGTH_LONG).show()
+            MainScope().launch {
+                val (authStatus,authMsg) = viewmodel.signupAuthentication()
+                Toast.makeText(context,"$authMsg",Toast.LENGTH_LONG).show()
+            }
         }
     }
-
-
 
 }

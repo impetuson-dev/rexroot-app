@@ -1,11 +1,22 @@
 package com.impetuson.rexroot.viewmodel
 
+import android.util.Log
+import android.widget.Toast
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.FirebaseAuthInvalidUserException
+import com.google.firebase.auth.ktx.auth
+import com.google.firebase.ktx.Firebase
 import com.impetuson.rexroot.model.LoginModelClass
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.tasks.await
+import kotlinx.coroutines.withContext
 
 class LoginViewModel: ViewModel() {
+
+    private lateinit var auth: FirebaseAuth
 
     private val _loginModel = MutableLiveData<LoginModelClass>(LoginModelClass("",""))
     val loginModel: LiveData<LoginModelClass> = _loginModel
@@ -45,6 +56,31 @@ class LoginViewModel: ViewModel() {
     fun resetViewModel(){
         _userEmailError.value = null
         _userPasswordError.value = null
+    }
+
+    suspend fun loginAuthentication(): List<Any> = withContext(Dispatchers.IO){
+        auth = Firebase.auth
+        var authMsg: String = ""
+        var authStatus: Boolean = false
+        val email = loginModel.value?.userEmail ?: ""
+        val password = loginModel.value?.userPassword ?: ""
+
+        try {
+            auth.signInWithEmailAndPassword(email, password).await()
+            Log.d("FirebaseAuth", "Login success")
+            authMsg = "Login successful"
+            authStatus = true
+            val user = auth.currentUser
+        } catch (e: Exception) {
+            Log.d("FirebaseAuth", "Login failed", e)
+            if (e is FirebaseAuthInvalidUserException) {
+                authMsg = "Account does not exist"
+            } else {
+                authMsg = "Invalid Email or Password"
+            }
+        }
+
+        listOf(authStatus,authMsg)
     }
 
 }

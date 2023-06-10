@@ -13,6 +13,8 @@ import androidx.navigation.fragment.findNavController
 import com.impetuson.rexroot.R
 import com.impetuson.rexroot.databinding.FragmentLoginBinding
 import com.impetuson.rexroot.viewmodel.LoginViewModel
+import kotlinx.coroutines.MainScope
+import kotlinx.coroutines.launch
 
 class LoginFragment : Fragment() {
 
@@ -50,7 +52,10 @@ class LoginFragment : Fragment() {
     fun btnLogInHandler(){
         val validation: Boolean = viewmodel.loginFormValidation()
         if (validation){
-            Toast.makeText(context,"Login Successful",Toast.LENGTH_LONG).show()
+            MainScope().launch {
+                val (authStatus,authMsg) = viewmodel.loginAuthentication()
+                Toast.makeText(context,"$authMsg",Toast.LENGTH_LONG).show()
+            }
         }
     }
 

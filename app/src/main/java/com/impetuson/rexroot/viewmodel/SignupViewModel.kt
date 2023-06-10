@@ -1,12 +1,22 @@
 package com.impetuson.rexroot.viewmodel
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.FirebaseAuthUserCollisionException
+import com.google.firebase.auth.ktx.auth
+import com.google.firebase.ktx.Firebase
 import com.impetuson.rexroot.model.LoginModelClass
 import com.impetuson.rexroot.model.SignupModelClass
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.tasks.await
+import kotlinx.coroutines.withContext
 
 class SignupViewModel: ViewModel() {
+
+    private lateinit var auth: FirebaseAuth
 
     private val _signupModel = MutableLiveData<SignupModelClass>(SignupModelClass("","","",""))
     val signupModel: LiveData<SignupModelClass> = _signupModel
@@ -71,6 +81,31 @@ class SignupViewModel: ViewModel() {
     private fun isMobileNumberValid(mobilenumber: String): Boolean {
         if (mobilenumber.length < 10) return false
         else return mobilenumber.all { it.isLetterOrDigit() }
+    }
+
+    suspend fun signupAuthentication(): List<Any> = withContext(Dispatchers.IO){
+        auth = Firebase.auth
+        var authMsg: String = ""
+        var authStatus: Boolean = false
+        val email = signupModel.value?.userEmail ?: ""
+        val password = signupModel.value?.userPassword ?: ""
+
+        try {
+            auth.createUserWithEmailAndPassword(email, password).await()
+            Log.d("FirebaseAuth", "Sign up success")
+            authMsg = "Sign up successful"
+            authStatus = true
+            val user = auth.currentUser
+        } catch (e: Exception) {
+            Log.d("FirebaseAuth", "Sign up failed", e)
+            if (e is FirebaseAuthUserCollisionException) {
+                authMsg = "Account already exists"
+            } else {
+                authMsg = "Sign up failed"
+            }
+        }
+
+        listOf(authStatus, authMsg)
     }
 
     fun resetViewModel(){
