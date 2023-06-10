@@ -4,6 +4,9 @@
         <!-- Customize your light theme here. -->
         <item name="android:fontFamily">@font/notosans_regular</item>
         <!-- <item name="colorPrimary">@color/my_light_primary</item> -->
+        <item name="android:statusBarColor">@color/white</item>
+        <item name="android:navigationBarColor">@color/white</item>
+        <item name="android:windowLightStatusBar">true</item>
     </style>
 
     <style name="Theme.Rexroot" parent="Base.Theme.Rexroot" />
