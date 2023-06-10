@@ -7,8 +7,8 @@
             name="loginFragment"
             type="com.impetuson.rexroot.view.LoginFragment" />
         <variable
-            name="validationViewModel"
-            type="com.impetuson.rexroot.viewmodel.ValidationViewModel" />
+            name="loginViewModel"
+            type="com.impetuson.rexroot.viewmodel.LoginViewModel" />
     </data>
 
     <RelativeLayout
@@ -84,7 +84,7 @@
                         app:boxStrokeColor="#2196F3"
                         app:hintTextColor="#2196F3"
                         app:errorEnabled="true"
-                        app:error="@{validationViewModel.userEmailError}"
+                        app:error="@{loginViewModel.userEmailError}"
                         app:placeholderText="Eg: john@example.com"
                         app:startIconDrawable="@drawable/baseline_mail_24">
 
@@ -92,10 +92,10 @@
                             android:id="@+id/et_email"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
+                            android:text="@={loginViewModel.loginModel.userEmail}"
                             android:hint="Email address" />
 
                     </com.google.android.material.textfield.TextInputLayout>
-
 
                 </LinearLayout>
 
@@ -111,7 +111,7 @@
                         app:boxStrokeColor="#2196F3"
                         app:hintTextColor="#2196F3"
                         app:errorEnabled="true"
-                        app:error="@{validationViewModel.userPasswordError}"
+                        app:error="@{loginViewModel.userPasswordError}"
                         app:passwordToggleEnabled="true"
                         app:placeholderText="Enter your password"
                         app:startIconDrawable="@drawable/baseline_lock_24">
@@ -120,6 +120,7 @@
                             android:id="@+id/et_password"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
+                            android:text="@={loginViewModel.loginModel.userPassword}"
                             android:hint="Password"
                             android:inputType="textPassword" />
 
