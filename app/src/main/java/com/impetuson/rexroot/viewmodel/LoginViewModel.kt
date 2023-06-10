@@ -16,7 +16,7 @@ import kotlinx.coroutines.withContext
 
 class LoginViewModel: ViewModel() {
 
-    private lateinit var auth: FirebaseAuth
+    private var auth: FirebaseAuth = Firebase.auth
 
     private val _loginModel = MutableLiveData<LoginModelClass>(LoginModelClass("",""))
     val loginModel: LiveData<LoginModelClass> = _loginModel
@@ -59,7 +59,6 @@ class LoginViewModel: ViewModel() {
     }
 
     suspend fun loginAuthentication(): List<Any> = withContext(Dispatchers.IO){
-        auth = Firebase.auth
         var authMsg: String = ""
         var authStatus: Boolean = false
         val email = loginModel.value?.userEmail ?: ""
@@ -82,5 +81,4 @@ class LoginViewModel: ViewModel() {
 
         listOf(authStatus,authMsg)
     }
-
 }

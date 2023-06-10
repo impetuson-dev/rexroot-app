@@ -51,8 +51,10 @@ class SignupFragment : Fragment() {
             MainScope().launch {
                 val (authStatus,authMsg) = viewmodel.signupAuthentication()
                 Toast.makeText(context,"$authMsg",Toast.LENGTH_LONG).show()
+                if (authStatus as Boolean){
+                    findNavController().navigate(R.id.action_signupFragment_to_homeFragment)
+                }
             }
         }
     }
-
 }
