@@ -11,7 +11,7 @@ android {
 
     defaultConfig {
         applicationId = "com.impetuson.rexroot"
-        minSdk = 22
+        minSdk = 23
         targetSdk = 33
         versionCode = 1
         versionName = "1.0"
