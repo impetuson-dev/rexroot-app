@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "626021352300",
+    "project_id": "rexroot-app",
+    "storage_bucket": "rexroot-app.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:626021352300:android:afc5fe725f3a2f13806949",
+        "android_client_info": {
+          "package_name": "com.impetuson.rexroot"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "626021352300-00i9th3ja7csrsn56lgsj70v2qq96a8e.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAJegAh4eFLXywqmKtzl1DUfg33qLmU7dg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "626021352300-00i9th3ja7csrsn56lgsj70v2qq96a8e.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
