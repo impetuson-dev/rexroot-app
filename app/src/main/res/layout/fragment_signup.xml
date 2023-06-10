@@ -78,18 +78,19 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         app:boxStrokeColor="#2196F3"
-                        app:hintTextColor="#2196F3"
-                        app:errorEnabled="true"
                         app:error="@{signupViewModel.userFullNameError}"
+                        app:errorEnabled="true"
+                        app:hintTextColor="#2196F3"
                         app:placeholderText="Eg: John Steve"
+                        app:placeholderTextColor="#A9A9A9"
                         app:startIconDrawable="@drawable/baseline_account_circle_24">
 
                         <com.google.android.material.textfield.TextInputEditText
                             android:id="@+id/et_fullname"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:text="@={signupViewModel.signupModel.userFullName}"
-                            android:hint="Full Name" />
+                            android:hint="Full Name"
+                            android:text="@={signupViewModel.signupModel.userFullName}" />
 
                     </com.google.android.material.textfield.TextInputLayout>
 
@@ -106,18 +107,19 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         app:boxStrokeColor="#2196F3"
-                        app:hintTextColor="#2196F3"
-                        app:errorEnabled="true"
                         app:error="@{signupViewModel.userEmailError}"
+                        app:errorEnabled="true"
+                        app:hintTextColor="#2196F3"
                         app:placeholderText="Eg: john@example.com"
+                        app:placeholderTextColor="#A9A9A9"
                         app:startIconDrawable="@drawable/baseline_mail_24">
 
                         <com.google.android.material.textfield.TextInputEditText
                             android:id="@+id/et_email"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:text="@={signupViewModel.signupModel.userEmail}"
-                            android:hint="Email Address" />
+                            android:hint="Email Address"
+                            android:text="@={signupViewModel.signupModel.userEmail}" />
 
                     </com.google.android.material.textfield.TextInputLayout>
 
@@ -133,18 +135,19 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         app:boxStrokeColor="#2196F3"
-                        app:hintTextColor="#2196F3"
-                        app:errorEnabled="true"
                         app:error="@{signupViewModel.userMobileNumberError}"
+                        app:errorEnabled="true"
+                        app:hintTextColor="#2196F3"
                         app:placeholderText="Eg: 987654210"
+                        app:placeholderTextColor="#A9A9A9"
                         app:startIconDrawable="@drawable/baseline_phone_24">
 
                         <com.google.android.material.textfield.TextInputEditText
                             android:id="@+id/et_mobilenumber"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:text="@={signupViewModel.signupModel.userMobileNumber}"
-                            android:hint="Mobile Number" />
+                            android:hint="Mobile Number"
+                            android:text="@={signupViewModel.signupModel.userMobileNumber}" />
 
                     </com.google.android.material.textfield.TextInputLayout>
 
@@ -161,20 +164,21 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         app:boxStrokeColor="#2196F3"
+                        app:error="@{signupViewModel.userPasswordError}"
+                        app:errorEnabled="true"
                         app:hintTextColor="#2196F3"
                         app:passwordToggleEnabled="true"
-                        app:errorEnabled="true"
-                        app:error="@{signupViewModel.userPasswordError}"
                         app:placeholderText="Enter your password"
+                        app:placeholderTextColor="#A9A9A9"
                         app:startIconDrawable="@drawable/baseline_lock_24">
 
                         <com.google.android.material.textfield.TextInputEditText
                             android:id="@+id/et_password"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:text="@={signupViewModel.signupModel.userPassword}"
                             android:hint="Password"
-                            android:inputType="textPassword" />
+                            android:inputType="textPassword"
+                            android:text="@={signupViewModel.signupModel.userPassword}" />
 
                     </com.google.android.material.textfield.TextInputLayout>
 
