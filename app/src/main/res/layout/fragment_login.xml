@@ -82,18 +82,19 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         app:boxStrokeColor="#2196F3"
-                        app:hintTextColor="#2196F3"
-                        app:errorEnabled="true"
                         app:error="@{loginViewModel.userEmailError}"
+                        app:errorEnabled="true"
+                        app:hintTextColor="#2196F3"
                         app:placeholderText="Eg: john@example.com"
+                        app:placeholderTextColor="#A9A9A9"
                         app:startIconDrawable="@drawable/baseline_mail_24">
 
                         <com.google.android.material.textfield.TextInputEditText
                             android:id="@+id/et_email"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:text="@={loginViewModel.loginModel.userEmail}"
-                            android:hint="Email address" />
+                            android:hint="Email address"
+                            android:text="@={loginViewModel.loginModel.userEmail}" />
 
                     </com.google.android.material.textfield.TextInputLayout>
 
@@ -109,20 +110,21 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         app:boxStrokeColor="#2196F3"
-                        app:hintTextColor="#2196F3"
-                        app:errorEnabled="true"
                         app:error="@{loginViewModel.userPasswordError}"
+                        app:errorEnabled="true"
+                        app:hintTextColor="#2196F3"
                         app:passwordToggleEnabled="true"
                         app:placeholderText="Enter your password"
+                        app:placeholderTextColor="#A9A9A9"
                         app:startIconDrawable="@drawable/baseline_lock_24">
 
                         <com.google.android.material.textfield.TextInputEditText
                             android:id="@+id/et_password"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:text="@={loginViewModel.loginModel.userPassword}"
                             android:hint="Password"
-                            android:inputType="textPassword" />
+                            android:inputType="textPassword"
+                            android:text="@={loginViewModel.loginModel.userPassword}" />
 
                     </com.google.android.material.textfield.TextInputLayout>
 
