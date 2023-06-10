@@ -39,6 +39,8 @@ class SignupFragment : Fragment() {
             binding?.signupFragment = this@SignupFragment
             signupViewModel = viewmodel
         }
+
+
     }
 
     fun redirectToLogIn(){
@@ -49,11 +51,14 @@ class SignupFragment : Fragment() {
         val validation: Boolean = viewmodel.signupFormValidation()
         if (validation){
             MainScope().launch {
+                binding!!.progressBar.visibility = View.VISIBLE
                 val (authStatus,authMsg) = viewmodel.signupAuthentication()
                 Toast.makeText(context,"$authMsg",Toast.LENGTH_LONG).show()
                 if (authStatus as Boolean){
+                    viewmodel.storeDatatoFirestore()
                     findNavController().navigate(R.id.action_signupFragment_to_homeFragment)
                 }
+                binding!!.progressBar.visibility = View.GONE
             }
         }
     }

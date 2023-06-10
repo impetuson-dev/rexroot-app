@@ -13,15 +13,12 @@ import com.impetuson.rexroot.R
 import com.impetuson.rexroot.viewmodel.LoginViewModel
 import com.impetuson.rexroot.viewmodel.SplashViewModel
 
-/**
- * First screen of the app: Splash Screen
- */
-const val SPLASH_TIME: Long = 1500
 
 @SuppressLint("CustomSplashScreen")
 class SplashscreenFragment : Fragment() {
 
     private val viewmodel: SplashViewModel by activityViewModels()
+    private val SPLASH_TIME: Long = 1500
 
     override fun onCreateView(
         inflater: LayoutInflater,

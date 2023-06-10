@@ -7,6 +7,7 @@ import androidx.lifecycle.ViewModel
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseAuthUserCollisionException
 import com.google.firebase.auth.ktx.auth
+import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 import com.impetuson.rexroot.model.LoginModelClass
 import com.impetuson.rexroot.model.SignupModelClass
@@ -17,6 +18,7 @@ import kotlinx.coroutines.withContext
 class SignupViewModel: ViewModel() {
 
     private lateinit var auth: FirebaseAuth
+    private val db = Firebase.firestore
 
     private val _signupModel = MutableLiveData<SignupModelClass>(SignupModelClass("","","",""))
     val signupModel: LiveData<SignupModelClass> = _signupModel
@@ -106,6 +108,31 @@ class SignupViewModel: ViewModel() {
         }
 
         listOf(authStatus, authMsg)
+    }
+
+    fun storeDatatoFirestore(){
+        val fullname = signupModel.value?.userFullName ?: ""
+        val email = signupModel.value?.userEmail ?: ""
+        val mobilenumber = signupModel.value?.userMobileNumber ?: ""
+        val userId = auth.currentUser!!.uid
+
+        val userdata = hashMapOf(
+            "profiledata" to hashMapOf(
+                "userid" to userId,
+                "fullname" to fullname.trim(),
+                "email" to email.trim(),
+                "mobilenumber" to mobilenumber.trim()
+            ),
+            "submitdata" to hashMapOf()
+        )
+
+        db.collection("users").document(userId).set(userdata)
+            .addOnSuccessListener { documentReference ->
+                Log.d("FirestoreDB","Document Reference added: ${documentReference}")
+            }
+            .addOnFailureListener { error ->
+                Log.w("FirestoreDB","Error adding document: ${error}")
+            }
     }
 
     fun resetViewModel(){

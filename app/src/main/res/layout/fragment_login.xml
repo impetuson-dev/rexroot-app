@@ -18,7 +18,6 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-
         <LinearLayout
             android:id="@+id/ll_header"
             android:layout_width="match_parent"
@@ -50,7 +49,8 @@
                     android:layout_marginLeft="8sp"
                     android:layout_width="100dp"
                     android:layout_height="30dp"
-                    android:src="@drawable/impetuson_logo_cropped"></ImageView>
+                    android:src="@drawable/impetuson_logo_cropped">
+                </ImageView>
 
             </LinearLayout>
 
@@ -142,7 +142,8 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Forgot Password"
-                        android:textColor="@color/black"></TextView>
+                        android:textColor="@color/black">
+                    </TextView>
 
                 </LinearLayout>
 
@@ -192,7 +193,8 @@
                     android:layout_height="wrap_content"
                     android:text="@string/login_otp"
                     android:textStyle="bold"
-                    android:textColor="@color/primary_red"></TextView>
+                    android:textColor="@color/primary_red">
+                </TextView>
 
             </LinearLayout>
 
@@ -228,13 +230,14 @@
             android:layout_height="wrap_content"
             android:visibility="gone"
             android:padding="12dp"
+            android:background="@drawable/bg_progressbar"
             android:layout_centerInParent="true">
-            <!--android:background="@drawable/bg_progressbar">-->
 
-            <ProgressBar
-                android:visibility="visible"
+            <com.google.android.material.progressindicator.CircularProgressIndicator
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"></ProgressBar>
+                android:layout_height="wrap_content"
+                app:indicatorColor="@color/primary_green"
+                android:indeterminate="true" />
 
         </LinearLayout>
 
