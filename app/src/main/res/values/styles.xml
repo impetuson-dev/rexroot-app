@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <style name="AppTheme.Fragment" parent="Theme.MaterialComponents.Light.NoActionBar">
-        <!-- Customize your style attributes here -->
+
     </style>
+
 </resources>

@@ -80,6 +80,7 @@
                         app:boxStrokeColor="#2196F3"
                         app:error="@{signupViewModel.userFullNameError}"
                         app:errorEnabled="true"
+                        app:helperTextTextColor="#2196F3"
                         app:hintTextColor="#2196F3"
                         app:placeholderText="Eg: John Steve"
                         app:placeholderTextColor="#A9A9A9"
@@ -90,7 +91,8 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:hint="Full Name"
-                            android:text="@={signupViewModel.signupModel.userFullName}" />
+                            android:text="@={signupViewModel.signupModel.userFullName}"
+                            android:textColorHighlight="#2196F3" />
 
                     </com.google.android.material.textfield.TextInputLayout>
 
@@ -119,7 +121,8 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:hint="Email Address"
-                            android:text="@={signupViewModel.signupModel.userEmail}" />
+                            android:text="@={signupViewModel.signupModel.userEmail}"
+                            android:textColorHighlight="#2196F3" />
 
                     </com.google.android.material.textfield.TextInputLayout>
 
@@ -147,7 +150,8 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:hint="Mobile Number"
-                            android:text="@={signupViewModel.signupModel.userMobileNumber}" />
+                            android:text="@={signupViewModel.signupModel.userMobileNumber}"
+                            android:textColorHighlight="#2196F3" />
 
                     </com.google.android.material.textfield.TextInputLayout>
 
@@ -178,7 +182,8 @@
                             android:layout_height="wrap_content"
                             android:hint="Password"
                             android:inputType="textPassword"
-                            android:text="@={signupViewModel.signupModel.userPassword}" />
+                            android:text="@={signupViewModel.signupModel.userPassword}"
+                            android:textColorHighlight="#2196F3" />
 
                     </com.google.android.material.textfield.TextInputLayout>
 

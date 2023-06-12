@@ -7,7 +7,10 @@
         <item name="android:statusBarColor">@color/white</item>
         <item name="android:navigationBarColor">@color/white</item>
         <item name="android:windowLightStatusBar">true</item>
+        <item name="android:windowDrawsSystemBarBackgrounds">true</item>
+
     </style>
+
 
     <style name="Theme.Rexroot" parent="Base.Theme.Rexroot" />
 </resources>

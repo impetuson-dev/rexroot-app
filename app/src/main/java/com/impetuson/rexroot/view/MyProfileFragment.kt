@@ -3,13 +3,13 @@ package com.impetuson.rexroot.view
 import android.graphics.Color
 import android.os.Build
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.activity.addCallback
-import androidx.core.content.ContextCompat
+import android.view.Window
+import android.view.WindowManager
 import androidx.databinding.DataBindingUtil
+import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.impetuson.rexroot.R
 import com.impetuson.rexroot.databinding.FragmentMyProfileBinding
@@ -24,6 +24,7 @@ class MyProfileFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+        changeStatusBarColor()
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_my_profile ,container, false)
         return binding!!.root
     }
@@ -31,7 +32,6 @@ class MyProfileFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        changeStatusBarColor()
 
         binding?.apply {
             lifecycleOwner = viewLifecycleOwner
@@ -44,14 +44,9 @@ class MyProfileFragment : Fragment() {
     }
 
     private fun changeStatusBarColor() {
-        val window = requireActivity().window
-        if (requireActivity().supportFragmentManager.findFragmentById(R.id.myProfileFragment) is MyProfileFragment) {
-            // Set the desired status bar color
-            window.statusBarColor = ContextCompat.getColor(requireContext(), R.color.primary_red)
-        } else {
-            // Reset the status bar color to the default color
-            window.statusBarColor = ContextCompat.getColor(requireContext(), R.color.white)
-        }
+        val window: Window = requireActivity().window
+        window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS)
+        window.statusBarColor = Color.parseColor("#E51E26")
     }
 
 }

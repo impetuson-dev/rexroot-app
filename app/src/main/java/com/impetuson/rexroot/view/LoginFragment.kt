@@ -55,7 +55,7 @@ class LoginFragment : Fragment() {
             MainScope().launch {
                 binding!!.progressBar.visibility = View.VISIBLE
                 val (authStatus,authMsg) = viewmodel.loginAuthentication()
-                Toast.makeText(context,"$authMsg",Toast.LENGTH_LONG).show()
+                Toast.makeText(context,"$authMsg",Toast.LENGTH_SHORT).show()
                 if (authStatus as Boolean){
                     findNavController().navigate(R.id.action_loginFragment_to_homeFragment)
                 }
