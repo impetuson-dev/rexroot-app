@@ -1,0 +1,271 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+        <variable
+            name="signupFragment"
+            type="com.impetuson.rexroot.view.SignupFragment" />
+        <variable
+            name="signupViewModel"
+            type="com.impetuson.rexroot.viewmodel.SignupViewModel" />
+    </data>
+
+    <RelativeLayout
+        android:id="@+id/parent_layout"
+        android:orientation="vertical"
+        android:background="@color/white"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:id="@+id/ll_header"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="rexroot"
+                android:textSize="50dp"
+                android:textColor="#e51e26"
+                android:textStyle="bold"></TextView>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="powered by"></TextView>
+
+                <ImageView
+                    android:layout_marginLeft="8sp"
+                    android:layout_width="100dp"
+                    android:layout_height="30dp"
+                    android:src="@drawable/impetuson_logo_cropped"></ImageView>
+
+            </LinearLayout>
+
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_margin="15dp"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@+id/ll_header"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="5dp"
+                    android:orientation="vertical">
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        app:boxStrokeColor="#2196F3"
+                        app:error="@{signupViewModel.userFullNameError}"
+                        app:errorEnabled="true"
+                        app:helperTextTextColor="#2196F3"
+                        app:hintTextColor="#2196F3"
+                        app:placeholderText="Eg: John Steve"
+                        app:placeholderTextColor="#A9A9A9"
+                        app:startIconDrawable="@drawable/baseline_account_circle_24">
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/et_fullname"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:hint="Full Name"
+                            android:text="@={signupViewModel.signupModel.userFullName}"
+                            android:textColorHighlight="#2196F3" />
+
+                    </com.google.android.material.textfield.TextInputLayout>
+
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="5dp"
+                    android:orientation="vertical">
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        app:boxStrokeColor="#2196F3"
+                        app:error="@{signupViewModel.userEmailError}"
+                        app:errorEnabled="true"
+                        app:hintTextColor="#2196F3"
+                        app:placeholderText="Eg: john@example.com"
+                        app:placeholderTextColor="#A9A9A9"
+                        app:startIconDrawable="@drawable/baseline_mail_24">
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/et_email"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:hint="Email Address"
+                            android:text="@={signupViewModel.signupModel.userEmail}"
+                            android:textColorHighlight="#2196F3" />
+
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="5dp"
+                    android:orientation="vertical">
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        app:boxStrokeColor="#2196F3"
+                        app:error="@{signupViewModel.userMobileNumberError}"
+                        app:errorEnabled="true"
+                        app:hintTextColor="#2196F3"
+                        app:placeholderText="Eg: 987654210"
+                        app:placeholderTextColor="#A9A9A9"
+                        app:startIconDrawable="@drawable/baseline_phone_24">
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/et_mobilenumber"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:hint="Mobile Number"
+                            android:text="@={signupViewModel.signupModel.userMobileNumber}"
+                            android:textColorHighlight="#2196F3" />
+
+                    </com.google.android.material.textfield.TextInputLayout>
+
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="5dp"
+                    android:orientation="vertical">
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        app:boxStrokeColor="#2196F3"
+                        app:error="@{signupViewModel.userPasswordError}"
+                        app:errorEnabled="true"
+                        app:hintTextColor="#2196F3"
+                        app:passwordToggleEnabled="true"
+                        app:placeholderText="Enter your password"
+                        app:placeholderTextColor="#A9A9A9"
+                        app:startIconDrawable="@drawable/baseline_lock_24">
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/et_password"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:hint="Password"
+                            android:inputType="textPassword"
+                            android:text="@={signupViewModel.signupModel.userPassword}"
+                            android:textColorHighlight="#2196F3" />
+
+                    </com.google.android.material.textfield.TextInputLayout>
+
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="25dp"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="By signing up, you agree to our Terms &amp; Conditions, and Privacy Policy of our application"
+                        android:textColor="@color/black">
+                    </TextView>
+
+                </LinearLayout>
+
+                <Button
+                    android:id="@+id/btn_signup"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingTop="14sp"
+                    android:paddingBottom="14sp"
+                    android:paddingLeft="50dp"
+                    android:paddingRight="50dp"
+                    android:text="Sign up"
+                    android:backgroundTint="@color/primary_red"
+                    android:textAllCaps="false"
+                    android:textColor="@color/white"
+                    android:onClick="@{() -> signupFragment.btnSignUpHandler()}"
+                    android:textStyle="bold">
+                </Button>
+
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="30dp"
+                android:gravity="center">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Are you an existing user?  "
+                    android:textColor="@color/black"></TextView>
+
+                <TextView
+                    android:id="@+id/tv_clickhere"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textStyle="bold"
+                    android:text="@string/click_here"
+                    android:textColor="#e51e26"
+                    android:onClick="@{() -> signupFragment.redirectToLogIn()}"></TextView>
+
+            </LinearLayout>
+
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/progress_bar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:visibility="gone"
+            android:padding="12dp"
+            android:background="@drawable/bg_progressbar"
+            android:layout_centerInParent="true">
+
+            <com.google.android.material.progressindicator.CircularProgressIndicator
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:indicatorColor="@color/primary_green"
+                android:indeterminate="true" />
+
+        </LinearLayout>
+
+    </RelativeLayout>
+</layout>

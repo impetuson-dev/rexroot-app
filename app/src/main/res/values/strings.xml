@@ -1,3 +1,8 @@
 <resources>
     <string name="app_name">Rexroot</string>
+    <string name="app_name_small">rexroot</string>
+    <string name="login_otp">Login using OTP</string>
+    <string name="click_here">Click here</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

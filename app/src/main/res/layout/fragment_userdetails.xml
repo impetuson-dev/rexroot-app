@@ -1,0 +1,311 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+    <data>
+        <variable
+            name="userdetailsFragment"
+            type="com.impetuson.rexroot.view.UserdetailsFragment" />
+        <variable
+            name="signupViewModel"
+            type="com.impetuson.rexroot.viewmodel.SignupViewModel" />
+        <variable
+            name="userdetailsViewModel"
+            type="com.impetuson.rexroot.viewmodel.UserdetailsViewModel" />
+    </data>
+
+    <RelativeLayout
+        tools:context=".view.UserdetailsFragment"
+        android:id="@+id/parent_layout"
+        android:orientation="vertical"
+        android:background="@color/white"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:id="@+id/ll_header"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="rexroot"
+                android:textSize="50dp"
+                android:textColor="#e51e26"
+                android:textStyle="bold"></TextView>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="powered by"></TextView>
+
+                <ImageView
+                    android:layout_marginLeft="8sp"
+                    android:layout_width="100dp"
+                    android:layout_height="30dp"
+                    android:src="@drawable/impetuson_logo_cropped"></ImageView>
+
+            </LinearLayout>
+
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@+id/ll_header"
+            android:layout_marginStart="15dp"
+            android:layout_marginTop="15dp"
+            android:layout_marginBottom="15dp"
+            android:layout_marginEnd="15dp"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="10sp"
+                android:layout_marginBottom="10sp"
+                android:textStyle="bold"
+                android:text="User Details"></TextView>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="15dp"
+                android:orientation="vertical">
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:enabled="false"
+                    app:boxStrokeColor="#2196F3"
+                    app:hintTextColor="#2196F3"
+                    app:placeholderText="Eg: John Steve"
+                    app:placeholderTextColor="#A9A9A9"
+                    app:startIconDrawable="@drawable/baseline_account_circle_24">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/et_fullname"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="@{signupViewModel.signupModel.userFullName}" />
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="15dp"
+                android:orientation="vertical">
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:enabled="false"
+                    app:boxStrokeColor="#2196F3"
+                    app:hintTextColor="#2196F3"
+                    app:placeholderText="Eg: john@example.com"
+                    app:placeholderTextColor="#A9A9A9"
+                    app:startIconDrawable="@drawable/baseline_mail_24">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/et_email"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="@{signupViewModel.signupModel.userEmail}" />
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="15dp"
+                android:orientation="vertical">
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:boxStrokeColor="#2196F3"
+                    android:enabled="false"
+                    app:hintTextColor="#2196F3"
+                    app:placeholderText="Eg: 987654210"
+                    app:placeholderTextColor="#A9A9A9"
+                    app:startIconDrawable="@drawable/baseline_phone_24">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/et_mobilenumber"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="@{signupViewModel.signupModel.userMobileNumber}" />
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+
+            </LinearLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_marginBottom="20sp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+
+                <com.google.android.material.textfield.TextInputLayout
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toStartOf="@id/btn_selectdate"
+                    android:layout_marginEnd="20sp"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    app:boxStrokeColor="#2196F3"
+                    app:hintTextColor="#2196F3"
+                    app:placeholderText="Eg: 01-01-2000"
+                    app:placeholderTextColor="#A9A9A9"
+                    app:startIconDrawable="@drawable/baseline_date_range_24">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/et_dob"
+                        android:editable="false"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@{userdetailsViewModel.dobUser}"
+                        android:hint="Date of Birth" />
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <Button
+                    android:id="@+id/btn_selectdate"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:backgroundTint="@color/primary_red"
+                    android:text="Select Date"
+                    android:textAllCaps="false"
+                    android:textColor="@color/white"
+                    android:textStyle="bold"
+                    android:onClick="@{() -> userdetailsFragment.btnSelectDateHandler()}"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent">
+                </Button>
+
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <LinearLayout
+                android:gravity="center"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Your preferred role:"></TextView>
+
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <CheckBox
+                        android:id="@+id/cb_partner"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Partner"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toStartOf="@id/cb_candidate"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"></CheckBox>
+
+                    <CheckBox
+                        android:id="@+id/cb_candidate"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toEndOf="@id/cb_partner"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Candidate">
+                    </CheckBox>
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <RadioButton
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Keep me signed in"></RadioButton>
+
+                <RadioButton
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Receive updates in Whatsapp">
+                </RadioButton>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center">
+
+                <Button
+                    android:id="@+id/btn_continue"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingTop="14sp"
+                    android:paddingBottom="14sp"
+                    android:paddingLeft="50dp"
+                    android:paddingRight="50dp"
+                    android:text="Continue"
+                    android:backgroundTint="@color/primary_red"
+                    android:textAllCaps="false"
+                    android:textColor="@color/white"
+                    android:onClick="@{() -> userdetailsFragment.btnContinueHandler()}"
+                    android:textStyle="bold">
+                </Button>
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/progress_bar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:visibility="gone"
+            android:padding="12dp"
+            android:background="@drawable/bg_progressbar"
+            android:layout_centerInParent="true">
+
+            <com.google.android.material.progressindicator.CircularProgressIndicator
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:indicatorColor="@color/primary_green"
+                android:indeterminate="true" />
+
+        </LinearLayout>
+
+    </RelativeLayout>
+</layout>
