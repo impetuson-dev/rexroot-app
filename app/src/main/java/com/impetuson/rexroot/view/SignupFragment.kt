@@ -53,9 +53,9 @@ class SignupFragment : Fragment() {
             MainScope().launch {
                 binding!!.progressBar.visibility = View.VISIBLE
                 val (authStatus,authMsg) = viewmodel.signupAuthentication()
-                Toast.makeText(context,"$authMsg",Toast.LENGTH_LONG).show()
                 if (authStatus as Boolean){
-                    viewmodel.storeDatatoFirestore()
+                    viewmodel.storeDataToFirestore()
+                    Toast.makeText(context,"$authMsg",Toast.LENGTH_LONG).show()
                     findNavController().navigate(R.id.action_signupFragment_to_userdetailsFragment)
                 }
                 binding!!.progressBar.visibility = View.GONE

@@ -4,5 +4,6 @@ data class SignupModelClass(
     var userFullName: String,
     var userEmail: String,
     var userMobileNumber: String,
-    var userPassword: String
+    var userPassword: String,
+    var userAge: Int
 )

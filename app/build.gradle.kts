@@ -67,4 +67,7 @@ dependencies {
     // Advanced Navigation - Jetpack Compose
     implementation("androidx.navigation:navigation-fragment-ktx:2.5.3")
     implementation("androidx.navigation:navigation-ui-ktx:2.5.3")
+
+    implementation("com.wdullaer:materialdatetimepicker:3.6.4")
+    releaseImplementation("com.github.OzcanAlasalvar:DatePicker:1.0.8")
 }

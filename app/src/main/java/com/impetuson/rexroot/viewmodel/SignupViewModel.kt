@@ -20,7 +20,7 @@ class SignupViewModel: ViewModel() {
     private lateinit var auth: FirebaseAuth
     private val db = Firebase.firestore
 
-    private val _signupModel = MutableLiveData<SignupModelClass>(SignupModelClass("","","",""))
+    private val _signupModel = MutableLiveData<SignupModelClass>(SignupModelClass("","","","",0))
     val signupModel: LiveData<SignupModelClass> = _signupModel
 
     private val _userFullNameError = MutableLiveData<String?>("")
@@ -110,7 +110,10 @@ class SignupViewModel: ViewModel() {
         listOf(authStatus, authMsg)
     }
 
-    fun storeDatatoFirestore(){
+    suspend fun storeDataToFirestore(): List<Any> = withContext(Dispatchers.IO){
+        var storeMsg: String = ""
+        var storeStatus: Boolean = false
+
         val fullname = signupModel.value?.userFullName ?: ""
         val email = signupModel.value?.userEmail ?: ""
         val mobilenumber = signupModel.value?.userMobileNumber ?: ""
@@ -121,18 +124,21 @@ class SignupViewModel: ViewModel() {
                 "userid" to userId,
                 "fullname" to fullname.trim(),
                 "email" to email.trim(),
-                "mobilenumber" to mobilenumber.trim()
+                "mobilenumber" to mobilenumber.trim(),
             ),
             "submitdata" to hashMapOf()
         )
 
-        db.collection("users").document(userId).set(userdata)
-            .addOnSuccessListener { documentReference ->
-                Log.d("FirestoreDB","Document Reference added: ${documentReference}")
-            }
-            .addOnFailureListener { error ->
-                Log.w("FirestoreDB","Error adding document: ${error}")
-            }
+        try{
+            db.collection("users").document(userId).set(userdata).await()
+            Log.d("FirestoreDB","Document Reference added: $userId")
+            storeStatus = true
+            storeMsg = "User details added successfully"
+        } catch (e: Exception) {
+            storeMsg = "Error occurred"
+        }
+
+        listOf(storeStatus,storeMsg)
     }
 
     fun resetViewModel(){

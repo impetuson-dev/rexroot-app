@@ -32,8 +32,8 @@ class SplashscreenFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         Handler().postDelayed({
-            if (viewmodel.userAlreadySignedIn()){ findNavController().navigate(R.id.action_splashscreenFragment_to_homeFragment) }
-            else { findNavController().navigate(R.id.action_splashscreenFragment_to_loginFragment) } }, SPLASH_TIME)
-
+//            if (viewmodel.userAlreadySignedIn()){ findNavController().navigate(R.id.action_splashscreenFragment_to_homeFragment) }
+//            else { findNavController().navigate(R.id.action_splashscreenFragment_to_loginFragment) } }, SPLASH_TIME)
+            findNavController().navigate(R.id.action_splashscreenFragment_to_loginFragment) }, SPLASH_TIME)
     }
 }
