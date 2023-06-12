@@ -3,6 +3,7 @@ package com.impetuson.rexroot.view
 
 import android.app.DatePickerDialog
 import android.os.Bundle
+import android.os.Handler
 import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -52,7 +53,7 @@ class UserdetailsFragment : Fragment() {
             val (storeStatus,storeMsg) = userdetailsviewmodel.storeDataToFirestore()
             Toast.makeText(context,"$storeMsg", Toast.LENGTH_LONG).show()
             if (storeStatus as Boolean){
-                findNavController().navigate(R.id.action_userdetailsFragment_to_homeFragment)
+                findNavController().navigate(R.id.action_userdetailsFragment_to_loadingFragment)
             }
             binding!!.progressBar.visibility = View.GONE
         }

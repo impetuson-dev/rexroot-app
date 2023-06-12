@@ -53,7 +53,16 @@
         android:label="fragment_userdetails"
         tools:layout="@layout/fragment_userdetails" >
         <action
-            android:id="@+id/action_userdetailsFragment_to_homeFragment"
+            android:id="@+id/action_userdetailsFragment_to_loadingFragment"
+            app:destination="@id/loadingFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/loadingFragment"
+        android:name="com.impetuson.rexroot.view.LoadingFragment"
+        android:label="LoadingFragment"
+        tools:layout="@layout/fragment_loading" >
+        <action
+            android:id="@+id/action_loadingFragment_to_homeFragment"
             app:destination="@id/homeFragment" />
     </fragment>
 </navigation>

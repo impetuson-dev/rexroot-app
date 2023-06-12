@@ -12,5 +12,4 @@ class SplashViewModel:ViewModel() {
     fun userAlreadySignedIn(): Boolean{
         return auth.currentUser != null
     }
-
 }
