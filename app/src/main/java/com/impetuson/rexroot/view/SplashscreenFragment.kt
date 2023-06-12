@@ -31,11 +31,10 @@ class SplashscreenFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-//        Handler().postDelayed({
-//            if (viewmodel.userAlreadySignedIn()){ findNavController().navigate(R.id.action_splashscreenFragment_to_homeFragment) }
-//            else { findNavController().navigate(R.id.action_splashscreenFragment_to_loginFragment) } }
-//            , SPLASH_TIME)
+        Handler().postDelayed({
+            if (viewmodel.userAlreadySignedIn()){ findNavController().navigate(R.id.action_splashscreenFragment_to_homeFragment) }
+            else { findNavController().navigate(R.id.action_splashscreenFragment_to_loginFragment) } }
+            , SPLASH_TIME)
 
-        findNavController().navigate(R.id.action_splashscreenFragment_to_loginFragment)
     }
 }

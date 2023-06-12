@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.activity.addCallback
 import androidx.databinding.DataBindingUtil
+import androidx.navigation.fragment.findNavController
 import com.impetuson.rexroot.R
 import com.impetuson.rexroot.databinding.FragmentHomeBinding
 
@@ -34,5 +35,11 @@ class HomeFragment : Fragment() {
         requireActivity().onBackPressedDispatcher.addCallback(this) {
             activity?.finish()
         }
+
+        binding!!.btnMyprofile.setOnClickListener {
+            findNavController().navigate(R.id.action_homeFragment_to_myProfileFragment)
+        }
+
+
     }
 }
