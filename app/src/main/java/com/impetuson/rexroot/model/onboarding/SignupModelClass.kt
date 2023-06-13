@@ -1,4 +1,4 @@
-package com.impetuson.rexroot.model
+package com.impetuson.rexroot.model.onboarding
 
 data class SignupModelClass(
     var userFullName: String,

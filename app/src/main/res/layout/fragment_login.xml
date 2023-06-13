@@ -5,10 +5,10 @@
     <data>
         <variable
             name="loginFragment"
-            type="com.impetuson.rexroot.view.LoginFragment" />
+            type="com.impetuson.rexroot.view.onboarding.LoginFragment" />
         <variable
             name="loginViewModel"
-            type="com.impetuson.rexroot.viewmodel.LoginViewModel" />
+            type="com.impetuson.rexroot.viewmodel.onboarding.LoginViewModel" />
     </data>
 
     <RelativeLayout

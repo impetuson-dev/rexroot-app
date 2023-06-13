@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/profile_navgraph"
+    app:startDestination="@id/myProfileFragment">
+
+    <fragment
+        android:id="@+id/myProfileFragment"
+        android:name="com.impetuson.rexroot.view.profile.MyProfileFragment"
+        android:label="MyProfileFragment"
+        tools:layout="@layout/fragment_my_profile" >
+        <action
+            android:id="@+id/action_myProfileFragment_to_partnerFragment"
+            app:destination="@id/partnerFragment" />
+        <action
+            android:id="@+id/action_myProfileFragment_to_candidateFragment"
+            app:destination="@id/candidateFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/partnerFragment"
+        android:name="com.impetuson.rexroot.view.profile.PartnerFragment"
+        android:label="PartnerFragment"
+        tools:layout="@layout/fragment_partner" />
+    <fragment
+        android:id="@+id/candidateFragment"
+        android:name="com.impetuson.rexroot.view.profile.CandidateFragment"
+        android:label="CandidateFragment"
+        tools:layout="@layout/fragment_candidate" />
+
+</navigation>

@@ -6,17 +6,17 @@
     <data>
         <variable
             name="userdetailsFragment"
-            type="com.impetuson.rexroot.view.UserdetailsFragment" />
+            type="com.impetuson.rexroot.view.onboarding.UserdetailsFragment" />
         <variable
             name="signupViewModel"
-            type="com.impetuson.rexroot.viewmodel.SignupViewModel" />
+            type="com.impetuson.rexroot.viewmodel.onboarding.SignupViewModel" />
         <variable
             name="userdetailsViewModel"
-            type="com.impetuson.rexroot.viewmodel.UserdetailsViewModel" />
+            type="com.impetuson.rexroot.viewmodel.onboarding.UserdetailsViewModel" />
     </data>
 
     <RelativeLayout
-        tools:context=".view.UserdetailsFragment"
+        tools:context=".view.onboarding.UserdetailsFragment"
         android:id="@+id/parent_layout"
         android:orientation="vertical"
         android:background="@color/white"

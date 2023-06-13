@@ -5,10 +5,10 @@
     <data>
         <variable
             name="signupFragment"
-            type="com.impetuson.rexroot.view.SignupFragment" />
+            type="com.impetuson.rexroot.view.onboarding.SignupFragment" />
         <variable
             name="signupViewModel"
-            type="com.impetuson.rexroot.viewmodel.SignupViewModel" />
+            type="com.impetuson.rexroot.viewmodel.onboarding.SignupViewModel" />
     </data>
 
     <RelativeLayout

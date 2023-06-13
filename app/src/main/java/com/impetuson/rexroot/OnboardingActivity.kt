@@ -1,13 +1,11 @@
 package com.impetuson.rexroot
 
-import android.graphics.Color
-import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
 
-class MainActivity : AppCompatActivity(R.layout.activity_main) {
+class OnboardingActivity : AppCompatActivity(R.layout.activity_onboarding) {
 
     private lateinit var navController: NavController
 

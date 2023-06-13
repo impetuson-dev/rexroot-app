@@ -1,4 +1,4 @@
-package com.impetuson.rexroot.view
+package com.impetuson.rexroot.view.onboarding
 
 import android.os.Bundle
 import android.os.Handler
@@ -9,7 +9,6 @@ import android.view.ViewGroup
 import androidx.navigation.fragment.findNavController
 import com.impetuson.rexroot.R
 import com.impetuson.rexroot.databinding.FragmentLoadingBinding
-import com.impetuson.rexroot.databinding.FragmentUserdetailsBinding
 
 
 class LoadingFragment : Fragment() {

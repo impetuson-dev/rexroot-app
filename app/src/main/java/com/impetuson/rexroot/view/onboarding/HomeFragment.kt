@@ -1,9 +1,8 @@
-package com.impetuson.rexroot.view
+package com.impetuson.rexroot.view.onboarding
 
 import android.content.Intent
 import android.graphics.Color
 import android.os.Bundle
-import android.provider.ContactsContract.Profile
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -12,8 +11,6 @@ import android.view.Window
 import android.view.WindowManager
 import androidx.activity.addCallback
 import androidx.databinding.DataBindingUtil
-import androidx.navigation.fragment.findNavController
-import com.impetuson.rexroot.MainActivity
 import com.impetuson.rexroot.ProfileActivity
 import com.impetuson.rexroot.R
 import com.impetuson.rexroot.databinding.FragmentHomeBinding
@@ -47,7 +44,6 @@ class HomeFragment : Fragment() {
         binding!!.btnMyprofile.setOnClickListener {
             val intent = Intent(context,ProfileActivity::class.java)
             startActivity(intent)
-            //findNavController().navigate(R.id.action_homeFragment_to_myProfileFragment)
         }
     }
 
