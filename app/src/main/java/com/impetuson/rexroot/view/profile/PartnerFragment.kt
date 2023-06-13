@@ -9,6 +9,7 @@ import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.activityViewModels
 import com.impetuson.rexroot.R
 import com.impetuson.rexroot.databinding.FragmentPartnerBinding
+import com.impetuson.rexroot.databinding.FragmentSignupBinding
 import com.impetuson.rexroot.viewmodel.profile.PartnerViewModel
 
 
@@ -22,23 +23,25 @@ class PartnerFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        binding = DataBindingUtil.inflate(inflater, R.layout.fragment_partner ,container, false)
+        val fragmentBinding = FragmentPartnerBinding.inflate(inflater, container, false)
+        binding = fragmentBinding
         return binding!!.root
     }
 
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        //viewmodel.fetchDetails()
 
         binding?.apply {
             lifecycleOwner = viewLifecycleOwner
-            partnerFragment = this@PartnerFragment
             partnerViewModel = viewmodel
 
             cvGoback.setOnClickListener {
                 activity?.onBackPressed()
             }
         }
+
 
     }
 
