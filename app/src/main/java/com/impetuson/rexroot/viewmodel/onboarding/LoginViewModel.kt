@@ -1,7 +1,6 @@
-package com.impetuson.rexroot.viewmodel
+package com.impetuson.rexroot.viewmodel.onboarding
 
 import android.util.Log
-import android.widget.Toast
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -9,7 +8,7 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseAuthInvalidUserException
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
-import com.impetuson.rexroot.model.LoginModelClass
+import com.impetuson.rexroot.model.onboarding.LoginModelClass
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.tasks.await
 import kotlinx.coroutines.withContext

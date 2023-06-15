@@ -1,9 +1,8 @@
-package com.impetuson.rexroot.view
+package com.impetuson.rexroot.view.onboarding
 
 
 import android.app.DatePickerDialog
 import android.os.Bundle
-import android.os.Handler
 import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -14,11 +13,10 @@ import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import com.impetuson.rexroot.R
 import com.impetuson.rexroot.databinding.FragmentUserdetailsBinding
-import com.impetuson.rexroot.viewmodel.SignupViewModel
-import com.impetuson.rexroot.viewmodel.UserdetailsViewModel
+import com.impetuson.rexroot.viewmodel.onboarding.SignupViewModel
+import com.impetuson.rexroot.viewmodel.onboarding.UserdetailsViewModel
 import kotlinx.coroutines.MainScope
 import kotlinx.coroutines.launch
-import java.util.Calendar
 
 class UserdetailsFragment : Fragment() {
 

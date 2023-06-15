@@ -1,4 +1,4 @@
-package com.impetuson.rexroot.viewmodel
+package com.impetuson.rexroot.viewmodel.onboarding
 
 import androidx.lifecycle.ViewModel
 import com.google.firebase.auth.FirebaseAuth

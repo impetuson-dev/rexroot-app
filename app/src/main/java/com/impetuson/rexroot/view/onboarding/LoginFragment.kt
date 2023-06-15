@@ -1,4 +1,4 @@
-package com.impetuson.rexroot.view
+package com.impetuson.rexroot.view.onboarding
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -12,7 +12,7 @@ import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import com.impetuson.rexroot.R
 import com.impetuson.rexroot.databinding.FragmentLoginBinding
-import com.impetuson.rexroot.viewmodel.LoginViewModel
+import com.impetuson.rexroot.viewmodel.onboarding.LoginViewModel
 import kotlinx.coroutines.MainScope
 import kotlinx.coroutines.launch
 

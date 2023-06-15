@@ -1,4 +1,4 @@
-package com.impetuson.rexroot.viewmodel
+package com.impetuson.rexroot.viewmodel.onboarding
 
 import android.util.Log
 import androidx.lifecycle.LiveData
@@ -9,8 +9,7 @@ import com.google.firebase.auth.FirebaseAuthUserCollisionException
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
-import com.impetuson.rexroot.model.LoginModelClass
-import com.impetuson.rexroot.model.SignupModelClass
+import com.impetuson.rexroot.model.onboarding.SignupModelClass
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.tasks.await
 import kotlinx.coroutines.withContext

@@ -1,7 +1,6 @@
-package com.impetuson.rexroot.view
+package com.impetuson.rexroot.view.profile
 
 import android.graphics.Color
-import android.os.Build
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -32,15 +31,22 @@ class MyProfileFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-
         binding?.apply {
             lifecycleOwner = viewLifecycleOwner
+
+            cvGoback.setOnClickListener {
+                activity?.onBackPressed()
+            }
+
+            cvPartner.setOnClickListener {
+                findNavController().navigate(R.id.action_myProfileFragment_to_partnerFragment)
+            }
+
+            cvCandidate.setOnClickListener {
+                findNavController().navigate(R.id.action_myProfileFragment_to_candidateFragment)
+            }
         }
 
-
-        binding!!.cvGoback.setOnClickListener {
-            findNavController().navigate(R.id.action_myProfileFragment_to_homeFragment)
-        }
     }
 
     private fun changeStatusBarColor() {
