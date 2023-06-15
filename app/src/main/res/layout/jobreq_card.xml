@@ -13,29 +13,28 @@
     android:layout_height="wrap_content">
 
     <LinearLayout
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:padding="12sp"
+        android:padding="15sp"
         android:orientation="vertical">
 
         <TextView
             android:id="@+id/tv_jobrole"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textSize="18sp"
             android:textColor="@color/black"
             android:text="Job Role"
             android:textStyle="bold">
         </TextView>
 
         <LinearLayout
-            android:layout_marginTop="5sp"
-            android:layout_width="wrap_content"
+            android:layout_marginTop="10sp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
             <ImageView
-                android:layout_width="20sp"
-                android:layout_height="20sp"
+                android:layout_width="15sp"
+                android:layout_height="15sp"
                 android:layout_gravity="center"
                 android:src="@drawable/icon_company">
             </ImageView>
@@ -43,6 +42,8 @@
             <TextView
                 android:layout_marginLeft="10sp"
                 android:id="@+id/tv_compname"
+                android:textColor="@color/black"
+                android:textSize="12sp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Company Name">
@@ -52,12 +53,12 @@
 
         <LinearLayout
             android:layout_marginTop="5sp"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
             <ImageView
-                android:layout_width="20sp"
-                android:layout_height="20sp"
+                android:layout_width="15sp"
+                android:layout_height="15sp"
                 android:layout_gravity="center"
                 android:src="@drawable/icon_location">
             </ImageView>
@@ -65,6 +66,8 @@
             <TextView
                 android:layout_marginLeft="10sp"
                 android:id="@+id/tv_complocation"
+                android:textColor="@color/black"
+                android:textSize="12sp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Company Location">
@@ -73,17 +76,20 @@
         </LinearLayout>
 
         <LinearLayout
+            android:layout_marginTop="5sp"
+            android:weightSum="1"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
             <LinearLayout
-                android:layout_marginTop="5sp"
+                android:layout_weight="0.5"
+                android:layout_gravity="center"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content">
 
                 <ImageView
-                    android:layout_width="20sp"
-                    android:layout_height="20sp"
+                    android:layout_width="15sp"
+                    android:layout_height="15sp"
                     android:layout_gravity="center"
                     android:src="@drawable/icon_salary">
                 </ImageView>
@@ -91,6 +97,8 @@
                 <TextView
                     android:layout_marginLeft="10sp"
                     android:id="@+id/tv_jobsalary"
+                    android:textColor="@color/dark_grey"
+                    android:textSize="12sp"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Job Salary">
@@ -98,8 +106,111 @@
 
             </LinearLayout>
 
+            <LinearLayout
+                android:layout_gravity="center"
+                android:layout_weight="0.5"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+
+                <ImageView
+                    android:layout_width="15sp"
+                    android:layout_height="15sp"
+                    android:layout_gravity="center"
+                    android:src="@drawable/icon_suitcase">
+                </ImageView>
+
+                <TextView
+                    android:layout_marginLeft="10sp"
+                    android:id="@+id/tv_reqjobexp"
+                    android:textSize="12sp"
+                    android:textColor="@color/dark_grey"
+                    android:layout_gravity="center"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Req Experience">
+                </TextView>
+
+            </LinearLayout>
+
         </LinearLayout>
 
+        <LinearLayout
+            android:layout_marginTop="5sp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/tv_jobskills"
+                android:textSize="12sp"
+                android:textColor="@color/metal_grey"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Job Skills">
+            </TextView>
+
+        </LinearLayout>
+
+        <RelativeLayout
+            android:layout_marginTop="10sp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <LinearLayout
+                android:layout_centerVertical="true"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:textColor="@color/black"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="12sp"
+                    android:textStyle="bold"
+                    android:text="Price per closure: ">
+                </TextView>
+
+                <TextView
+                    android:id="@+id/tv_priceperclosure"
+                    android:textColor="@color/black"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="12sp"
+                    android:textStyle="bold"
+                    android:text="">
+                </TextView>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_alignParentEnd="true"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+
+                <androidx.cardview.widget.CardView
+                    android:elevation="0dp"
+                    app:cardCornerRadius="15dp"
+                    android:backgroundTint="@color/primary_green"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:paddingLeft="10sp"
+                        android:paddingRight="10sp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/white"
+                        android:textStyle="bold"
+                        android:text="ACTIVE">
+                    </TextView>
+
+
+                </androidx.cardview.widget.CardView>
+
+            </LinearLayout>
+
+
+
+        </RelativeLayout>
 
     </LinearLayout>
 

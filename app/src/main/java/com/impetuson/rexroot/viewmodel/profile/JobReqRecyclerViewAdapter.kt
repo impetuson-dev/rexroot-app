@@ -12,10 +12,19 @@ class JobReqRecyclerViewAdapter(private val dataList: List<JobReqModelClass>) : 
     inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         private val jobRole: TextView = itemView.findViewById(R.id.tv_jobrole)
         private val companyName: TextView = itemView.findViewById(R.id.tv_compname)
-
+        private val companyLocation: TextView = itemView.findViewById(R.id.tv_complocation)
+        private val jobSalary: TextView = itemView.findViewById(R.id.tv_jobsalary)
+        private val jobReqExp: TextView = itemView.findViewById(R.id.tv_reqjobexp)
+        private val jobSkills: TextView = itemView.findViewById(R.id.tv_jobskills)
+        private val pricePerClosure: TextView = itemView.findViewById(R.id.tv_priceperclosure)
         fun bind(data: JobReqModelClass) {
             jobRole.text = data.jobrole
             companyName.text = data.compname
+            companyLocation.text = data.complocation
+            jobSalary.text = data.jobsalary
+            jobReqExp.text = data.reqjobexp
+            jobSkills.text = data.jobmandskills
+            pricePerClosure.text = "₹" + data.priceperclosure
         }
     }
 
