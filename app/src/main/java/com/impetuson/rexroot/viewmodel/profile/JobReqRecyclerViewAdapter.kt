@@ -17,6 +17,7 @@ class JobReqRecyclerViewAdapter(private val dataList: List<JobReqModelClass>) : 
         private val jobReqExp: TextView = itemView.findViewById(R.id.tv_reqjobexp)
         private val jobSkills: TextView = itemView.findViewById(R.id.tv_jobskills)
         private val pricePerClosure: TextView = itemView.findViewById(R.id.tv_priceperclosure)
+
         fun bind(data: JobReqModelClass) {
             jobRole.text = data.jobrole
             companyName.text = data.compname
