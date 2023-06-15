@@ -50,6 +50,7 @@ dependencies {
     implementation(libs.constraintlayout)
     implementation(libs.androidx.navigation.fragment)
     implementation(libs.firebase.auth.ktx)
+    implementation(libs.firebase.database.ktx)
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.test.ext.junit)
     androidTestImplementation(libs.espresso.core)
@@ -75,4 +76,7 @@ dependencies {
 
     // Gson
     implementation("com.google.code.gson:gson:2.8.9")
+
+    // Material
+    implementation("com.google.android.material:material:1.0.0")
 }

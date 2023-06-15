@@ -34,7 +34,7 @@ class CandidateFragment : Fragment() {
         binding?.apply {
             lifecycleOwner = viewLifecycleOwner
             candidateFragment = this@CandidateFragment
-            partnerViewModel = viewmodel
+            candidateViewModel = viewmodel
 
             cvGoback.setOnClickListener {
                 activity?.onBackPressed()

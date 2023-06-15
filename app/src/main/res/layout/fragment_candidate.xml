@@ -8,7 +8,7 @@
             name="candidateFragment"
             type="com.impetuson.rexroot.view.profile.CandidateFragment" />
         <variable
-            name="partnerViewModel"
+            name="candidateViewModel"
             type="com.impetuson.rexroot.viewmodel.profile.CandidateViewModel" />
     </data>
 
@@ -65,7 +65,8 @@
                 android:clickable="true"
                 android:foreground="?android:attr/selectableItemBackground"
                 app:cardCornerRadius="20sp"
-                app:cardElevation="0dp">
+                app:cardElevation="0dp"
+                android:onClick="@{() -> candidateViewModel.saveDetails()}">
 
                 <TextView
                     android:paddingTop="5sp"
@@ -118,6 +119,7 @@
                         android:layout_height="wrap_content"
                         android:textSize="@dimen/edittext_body_text"
                         android:padding="@dimen/edittext_body_padding"
+                        android:text="@={candidateViewModel.candidateModel.candidateFullName}"
                         android:hint="Eg: John Steve"
                         android:background="@drawable/bg_edittext">
                     </EditText>
@@ -144,6 +146,7 @@
                         android:layout_height="wrap_content"
                         android:textSize="@dimen/edittext_body_text"
                         android:padding="@dimen/edittext_body_padding"
+                        android:text="@={candidateViewModel.candidateModel.candidateEmail}"
                         android:hint="Eg: john@example.com"
                         android:background="@drawable/bg_edittext">
                     </EditText>
@@ -170,6 +173,7 @@
                         android:layout_height="wrap_content"
                         android:textSize="@dimen/edittext_body_text"
                         android:padding="@dimen/edittext_body_padding"
+                        android:text="@={candidateViewModel.candidateModel.candidateMobileNumber}"
                         android:hint="Eg: 9876543210"
                         android:background="@drawable/bg_edittext">
                     </EditText>
@@ -196,6 +200,7 @@
                         android:layout_height="wrap_content"
                         android:textSize="@dimen/edittext_body_text"
                         android:padding="@dimen/edittext_body_padding"
+                        android:text="@={candidateViewModel.candidateModel.candidateGender}"
                         android:hint="Enter your Gender"
                         android:background="@drawable/bg_edittext">
                     </EditText>
@@ -222,6 +227,7 @@
                         android:layout_height="wrap_content"
                         android:textSize="@dimen/edittext_body_text"
                         android:padding="@dimen/edittext_body_padding"
+                        android:text="@={candidateViewModel.candidateModel.candidateCurrLocation}"
                         android:hint="Enter your current location"
                         android:background="@drawable/bg_edittext">
                     </EditText>
@@ -248,6 +254,7 @@
                         android:layout_height="wrap_content"
                         android:textSize="@dimen/edittext_body_text"
                         android:padding="@dimen/edittext_body_padding"
+                        android:text="@={candidateViewModel.candidateModel.candidateDesLocation}"
                         android:hint="Enter your preferred locations"
                         android:background="@drawable/bg_edittext">
                     </EditText>
@@ -320,6 +327,7 @@
                         android:lines="2"
                         android:maxLines="10"
                         android:scrollbars="vertical"
+                        android:text="@={candidateViewModel.candidateModel.candidateCoreSkills}"
                         android:hint="Eg: Coding, Business Development, Marketing, etc"
                         android:background="@drawable/bg_edittext" >
                     </EditText>
@@ -351,6 +359,7 @@
                         android:lines="2"
                         android:maxLines="10"
                         android:scrollbars="vertical"
+                        android:text="@={candidateViewModel.candidateModel.candidateSuppSkills}"
                         android:hint="Eg: Soft Skills, Interpersonal Skills, etc"
                         android:background="@drawable/bg_edittext" >
                     </EditText>

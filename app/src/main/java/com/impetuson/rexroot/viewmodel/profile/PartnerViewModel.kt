@@ -4,21 +4,19 @@ import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.firestore.SetOptions
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 import com.google.gson.Gson
 import com.impetuson.rexroot.model.profile.PartnerModelClass
-import kotlinx.coroutines.tasks.await
 
 class PartnerViewModel: ViewModel() {
 
     private val auth = Firebase.auth
     private val db = Firebase.firestore
 
-    private val _partnerModel = MutableLiveData<PartnerModelClass>(PartnerModelClass("","","","","",""))
+    private val _partnerModel = MutableLiveData<PartnerModelClass>()
     val partnerModel: LiveData<PartnerModelClass> = _partnerModel
 
     fun saveDetails(){
