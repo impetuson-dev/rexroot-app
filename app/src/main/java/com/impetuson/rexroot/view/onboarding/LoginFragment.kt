@@ -1,5 +1,6 @@
 package com.impetuson.rexroot.view.onboarding
 
+import android.content.Context
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -42,7 +43,7 @@ class LoginFragment : Fragment() {
         }
 
         // Exit app
-        requireActivity().onBackPressedDispatcher.addCallback(this) {activity?.finish()}
+        requireActivity().onBackPressedDispatcher.addCallback(this) {activity?.finishAffinity()}
     }
 
     fun redirectToSignUp(){
@@ -55,6 +56,11 @@ class LoginFragment : Fragment() {
             MainScope().launch {
                 binding!!.progressBar.visibility = View.VISIBLE
                 val (authStatus,authMsg) = viewmodel.loginAuthentication()
+                val fetchStatus = viewmodel.fetchUserDataFromFirestore()
+
+                val sharedPreferences = requireContext().getSharedPreferences("profiledata",Context.MODE_PRIVATE)
+                viewmodel.storeDataToSharedPreferences(sharedPreferences)
+
                 Toast.makeText(context,"$authMsg",Toast.LENGTH_SHORT).show()
                 if (authStatus as Boolean){
                     findNavController().navigate(R.id.action_loginFragment_to_homeFragment)
@@ -63,5 +69,4 @@ class LoginFragment : Fragment() {
             }
         }
     }
-
 }

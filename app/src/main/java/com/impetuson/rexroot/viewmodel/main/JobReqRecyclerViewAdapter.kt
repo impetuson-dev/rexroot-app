@@ -1,4 +1,4 @@
-package com.impetuson.rexroot.viewmodel.profile
+package com.impetuson.rexroot.viewmodel.main
 
 import android.text.TextUtils
 import android.view.LayoutInflater
