@@ -1,5 +1,6 @@
 package com.impetuson.rexroot.viewmodel.onboarding
 
+import android.content.SharedPreferences
 import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -7,6 +8,7 @@ import androidx.lifecycle.ViewModel
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseAuthInvalidUserException
 import com.google.firebase.auth.ktx.auth
+import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.ktx.Firebase
 import com.impetuson.rexroot.model.onboarding.LoginModelClass
 import kotlinx.coroutines.Dispatchers
@@ -15,7 +17,10 @@ import kotlinx.coroutines.withContext
 
 class LoginViewModel: ViewModel() {
 
+    private var userId: String = ""
     private var auth: FirebaseAuth = Firebase.auth
+    private var firestoreRef = FirebaseFirestore.getInstance().collection("users")
+    private var fetchedData: Map<String,Any>? = null
 
     private val _loginModel = MutableLiveData<LoginModelClass>(LoginModelClass("",""))
     val loginModel: LiveData<LoginModelClass> = _loginModel
@@ -65,10 +70,11 @@ class LoginViewModel: ViewModel() {
 
         try {
             auth.signInWithEmailAndPassword(email, password).await()
+            userId = auth.currentUser?.uid.toString()
             Log.d("FirebaseAuth", "Login success")
             authMsg = "Login successful"
             authStatus = true
-            val user = auth.currentUser
+
         } catch (e: Exception) {
             Log.d("FirebaseAuth", "Login failed", e)
             if (e is FirebaseAuthInvalidUserException) {
@@ -79,5 +85,33 @@ class LoginViewModel: ViewModel() {
         }
 
         listOf(authStatus,authMsg)
+    }
+
+    suspend fun fetchUserDataFromFirestore(): Boolean = withContext(Dispatchers.IO){
+        var fetchStatus: Boolean = false
+
+        try{
+            val task = firestoreRef.document("$userId").get().await()
+            val document = task.data?.get("profiledata")
+            Log.d("Firestore", document.toString())
+            Log.d("Firebase Firestore","User data fetched successfully")
+            fetchStatus = true
+            fetchedData = document as Map<String, Any>
+        } catch (e: Exception){
+            Log.d("Firebase Firestore", "User data fetch unsuccessful")
+        }
+
+        fetchStatus
+    }
+
+    fun storeDataToSharedPreferences(sharedPreferences: SharedPreferences){
+        val editor = sharedPreferences.edit()
+        if (fetchedData.isNullOrEmpty()){
+            Log.d("Firebase Firestore","Fetched data is null")
+        }
+        editor.putString("useremail", fetchedData?.get("email").toString())
+        editor.putString("username", fetchedData?.get("fullname").toString())
+        editor.putString("usermobilenumber", fetchedData?.get("mobilenumber").toString())
+        editor.apply()
     }
 }

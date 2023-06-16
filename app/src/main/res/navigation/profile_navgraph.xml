@@ -16,6 +16,9 @@
         <action
             android:id="@+id/action_myProfileFragment_to_candidateFragment"
             app:destination="@id/candidateFragment" />
+        <action
+            android:id="@+id/action_myProfileFragment_to_loginFragment2"
+            app:destination="@id/loginFragment2" />
     </fragment>
     <fragment
         android:id="@+id/partnerFragment"
@@ -27,5 +30,10 @@
         android:name="com.impetuson.rexroot.view.profile.CandidateFragment"
         android:label="CandidateFragment"
         tools:layout="@layout/fragment_candidate" />
+    <fragment
+        android:id="@+id/loginFragment2"
+        android:name="com.impetuson.rexroot.view.onboarding.LoginFragment"
+        android:label="LoginFragment"
+        tools:layout="@layout/fragment_login" />
 
 </navigation>

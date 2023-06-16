@@ -1,6 +1,8 @@
-package com.impetuson.rexroot.view.onboarding
+package com.impetuson.rexroot.view.main
 
+import android.content.Context
 import android.content.Intent
+import android.content.SharedPreferences
 import android.graphics.Color
 import android.os.Bundle
 import android.util.Log
@@ -13,6 +15,7 @@ import android.view.WindowManager
 import android.widget.Toast
 import androidx.activity.addCallback
 import androidx.databinding.DataBindingUtil
+import androidx.fragment.app.activityViewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.firebase.database.ChildEventListener
 import com.google.firebase.database.DataSnapshot
@@ -23,7 +26,13 @@ import com.impetuson.rexroot.ProfileActivity
 import com.impetuson.rexroot.R
 import com.impetuson.rexroot.databinding.FragmentHomeBinding
 import com.impetuson.rexroot.model.profile.JobReqModelClass
-import com.impetuson.rexroot.viewmodel.profile.JobReqRecyclerViewAdapter
+import com.impetuson.rexroot.viewmodel.main.HomeViewModel
+import com.impetuson.rexroot.viewmodel.main.JobReqRecyclerViewAdapter
+import kotlinx.coroutines.CompletableDeferred
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.MainScope
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 class HomeFragment : Fragment() {
 
@@ -31,6 +40,7 @@ class HomeFragment : Fragment() {
     private lateinit var jobReqList: ArrayList<JobReqModelClass>
     private lateinit var jobreqadapter: JobReqRecyclerViewAdapter
     private lateinit var firebaseDB : DatabaseReference
+    private val viewmodel: HomeViewModel by activityViewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -47,26 +57,48 @@ class HomeFragment : Fragment() {
 
         binding?.apply {
             lifecycleOwner = viewLifecycleOwner
+            viewModel = viewmodel
+
+            val sharedPreference: SharedPreferences =  requireContext().getSharedPreferences("profiledata", Context.MODE_PRIVATE)
+            viewmodel.getUserProfileDetails(sharedPreference)
+
+            btnMyprofile.setOnClickListener {
+                val intent = Intent(context,ProfileActivity::class.java)
+                startActivity(intent)
+            }
+
+            rvJobreq.layoutManager = LinearLayoutManager(requireContext())
+            jobReqList = ArrayList<JobReqModelClass>()
+            jobreqadapter = JobReqRecyclerViewAdapter(jobReqList)
+            rvJobreq.adapter = jobreqadapter
+
+            loadingAnimation.visibility = View.VISIBLE
+
+            firebaseDB = FirebaseDatabase.getInstance().getReference("jobreq")
+
+            MainScope().launch {
+                recyclerViewLoader()
+                loadingAnimation.visibility = View.GONE
+
+                if (jobReqList.isEmpty()){ noresultsAnimation.visibility = View.VISIBLE }
+            }
         }
 
         // Exit app
         requireActivity().onBackPressedDispatcher.addCallback(this) {
             activity?.finish()
         }
+    }
 
-        binding!!.btnMyprofile.setOnClickListener {
-            val intent = Intent(context,ProfileActivity::class.java)
-            startActivity(intent)
-        }
+    private fun changeStatusBarColor() {
+        val window: Window = requireActivity().window
+        window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS)
+        window.statusBarColor = Color.parseColor("#e5e5ff")
+    }
 
-        binding!!.rvJobreq.layoutManager = LinearLayoutManager(requireContext())
-        jobReqList = ArrayList<JobReqModelClass>()
-        jobreqadapter = JobReqRecyclerViewAdapter(jobReqList)
-        binding!!.rvJobreq.adapter = jobreqadapter
-
-        //loadingProgressBar.visibility = View.VISIBLE
-
-        firebaseDB = FirebaseDatabase.getInstance().getReference("jobreq")
+    private suspend fun recyclerViewLoader() = withContext(Dispatchers.IO){
+        // Since the .addChildEventListener() does not return any object that can be awaited
+        val jobReqDeferred = CompletableDeferred<Unit>()
 
         firebaseDB.addChildEventListener(object : ChildEventListener{
             override fun onChildAdded(snapshot: DataSnapshot, previousChildName: String?) {
@@ -74,7 +106,7 @@ class HomeFragment : Fragment() {
                 jobReqList.add(0,jobReqCard!!)
                 binding!!.rvJobreq.adapter?.notifyDataSetChanged()
 
-                //loadingProgressBar.visibility = View.GONE
+                binding!!.loadingAnimation.visibility = View.GONE
             }
 
             override fun onChildChanged(snapshot: DataSnapshot, previousChildName: String?) {
@@ -91,7 +123,7 @@ class HomeFragment : Fragment() {
                 jobReqList.remove(jobReqCard)
                 binding!!.rvJobreq.adapter?.notifyDataSetChanged()
 
-                //loadingProgressBar.visibility = View.GONE
+                binding!!.loadingAnimation.visibility = View.GONE
             }
 
             override fun onChildMoved(snapshot: DataSnapshot, previousChildName: String?) {
@@ -101,22 +133,11 @@ class HomeFragment : Fragment() {
             override fun onCancelled(error: DatabaseError) {
                 Log.d("FirebaseDB", "Error Occurred: $error")
                 Toast.makeText(requireContext(), "Database error occurred", Toast.LENGTH_SHORT).show()
+                jobReqDeferred.completeExceptionally(error.toException())
             }
 
         })
 
-        if (jobReqList.isEmpty()){
-            //loadingProgressBar.visibility = View.GONE
-            //tvNoResults.visibility = View.VISIBLE
-        }
-
-
+        jobReqDeferred.await()
     }
-
-    private fun changeStatusBarColor() {
-        val window: Window = requireActivity().window
-        window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS)
-        window.statusBarColor = Color.WHITE
-    }
-
 }

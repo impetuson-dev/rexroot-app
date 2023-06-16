@@ -1,5 +1,6 @@
 package com.impetuson.rexroot.view.onboarding
 
+import android.content.Context
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -55,6 +56,10 @@ class SignupFragment : Fragment() {
                 val (authStatus,authMsg) = viewmodel.signupAuthentication()
                 if (authStatus as Boolean){
                     viewmodel.storeDataToFirestore()
+
+                    val sharedPreferences = requireContext().getSharedPreferences("profiledata", Context.MODE_PRIVATE)
+                    viewmodel.storeDataToSharedPreferences(sharedPreferences)
+
                     Toast.makeText(context,"$authMsg",Toast.LENGTH_SHORT).show()
                     findNavController().navigate(R.id.action_signupFragment_to_userdetailsFragment)
                 }

@@ -92,6 +92,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:hint="Full Name"
+                            android:maxLines="1"
                             android:text="@={signupViewModel.signupModel.userFullName}"
                             android:textColorHighlight="#2196F3" />
 
@@ -122,6 +123,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:hint="Email Address"
+                            android:maxLines="1"
                             android:text="@={signupViewModel.signupModel.userEmail}"
                             android:textColorHighlight="#2196F3" />
 
@@ -151,6 +153,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:hint="Mobile Number"
+                            android:maxLines="1"
                             android:text="@={signupViewModel.signupModel.userMobileNumber}"
                             android:textColorHighlight="#2196F3" />
 
@@ -182,6 +185,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:hint="Password"
+                            android:maxLines="1"
                             android:inputType="textPassword"
                             android:text="@={signupViewModel.signupModel.userPassword}"
                             android:textColorHighlight="#2196F3" />

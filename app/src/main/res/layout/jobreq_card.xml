@@ -1,13 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+<com.google.android.material.card.MaterialCardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     app:cardCornerRadius="12sp"
     android:orientation="vertical"
+    app:cardBackgroundColor="@color/white"
     android:foreground="?android:attr/selectableItemBackground"
     android:clickable="true"
-    android:layout_marginTop="2sp"
-    android:layout_marginLeft="2sp"
-    android:layout_marginRight="2sp"
     android:layout_marginBottom="10sp"
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
@@ -84,7 +83,7 @@
             <LinearLayout
                 android:layout_weight="0.5"
                 android:layout_gravity="center"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content">
 
                 <ImageView
@@ -109,7 +108,7 @@
             <LinearLayout
                 android:layout_gravity="center"
                 android:layout_weight="0.5"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content">
 
                 <ImageView
@@ -145,6 +144,7 @@
                 android:textColor="@color/metal_grey"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:maxLines="1"
                 android:text="Job Skills">
             </TextView>
 
@@ -214,4 +214,4 @@
 
     </LinearLayout>
 
-</androidx.cardview.widget.CardView>
+</com.google.android.material.card.MaterialCardView>

@@ -1,5 +1,6 @@
-package com.impetuson.rexroot.viewmodel.profile
+package com.impetuson.rexroot.viewmodel.main
 
+import android.text.TextUtils
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -24,6 +25,7 @@ class JobReqRecyclerViewAdapter(private val dataList: List<JobReqModelClass>) : 
             companyLocation.text = data.complocation
             jobSalary.text = data.jobsalary
             jobReqExp.text = data.reqjobexp
+            jobSkills.ellipsize = TextUtils.TruncateAt.END
             jobSkills.text = data.jobmandskills
             pricePerClosure.text = "₹" + data.priceperclosure
         }
