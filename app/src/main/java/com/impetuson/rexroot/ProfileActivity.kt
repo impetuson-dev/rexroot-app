@@ -25,4 +25,5 @@ class ProfileActivity: AppCompatActivity(R.layout.activity_profile) {
         window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS)
         window.statusBarColor = this.resources.getColor(R.color.primary_red)
     }
+
 }
