@@ -1,6 +1,8 @@
 package com.impetuson.rexroot.view.main
 
+import android.content.Context
 import android.content.Intent
+import android.content.SharedPreferences
 import android.graphics.Color
 import android.os.Bundle
 import android.util.Log
@@ -13,6 +15,7 @@ import android.view.WindowManager
 import android.widget.Toast
 import androidx.activity.addCallback
 import androidx.databinding.DataBindingUtil
+import androidx.fragment.app.activityViewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.firebase.database.ChildEventListener
 import com.google.firebase.database.DataSnapshot
@@ -23,6 +26,7 @@ import com.impetuson.rexroot.ProfileActivity
 import com.impetuson.rexroot.R
 import com.impetuson.rexroot.databinding.FragmentHomeBinding
 import com.impetuson.rexroot.model.profile.JobReqModelClass
+import com.impetuson.rexroot.viewmodel.main.HomeViewModel
 import com.impetuson.rexroot.viewmodel.main.JobReqRecyclerViewAdapter
 import kotlinx.coroutines.CompletableDeferred
 import kotlinx.coroutines.Dispatchers
@@ -36,6 +40,7 @@ class HomeFragment : Fragment() {
     private lateinit var jobReqList: ArrayList<JobReqModelClass>
     private lateinit var jobreqadapter: JobReqRecyclerViewAdapter
     private lateinit var firebaseDB : DatabaseReference
+    private val viewmodel: HomeViewModel by activityViewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -52,6 +57,10 @@ class HomeFragment : Fragment() {
 
         binding?.apply {
             lifecycleOwner = viewLifecycleOwner
+            viewModel = viewmodel
+
+            val sharedPreference: SharedPreferences =  requireContext().getSharedPreferences("profiledata", Context.MODE_PRIVATE)
+            viewmodel.getUserProfileDetails(sharedPreference)
 
             btnMyprofile.setOnClickListener {
                 val intent = Intent(context,ProfileActivity::class.java)
@@ -131,5 +140,4 @@ class HomeFragment : Fragment() {
 
         jobReqDeferred.await()
     }
-
 }

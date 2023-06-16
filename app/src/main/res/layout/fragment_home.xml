@@ -4,7 +4,9 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
-
+        <variable
+            name="viewModel"
+            type="com.impetuson.rexroot.viewmodel.main.HomeViewModel" />
     </data>
 
     <RelativeLayout
@@ -112,12 +114,11 @@
                 android:elevation="0dp"
                 app:cardCornerRadius="10sp"
                 android:layout_weight="0.5"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content">
 
                 <LinearLayout
                     android:padding="10sp"
-                    android:weightSum="1"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content">
 
@@ -131,7 +132,8 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:maxLines="1"
-                            android:text="Hello Tharun!"
+                            android:ellipsize="end"
+                            android:text="@{viewModel.userName}"
                             android:textStyle="bold">
                         </TextView>
 
@@ -159,7 +161,7 @@
                 android:elevation="0dp"
                 app:cardCornerRadius="10sp"
                 android:layout_weight="0.5"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content">
 
                 <LinearLayout
@@ -171,14 +173,14 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Hello Tharun!"
+                        android:text="Actions"
                         android:textStyle="bold">
                     </TextView>
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="View profile"
+                        android:text="10 new"
                         android:textSize="12sp"
                         android:textStyle="bold">
                     </TextView>
@@ -191,11 +193,12 @@
 
         </LinearLayout>
 
+
         <LinearLayout
             android:layout_below="@id/ll_section"
             android:padding="15sp"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="wrap_content">
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/rv_jobreq"
@@ -205,6 +208,7 @@
             </androidx.recyclerview.widget.RecyclerView>
 
         </LinearLayout>
+
 
         <LinearLayout
             android:id="@+id/loading_animation"

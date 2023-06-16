@@ -26,8 +26,6 @@ class MyProfileViewModel: ViewModel() {
         _userName.value = sharedPreference.getString("username","")
         _userEmailID.value = sharedPreference.getString("useremail","")
         _userMobileNumber.value = sharedPreference.getString("usermobilenumber","")
-
-        Log.d("sharedpreference",sharedPreference.getString("username","").toString())
     }
 
     fun btnLogOutHandler(){
