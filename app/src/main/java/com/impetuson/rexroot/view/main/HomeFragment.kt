@@ -53,7 +53,6 @@ class HomeFragment : Fragment() {
         binding?.apply {
             lifecycleOwner = viewLifecycleOwner
 
-
             btnMyprofile.setOnClickListener {
                 val intent = Intent(context,ProfileActivity::class.java)
                 startActivity(intent)
@@ -85,7 +84,7 @@ class HomeFragment : Fragment() {
     private fun changeStatusBarColor() {
         val window: Window = requireActivity().window
         window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS)
-        window.statusBarColor = Color.WHITE
+        window.statusBarColor = Color.parseColor("#e5e5ff")
     }
 
     private suspend fun recyclerViewLoader() = withContext(Dispatchers.IO){

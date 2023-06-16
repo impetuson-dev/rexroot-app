@@ -1,5 +1,6 @@
 package com.impetuson.rexroot.viewmodel.onboarding
 
+import android.content.SharedPreferences
 import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -18,6 +19,11 @@ class SignupViewModel: ViewModel() {
 
     private lateinit var auth: FirebaseAuth
     private val db = Firebase.firestore
+
+    private var fullname: String = ""
+    private var email: String = ""
+    private var mobilenumber: String = ""
+    private var userId: String = ""
 
     private val _signupModel = MutableLiveData<SignupModelClass>(SignupModelClass("","","","",0))
     val signupModel: LiveData<SignupModelClass> = _signupModel
@@ -113,10 +119,10 @@ class SignupViewModel: ViewModel() {
         var storeMsg: String = ""
         var storeStatus: Boolean = false
 
-        val fullname = signupModel.value?.userFullName ?: ""
-        val email = signupModel.value?.userEmail ?: ""
-        val mobilenumber = signupModel.value?.userMobileNumber ?: ""
-        val userId = auth.currentUser!!.uid
+        fullname = signupModel.value?.userFullName ?: ""
+        email = signupModel.value?.userEmail ?: ""
+        mobilenumber = signupModel.value?.userMobileNumber ?: ""
+        userId = auth.currentUser!!.uid
 
         val userdata = hashMapOf(
             "profiledata" to hashMapOf(
@@ -145,6 +151,14 @@ class SignupViewModel: ViewModel() {
         _userEmailError.value = null
         _userMobileNumberError.value = null
         _userPasswordError.value = null
+    }
+
+    fun storeDataToSharedPreferences(sharedPreferences: SharedPreferences){
+        val editor = sharedPreferences.edit()
+        editor.putString("useremail",email)
+        editor.putString("username",fullname)
+        editor.putString("usermobilenumber",mobilenumber)
+        editor.apply()
     }
 
 }
