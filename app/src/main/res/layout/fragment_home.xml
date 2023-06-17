@@ -131,20 +131,19 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:maxLines="1"
-                            android:ellipsize="end"
-                            android:text="@{viewModel.userName}"
+                            android:text="Hello!"
+                            android:textSize="12sp"
                             android:textStyle="bold">
                         </TextView>
 
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="View profile"
-                            android:textSize="12sp"
+                            android:maxLines="1"
+                            android:ellipsize="end"
+                            android:text="@{viewModel.userName}"
                             android:textStyle="bold">
                         </TextView>
-
 
                     </LinearLayout>
 
@@ -196,7 +195,9 @@
 
         <LinearLayout
             android:layout_below="@id/ll_section"
-            android:padding="15sp"
+            android:paddingTop="5sp"
+            android:paddingStart="15sp"
+            android:paddingEnd="15sp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 

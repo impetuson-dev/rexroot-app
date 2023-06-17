@@ -1,6 +1,7 @@
 package com.impetuson.rexroot.view.onboarding
 
 import android.annotation.SuppressLint
+import android.content.Intent
 import android.os.Bundle
 import android.os.Handler
 import androidx.fragment.app.Fragment
@@ -9,6 +10,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
+import com.impetuson.rexroot.MainActivity
 import com.impetuson.rexroot.R
 import com.impetuson.rexroot.viewmodel.onboarding.SplashViewModel
 
@@ -31,7 +33,9 @@ class SplashscreenFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         Handler().postDelayed({
-            if (viewmodel.userAlreadySignedIn()){ findNavController().navigate(R.id.action_splashscreenFragment_to_homeFragment) }
+            if (viewmodel.userAlreadySignedIn()){
+                startActivity(Intent(requireContext(),MainActivity::class.java))
+            }
             else { findNavController().navigate(R.id.action_splashscreenFragment_to_loginFragment) } }
             , SPLASH_TIME)
 

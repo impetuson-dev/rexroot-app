@@ -1,11 +1,13 @@
 package com.impetuson.rexroot.viewmodel.main
 
+import android.content.Intent
 import android.text.TextUtils
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import com.impetuson.rexroot.JobreqActivity
 import com.impetuson.rexroot.R
 import com.impetuson.rexroot.model.profile.JobReqModelClass
 class JobReqRecyclerViewAdapter(private val dataList: List<JobReqModelClass>) : RecyclerView.Adapter<JobReqRecyclerViewAdapter.ViewHolder>() {
@@ -28,6 +30,12 @@ class JobReqRecyclerViewAdapter(private val dataList: List<JobReqModelClass>) : 
             jobSkills.ellipsize = TextUtils.TruncateAt.END
             jobSkills.text = data.jobmandskills
             pricePerClosure.text = "₹" + data.priceperclosure
+
+            itemView.setOnClickListener {
+                val intent = Intent(itemView.context, JobreqActivity::class.java)
+                intent.putExtra("jobId", data.jobid)
+                itemView.context.startActivity(intent)
+            }
         }
     }
 

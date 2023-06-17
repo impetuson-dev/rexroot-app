@@ -1,4 +1,4 @@
-package com.impetuson.rexroot.view.profile
+package com.impetuson.rexroot.view.main
 
 import android.content.Context
 import android.content.Intent
@@ -14,6 +14,7 @@ import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.impetuson.rexroot.OnboardingActivity
 import com.impetuson.rexroot.R
 import com.impetuson.rexroot.databinding.FragmentMyProfileBinding
@@ -29,13 +30,14 @@ class MyProfileFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        changeStatusBarColor()
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_my_profile ,container, false)
         return binding!!.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        changeStatusBarColor()
 
         binding?.apply {
             lifecycleOwner = viewLifecycleOwner
@@ -44,30 +46,33 @@ class MyProfileFragment : Fragment() {
             val sharedPreference: SharedPreferences  =  requireContext().getSharedPreferences("profiledata", Context.MODE_PRIVATE)
             viewmodel.getUserProfileDetails(sharedPreference)
 
-            cvGoback.setOnClickListener {
-                activity?.onBackPressed()
-            }
-
             cvPartner.setOnClickListener {
-                findNavController().navigate(R.id.action_myProfileFragment_to_partnerFragment)
+                findNavController().navigate(R.id.action_profileFragment_to_partnerFragment2)
             }
 
             cvCandidate.setOnClickListener {
-                findNavController().navigate(R.id.action_myProfileFragment_to_candidateFragment)
+                findNavController().navigate(R.id.action_profileFragment_to_candidateFragment2)
             }
 
             btnLogout.setOnClickListener {
-                viewmodel.btnLogOutHandler()
-                startActivity(Intent(requireActivity(),OnboardingActivity::class.java))
+                MaterialAlertDialogBuilder(requireContext())
+                    .setTitle("Log out")
+                    .setMessage("Do you want to log out?")
+                    .setPositiveButton("Yes"){ _, _ ->
+                        viewmodel.btnLogOutHandler()
+                        startActivity(Intent(requireActivity(),OnboardingActivity::class.java))
+                    }
+                    .setNegativeButton("No"){ _,_ ->
+
+                    }
+                    .show()
             }
         }
-
     }
 
     private fun changeStatusBarColor() {
         val window: Window = requireActivity().window
         window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS)
-        window.statusBarColor = Color.parseColor("#E51E26")
+        window.statusBarColor = Color.WHITE
     }
-
 }

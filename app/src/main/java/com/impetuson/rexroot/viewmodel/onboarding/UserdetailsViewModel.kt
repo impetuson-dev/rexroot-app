@@ -33,6 +33,9 @@ class UserdetailsViewModel: ViewModel() {
     private val _dobUser = MutableLiveData<String>("")
     val dobUser: LiveData<String> = _dobUser
 
+    private val _dobUserError = MutableLiveData<String?>("")
+    val dobUserError: LiveData<String?> = _dobUserError
+
     fun setdobDay(day: Int){ _dobDay.value = day }
     fun setdobMonth(month: Int){ _dobMonth.value = month }
     fun setdobYear(year: Int){ _dobYear.value = year }
@@ -48,6 +51,18 @@ class UserdetailsViewModel: ViewModel() {
     }
     fun calcAge(): Int{
         return calendar.get(Calendar.YEAR).minus(dobYear.value ?: 0)
+    }
+
+    fun formValidation(): Boolean{
+        val dob = _dobUser.value.toString()
+        if (dob.isEmpty()){
+            _dobUserError.value = "Date of Birth is required"
+            return false
+        }
+        else {
+            _dobUserError.value = null
+            return true
+        }
     }
 
     suspend fun storeDataToFirestore(): List<Any> = withContext(Dispatchers.IO){

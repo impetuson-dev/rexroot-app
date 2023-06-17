@@ -165,11 +165,13 @@
 
 
                 <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/btn_selectdate"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
                     app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toStartOf="@id/btn_selectdate"
-                    android:layout_marginEnd="20sp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:errorEnabled="true"
+                    app:error="@{userdetailsViewModel.dobUserError}"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     app:boxStrokeColor="#2196F3"
@@ -184,26 +186,10 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="@{userdetailsViewModel.dobUser}"
+                        android:onClick="@{() -> userdetailsFragment.btnSelectDateHandler()}"
                         android:hint="Date of Birth" />
 
                 </com.google.android.material.textfield.TextInputLayout>
-
-                <Button
-                    android:id="@+id/btn_selectdate"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:backgroundTint="@color/primary_red"
-                    android:text="Select Date"
-                    android:textAllCaps="false"
-                    android:textColor="@color/white"
-                    android:textStyle="bold"
-                    android:onClick="@{() -> userdetailsFragment.btnSelectDateHandler()}"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toTopOf="parent">
-                </Button>
-
-
             </androidx.constraintlayout.widget.ConstraintLayout>
 
             <LinearLayout
@@ -252,12 +238,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical">
-
-                <RadioButton
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Keep me signed in">
-                </RadioButton>
 
                 <RadioButton
                     android:layout_width="wrap_content"

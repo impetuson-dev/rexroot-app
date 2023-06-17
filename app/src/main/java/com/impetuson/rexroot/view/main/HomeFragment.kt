@@ -16,13 +16,13 @@ import android.widget.Toast
 import androidx.activity.addCallback
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.activityViewModels
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.firebase.database.ChildEventListener
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.DatabaseError
-import com.impetuson.rexroot.ProfileActivity
 import com.impetuson.rexroot.R
 import com.impetuson.rexroot.databinding.FragmentHomeBinding
 import com.impetuson.rexroot.model.profile.JobReqModelClass
@@ -62,11 +62,6 @@ class HomeFragment : Fragment() {
             val sharedPreference: SharedPreferences =  requireContext().getSharedPreferences("profiledata", Context.MODE_PRIVATE)
             viewmodel.getUserProfileDetails(sharedPreference)
 
-            btnMyprofile.setOnClickListener {
-                val intent = Intent(context,ProfileActivity::class.java)
-                startActivity(intent)
-            }
-
             rvJobreq.layoutManager = LinearLayoutManager(requireContext())
             jobReqList = ArrayList<JobReqModelClass>()
             jobreqadapter = JobReqRecyclerViewAdapter(jobReqList)
@@ -86,7 +81,7 @@ class HomeFragment : Fragment() {
 
         // Exit app
         requireActivity().onBackPressedDispatcher.addCallback(this) {
-            activity?.finish()
+            activity?.finishAffinity()
         }
     }
 
