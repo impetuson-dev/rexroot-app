@@ -19,6 +19,7 @@ import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.ktx.Firebase
 import com.google.firebase.storage.ktx.storage
 import com.google.firebase.firestore.SetOptions
+import com.google.firebase.firestore.ktx.firestore
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 import com.impetuson.rexroot.R
@@ -34,6 +35,7 @@ import java.util.UUID
 
 class JobreqViewModel : ViewModel() {
 
+    private val firestoreDB = Firebase.firestore
     private lateinit var realtimeDB: DatabaseReference
     private lateinit var mediaPlayer: MediaPlayer
 
@@ -56,7 +58,7 @@ class JobreqViewModel : ViewModel() {
     private val _jobreqModel = MutableLiveData<JobReqModelClass>()
     var jobreqModel: LiveData<JobReqModelClass> = _jobreqModel
 
-    private var userId: String = ""
+    var userId: String = ""
     var jobId: String = ""
 
     suspend fun fetchRealtimeDB() = withContext(Dispatchers.IO){
@@ -132,18 +134,34 @@ class JobreqViewModel : ViewModel() {
     private suspend fun uploadToFireStorage(fileUris: List<Uri>, contentResolver: ContentResolver): String = withContext(Dispatchers.IO){
         val storageRef = Firebase.storage.reference
         var uploadMsg = ""
+        var downloadUrl = ""
 
         fileUris.forEachIndexed { index, fileUri ->
             val fileName = UUID.randomUUID().toString()
             val pdfRef = storageRef.child("$userId/submissions/$jobId/$fileName")
 
             selectedUUIDFilesNames.add(fileName)
-            selectedFilesNames.add(getFileNameFromUri(fileUri, contentResolver))
-
+            val resumeName = getFileNameFromUri(fileUri, contentResolver)
+            selectedFilesNames.add(resumeName)
             try {
-                pdfRef.putFile(fileUri).await()
+                pdfRef.putFile(fileUri)
+                    .continueWithTask { task ->
+                        if (!task.isSuccessful) {
+                            task.exception?.let {
+                                throw it
+                            }
+                        }
+                        pdfRef.downloadUrl
+                    }
+                    .addOnCompleteListener {  task ->
+                        if (task.isSuccessful) downloadUrl = task.result.toString()
+                    }
+                    .await()
+
                 uploadMsg = "Resume(s) Uploaded successfully"
                 Log.d("Firebase Storage","Resume(s) Uploaded successfully: $fileName")
+
+                storeDataToFirestore(fileName, resumeName, downloadUrl, index)
             } catch(e: Exception) {
                 uploadMsg = "Database error occurred"
                 Log.d("Firebase Storage","Error: ${e.message}")
@@ -152,6 +170,30 @@ class JobreqViewModel : ViewModel() {
         }
 
         uploadMsg
+    }
+
+    private fun storeDataToFirestore(resumeId: String, resumeName: String, resumeUrl: String, index: Int) {
+
+        val submitdata = mapOf<String,Any>(
+            "submitdata" to mapOf(
+                jobId to mapOf(
+                    resumeId to mapOf(
+                        "resumeid" to resumeId,
+                        "resumestatus" to "0",
+                        "resumename" to resumeName,
+                        "resumeurl" to resumeUrl
+                    )
+                )
+            )
+        )
+
+        firestoreDB.collection("users").document(userId).set(submitdata, SetOptions.merge())
+
+        firestoreDB.collection("users").document(userId).update(mapOf(
+            "submitdata.$jobId.count.submitted" to "${index+1}",
+            "submitdata.$jobId.count.accepted" to "0",
+            "submitdata.$jobId.count.rejected" to "0"
+        ))
     }
 
     private fun getFileNameFromUri(uri: Uri, contentResolver: ContentResolver): String {

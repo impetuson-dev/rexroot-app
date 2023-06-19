@@ -41,8 +41,8 @@
                         android:layout_height="wrap_content">
 
                         <ImageView
-                            android:layout_width="25sp"
-                            android:layout_height="25sp"
+                            android:layout_width="20sp"
+                            android:layout_height="20sp"
                             android:layout_gravity="center"
                             android:layout_marginRight="8sp"
                             android:src="@drawable/icon_salary">
@@ -63,8 +63,8 @@
                         android:layout_height="wrap_content">
 
                         <ImageView
-                            android:layout_width="25sp"
-                            android:layout_height="25sp"
+                            android:layout_width="20sp"
+                            android:layout_height="20sp"
                             android:layout_gravity="center"
                             android:layout_marginRight="8sp"
                             android:src="@drawable/icon_suitcase">
@@ -87,8 +87,8 @@
                     android:layout_height="wrap_content">
 
                     <ImageView
-                        android:layout_width="25sp"
-                        android:layout_height="25sp"
+                        android:layout_width="20sp"
+                        android:layout_height="20sp"
                         android:layout_gravity="center"
                         android:layout_marginRight="8sp"
                         android:src="@drawable/icon_location">
@@ -108,8 +108,8 @@
                     android:layout_height="wrap_content">
 
                     <ImageView
-                        android:layout_width="25sp"
-                        android:layout_height="25sp"
+                        android:layout_width="20sp"
+                        android:layout_height="20sp"
                         android:layout_gravity="center"
                         android:layout_marginRight="8sp"
                         android:src="@drawable/icon_degree">
@@ -119,7 +119,8 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
-                        android:text="@{jobreqviewmodel.jobreqModel.reqeduqualify}"></TextView>
+                        android:text="@{jobreqviewmodel.jobreqModel.reqeduqualify}">
+                    </TextView>
 
                 </LinearLayout>
 

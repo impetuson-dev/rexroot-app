@@ -1,18 +1,53 @@
 package com.impetuson.rexroot.view.jobreq
 
+import android.content.Context.MODE_PRIVATE
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.databinding.DataBindingUtil
+import androidx.recyclerview.widget.LinearLayoutManager
+import com.impetuson.rexroot.JobreqActivity
 import com.impetuson.rexroot.R
+import com.impetuson.rexroot.databinding.FragmentJobreqdetailsBinding
+import com.impetuson.rexroot.databinding.FragmentJobreqsubmissionsBinding
+import com.impetuson.rexroot.viewmodel.jobreq.SubmissionsRecyclerViewAdapter
+import com.impetuson.rexroot.viewmodel.jobreq.SubmissionsViewModel
+import kotlinx.coroutines.MainScope
+import kotlinx.coroutines.launch
 
 class JobreqSubmissionsFragment : Fragment() {
+
+    private var binding: FragmentJobreqsubmissionsBinding ?= null
+    private lateinit var resumeList: List<String>
+    private lateinit var submissionsAdapter: SubmissionsRecyclerViewAdapter
+    private val viewmodel = SubmissionsViewModel()
+
+    private var jobId: String = JobreqActivity().jobId
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_jobreqsubmissions, container, false)
+    ): View {
+        binding = DataBindingUtil.inflate(inflater, R.layout.fragment_jobreqsubmissions, container, false)
+        return binding!!.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        binding?.apply {
+            lifecycleOwner = viewLifecycleOwner
+            context?.let { viewmodel.fetchDataSharedPref(it.getSharedPreferences("profiledata",MODE_PRIVATE)) }
+
+            rvSubmissions.layoutManager = LinearLayoutManager(requireContext())
+            MainScope().launch {
+                resumeList = viewmodel.fetchDataFromFirestore()
+                submissionsAdapter = SubmissionsRecyclerViewAdapter(resumeList)
+                rvSubmissions.adapter = submissionsAdapter
+            }
+
+        }
     }
 }

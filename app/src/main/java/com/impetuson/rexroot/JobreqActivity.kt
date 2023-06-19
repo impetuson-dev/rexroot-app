@@ -17,6 +17,7 @@ import com.impetuson.rexroot.view.jobreq.JobreqDetailsFragment
 import com.impetuson.rexroot.view.jobreq.JobreqSubmissionsFragment
 import com.impetuson.rexroot.view.jobreq.JobreqViewPagerAdapter
 import com.impetuson.rexroot.viewmodel.jobreq.JobreqViewModel
+import com.impetuson.rexroot.viewmodel.jobreq.SubmissionsViewModel
 import kotlinx.coroutines.MainScope
 import kotlinx.coroutines.launch
 
@@ -24,11 +25,11 @@ class JobreqActivity: AppCompatActivity() {
 
     private val PDF_REQUEST_CODE = 123
 
-
-    private lateinit var jobId: String
+    var jobId: String = ""
     private lateinit var binding: ActivityJobreqBinding
     private lateinit var jobreqViewPageAdapter: JobreqViewPagerAdapter
-    private val viewmodel: JobreqViewModel by viewModels()
+    private val jobreqViewModel: JobreqViewModel by viewModels()
+    private val submissionsViewModel: SubmissionsViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -43,13 +44,12 @@ class JobreqActivity: AppCompatActivity() {
         jobreqViewPageAdapter.addFragment(JobreqSubmissionsFragment())
         jobreqViewPageAdapter.addFragment(JobreqActionsFragment())
 
-        viewmodel.fetchDataSharedPref(this.getSharedPreferences("profiledata", MODE_PRIVATE))
-        viewmodel.jobId = jobId
+        jobreqViewModel.fetchDataSharedPref(this.getSharedPreferences("profiledata", MODE_PRIVATE))
+        jobreqViewModel.jobId = jobId
 
         binding.apply{
             lifecycleOwner = this@JobreqActivity
-            jobreqviewmodel = viewmodel
-
+            jobreqviewmodel = jobreqViewModel
 
             ivGoback.setOnClickListener {
                 onBackPressed()
@@ -67,7 +67,7 @@ class JobreqActivity: AppCompatActivity() {
             loadingAnimation.visibility = View.VISIBLE
             body.visibility = View.GONE
             MainScope().launch {
-                viewmodel.fetchRealtimeDB()
+                jobreqViewModel.fetchRealtimeDB()
                 loadingAnimation.visibility = View.GONE
                 body.visibility = View.VISIBLE
             }
@@ -83,19 +83,19 @@ class JobreqActivity: AppCompatActivity() {
             btnSubmit.setOnClickListener {
                 MainScope().launch {
                     progressIndicator.visibility = View.VISIBLE
-                    val uploadMsg = viewmodel.btnSubmitHandler(contentResolver)
+                    val uploadMsg = jobreqViewModel.btnSubmitHandler(contentResolver)
                     Toast.makeText(this@JobreqActivity, uploadMsg, Toast.LENGTH_SHORT).show()
                     progressIndicator.visibility = View.GONE
                 }
             }
-
         }
+
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
         if (requestCode == PDF_REQUEST_CODE && resultCode == Activity.RESULT_OK){
-            viewmodel.getSelectedFiles(data)
+            jobreqViewModel.getSelectedFiles(data)
         }
     }
 
