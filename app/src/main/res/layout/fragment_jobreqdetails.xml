@@ -30,64 +30,103 @@
                 android:orientation="vertical">
 
                 <LinearLayout
+                    android:weightSum="1"
+                    android:layout_marginBottom="8sp"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content">
+
+                    <LinearLayout
+                        android:layout_weight="0.5"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <ImageView
+                            android:layout_width="25sp"
+                            android:layout_height="25sp"
+                            android:layout_gravity="center"
+                            android:layout_marginRight="8sp"
+                            android:src="@drawable/icon_salary">
+                        </ImageView>
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:text="@{jobreqviewmodel.jobreqModel.jobsalary}">
+                        </TextView>
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_weight="0.5"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <ImageView
+                            android:layout_width="25sp"
+                            android:layout_height="25sp"
+                            android:layout_gravity="center"
+                            android:layout_marginRight="8sp"
+                            android:src="@drawable/icon_suitcase">
+                        </ImageView>
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:text="@{jobreqviewmodel.jobreqModel.reqjobexp}"></TextView>
+
+                    </LinearLayout>
+
+                </LinearLayout>
+
+
+                <LinearLayout
+                    android:layout_marginBottom="8sp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <ImageView
+                        android:layout_width="25sp"
+                        android:layout_height="25sp"
+                        android:layout_gravity="center"
+                        android:layout_marginRight="8sp"
+                        android:src="@drawable/icon_location">
+                    </ImageView>
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="@{jobreqviewmodel.jobreqModel.jobsalary}">
-                    </TextView>
+                        android:layout_gravity="center"
+                        android:text="@{jobreqviewmodel.jobreqModel.complocation + ` (` + jobreqviewmodel.jobreqModel.jobtype + `)`}"></TextView>
 
                 </LinearLayout>
 
                 <LinearLayout
+                    android:layout_marginBottom="8sp"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content">
+
+                    <ImageView
+                        android:layout_width="25sp"
+                        android:layout_height="25sp"
+                        android:layout_gravity="center"
+                        android:layout_marginRight="8sp"
+                        android:src="@drawable/icon_degree">
+                    </ImageView>
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="@{jobreqviewmodel.jobreqModel.reqjobexp}"></TextView>
-
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
                         android:text="@{jobreqviewmodel.jobreqModel.reqeduqualify}"></TextView>
 
                 </LinearLayout>
 
                 <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@{jobreqviewmodel.jobreqModel.complocation}"></TextView>
-
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@{jobreqviewmodel.jobreqModel.jobtype}"></TextView>
-
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginBottom="8sp"
                     android:orientation="vertical">
 
                     <TextView

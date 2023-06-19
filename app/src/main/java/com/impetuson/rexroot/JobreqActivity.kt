@@ -1,6 +1,7 @@
 package com.impetuson.rexroot
 
 import android.os.Bundle
+import android.view.View
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.viewpager2.widget.ViewPager2
@@ -54,10 +55,18 @@ class JobreqActivity: AppCompatActivity() {
                     2 -> tab.text = "Actions"
                 }
             }.attach()
+
+            loadingAnimation.visibility = View.VISIBLE
+            body.visibility = View.GONE
+            MainScope().launch {
+                viewmodel.fetchRealtimeDB()
+                loadingAnimation.visibility = View.GONE
+                body.visibility = View.VISIBLE
+            }
+
         }
 
-        MainScope().launch {
-            viewmodel.fetchRealtimeDB()
-        }
+
+
     }
 }
