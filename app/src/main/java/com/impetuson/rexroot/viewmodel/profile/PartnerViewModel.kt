@@ -16,7 +16,7 @@ class PartnerViewModel: ViewModel() {
     private val auth = Firebase.auth
     private val db = Firebase.firestore
 
-    private val _partnerModel = MutableLiveData<PartnerModelClass>()
+    private val _partnerModel = MutableLiveData<PartnerModelClass>(PartnerModelClass("","","","","",""))
     val partnerModel: LiveData<PartnerModelClass> = _partnerModel
 
     fun saveDetails(){

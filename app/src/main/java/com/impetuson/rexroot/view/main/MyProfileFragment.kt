@@ -18,6 +18,8 @@ import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.impetuson.rexroot.OnboardingActivity
 import com.impetuson.rexroot.R
 import com.impetuson.rexroot.databinding.FragmentMyProfileBinding
+import com.impetuson.rexroot.view.profile.CandidateActivity
+import com.impetuson.rexroot.view.profile.PartnerActivity
 import com.impetuson.rexroot.viewmodel.profile.MyProfileViewModel
 
 class MyProfileFragment : Fragment() {
@@ -47,11 +49,11 @@ class MyProfileFragment : Fragment() {
             viewmodel.getUserProfileDetails(sharedPreference)
 
             cvPartner.setOnClickListener {
-                findNavController().navigate(R.id.action_profileFragment_to_partnerFragment2)
+                startActivity(Intent(requireContext(),PartnerActivity::class.java))
             }
 
             cvCandidate.setOnClickListener {
-                findNavController().navigate(R.id.action_profileFragment_to_candidateFragment2)
+                startActivity(Intent(requireContext(),CandidateActivity::class.java))
             }
 
             btnLogout.setOnClickListener {

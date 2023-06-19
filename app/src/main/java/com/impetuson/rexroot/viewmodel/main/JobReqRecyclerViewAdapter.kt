@@ -9,7 +9,7 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.impetuson.rexroot.JobreqActivity
 import com.impetuson.rexroot.R
-import com.impetuson.rexroot.model.profile.JobReqModelClass
+import com.impetuson.rexroot.model.jobreq.JobReqModelClass
 class JobReqRecyclerViewAdapter(private val dataList: List<JobReqModelClass>) : RecyclerView.Adapter<JobReqRecyclerViewAdapter.ViewHolder>() {
 
     inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
@@ -33,7 +33,7 @@ class JobReqRecyclerViewAdapter(private val dataList: List<JobReqModelClass>) : 
 
             itemView.setOnClickListener {
                 val intent = Intent(itemView.context, JobreqActivity::class.java)
-                intent.putExtra("jobId", data.jobid)
+                intent.putExtra("jobid", data.jobid)
                 itemView.context.startActivity(intent)
             }
         }

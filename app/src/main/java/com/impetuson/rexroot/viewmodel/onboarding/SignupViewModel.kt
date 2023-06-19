@@ -155,6 +155,7 @@ class SignupViewModel: ViewModel() {
 
     fun storeDataToSharedPreferences(sharedPreferences: SharedPreferences){
         val editor = sharedPreferences.edit()
+        editor.putString("userid",userId)
         editor.putString("useremail",email)
         editor.putString("username",fullname)
         editor.putString("usermobilenumber",mobilenumber)

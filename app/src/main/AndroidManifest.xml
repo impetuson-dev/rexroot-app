@@ -29,6 +29,14 @@
             android:name=".JobreqActivity"
             android:exported="true">
         </activity>
+        <activity
+            android:name=".view.profile.PartnerActivity"
+            android:exported="true">
+        </activity>
+        <activity
+            android:name=".view.profile.CandidateActivity"
+            android:exported="true">
+        </activity>
     </application>
 
 </manifest>

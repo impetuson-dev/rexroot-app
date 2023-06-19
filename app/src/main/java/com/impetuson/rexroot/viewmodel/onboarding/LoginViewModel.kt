@@ -109,6 +109,7 @@ class LoginViewModel: ViewModel() {
         if (fetchedData.isNullOrEmpty()){
             Log.d("Firebase Firestore","Fetched data is null")
         }
+        editor.putString("userid",userId)
         editor.putString("useremail", fetchedData?.get("email").toString())
         editor.putString("username", fetchedData?.get("fullname").toString())
         editor.putString("usermobilenumber", fetchedData?.get("mobilenumber").toString())

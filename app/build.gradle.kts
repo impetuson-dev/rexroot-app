@@ -12,7 +12,7 @@ android {
 
     defaultConfig {
         applicationId = "com.impetuson.rexroot"
-        minSdk = 23
+        minSdk = 26
         targetSdk = 33
         versionCode = 1
         versionName = "1.0"
@@ -79,4 +79,7 @@ dependencies {
 
     // Material
     implementation("com.google.android.material:material:1.0.0")
+
+    // ViewPager2
+    implementation("androidx.viewpager2:viewpager2:1.0.0")
 }

@@ -26,25 +26,9 @@
         android:label="fragment_my_profile"
         tools:layout="@layout/fragment_my_profile" >
         <action
-            android:id="@+id/action_profileFragment_to_partnerFragment2"
-            app:destination="@id/partnerFragment" />
-        <action
-            android:id="@+id/action_profileFragment_to_candidateFragment2"
-            app:destination="@id/candidateFragment" />
-        <action
             android:id="@+id/action_profileFragment_to_splashscreenFragment2"
             app:destination="@id/splashscreenFragment" />
     </fragment>
-    <fragment
-        android:id="@+id/partnerFragment"
-        android:name="com.impetuson.rexroot.view.profile.PartnerFragment"
-        android:label="PartnerFragment"
-        tools:layout="@layout/fragment_partner" />
-    <fragment
-        android:id="@+id/candidateFragment"
-        android:name="com.impetuson.rexroot.view.profile.CandidateFragment"
-        android:label="CandidateFragment"
-        tools:layout="@layout/fragment_candidate" />
     <fragment
         android:id="@+id/splashscreenFragment"
         android:name="com.impetuson.rexroot.view.onboarding.SplashscreenFragment"

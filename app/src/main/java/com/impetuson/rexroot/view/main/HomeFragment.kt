@@ -1,7 +1,6 @@
 package com.impetuson.rexroot.view.main
 
 import android.content.Context
-import android.content.Intent
 import android.content.SharedPreferences
 import android.graphics.Color
 import android.os.Bundle
@@ -16,7 +15,6 @@ import android.widget.Toast
 import androidx.activity.addCallback
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.activityViewModels
-import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.firebase.database.ChildEventListener
 import com.google.firebase.database.DataSnapshot
@@ -25,7 +23,7 @@ import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.DatabaseError
 import com.impetuson.rexroot.R
 import com.impetuson.rexroot.databinding.FragmentHomeBinding
-import com.impetuson.rexroot.model.profile.JobReqModelClass
+import com.impetuson.rexroot.model.jobreq.JobReqModelClass
 import com.impetuson.rexroot.viewmodel.main.HomeViewModel
 import com.impetuson.rexroot.viewmodel.main.JobReqRecyclerViewAdapter
 import kotlinx.coroutines.CompletableDeferred

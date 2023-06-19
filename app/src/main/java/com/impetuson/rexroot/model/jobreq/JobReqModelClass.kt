@@ -1,4 +1,4 @@
-package com.impetuson.rexroot.model.profile
+package com.impetuson.rexroot.model.jobreq
 
 data class JobReqModelClass(
     var jobid: String = "",
