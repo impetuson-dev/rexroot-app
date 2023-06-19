@@ -1,6 +1,10 @@
 package com.impetuson.rexroot
 
+import android.content.Context
+import android.net.ConnectivityManager
+import android.net.NetworkCapabilities
 import android.os.Bundle
+import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
@@ -21,4 +25,5 @@ class MainActivity: AppCompatActivity() {
         val bottomNavigationView = findViewById<BottomNavigationView>(R.id.bottomNavBar)
         setupWithNavController(bottomNavigationView, navController)
     }
+
 }
