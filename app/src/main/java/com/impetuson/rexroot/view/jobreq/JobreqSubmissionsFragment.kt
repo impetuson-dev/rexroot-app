@@ -8,28 +8,25 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.impetuson.rexroot.JobreqActivity
 import com.impetuson.rexroot.R
-import com.impetuson.rexroot.databinding.FragmentJobreqdetailsBinding
 import com.impetuson.rexroot.databinding.FragmentJobreqsubmissionsBinding
 import com.impetuson.rexroot.viewmodel.jobreq.SubmissionsRecyclerViewAdapter
 import com.impetuson.rexroot.viewmodel.jobreq.SubmissionsViewModel
 import kotlinx.coroutines.MainScope
 import kotlinx.coroutines.launch
 
-class JobreqSubmissionsFragment : Fragment() {
+class JobreqSubmissionsFragment(jobId: String) : Fragment() {
 
     private var binding: FragmentJobreqsubmissionsBinding ?= null
     private lateinit var resumeList: List<String>
     private lateinit var submissionsAdapter: SubmissionsRecyclerViewAdapter
-    private val viewmodel = SubmissionsViewModel()
-
-    private var jobId: String = JobreqActivity().jobId
+    private val viewmodel = SubmissionsViewModel(jobId)
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
+
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_jobreqsubmissions, container, false)
         return binding!!.root
     }

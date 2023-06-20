@@ -8,15 +8,14 @@ import com.google.firebase.ktx.Firebase
 import com.impetuson.rexroot.JobreqActivity
 import kotlinx.coroutines.tasks.await
 
-class SubmissionsViewModel: ViewModel() {
+class SubmissionsViewModel(private var jobId: String): ViewModel() {
 
     private val firestoreDB = Firebase.firestore
     private var userId = ""
-    private val jobId = "-NY32jt-jEWFPPTQGqZ9"
 
     suspend fun fetchDataFromFirestore(): List<String> {
         val resumeNames = mutableListOf<String>()
-        Log.d("firestoredb","fetching ... userid: $userId")
+        Log.d("firestoredb","fetching ... userid: $userId | jobid: $jobId")
 
         val documentSnapshot = firestoreDB.collection("users").document(userId).get().await()
 

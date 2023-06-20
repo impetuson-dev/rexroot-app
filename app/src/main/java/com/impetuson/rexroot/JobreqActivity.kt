@@ -4,6 +4,7 @@ import android.app.Activity
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.widget.Toast
 import androidx.activity.viewModels
@@ -29,7 +30,6 @@ class JobreqActivity: AppCompatActivity() {
     private lateinit var binding: ActivityJobreqBinding
     private lateinit var jobreqViewPageAdapter: JobreqViewPagerAdapter
     private val jobreqViewModel: JobreqViewModel by viewModels()
-    private val submissionsViewModel: SubmissionsViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -41,11 +41,12 @@ class JobreqActivity: AppCompatActivity() {
         jobreqViewPageAdapter = JobreqViewPagerAdapter(this)
 
         jobreqViewPageAdapter.addFragment(JobreqDetailsFragment())
-        jobreqViewPageAdapter.addFragment(JobreqSubmissionsFragment())
+        jobreqViewPageAdapter.addFragment(JobreqSubmissionsFragment(jobId))
         jobreqViewPageAdapter.addFragment(JobreqActionsFragment())
 
         jobreqViewModel.fetchDataSharedPref(this.getSharedPreferences("profiledata", MODE_PRIVATE))
         jobreqViewModel.jobId = jobId
+        Log.d("jobid",jobId)
 
         binding.apply{
             lifecycleOwner = this@JobreqActivity
