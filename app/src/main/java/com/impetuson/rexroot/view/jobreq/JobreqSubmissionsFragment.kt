@@ -6,6 +6,8 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.AdapterView
+import android.widget.ArrayAdapter
 import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.impetuson.rexroot.R
@@ -19,7 +21,7 @@ import kotlinx.coroutines.launch
 class JobreqSubmissionsFragment(jobId: String) : Fragment() {
 
     private var binding: FragmentJobreqsubmissionsBinding ?= null
-    private lateinit var resumeList: List<SubmissionsModelClass>
+    private lateinit var resumeList: List<List<SubmissionsModelClass>>
     private lateinit var submissionsAdapter: SubmissionsRecyclerViewAdapter
     private val viewmodel = SubmissionsViewModel(jobId)
 
@@ -41,11 +43,18 @@ class JobreqSubmissionsFragment(jobId: String) : Fragment() {
             rvSubmissions.layoutManager = LinearLayoutManager(requireContext())
             MainScope().launch {
                 resumeList = viewmodel.fetchDataFromFirestore()
-                submissionsAdapter = SubmissionsRecyclerViewAdapter(resumeList)
-                rvSubmissions.adapter = submissionsAdapter
 
-                if (resumeList.isEmpty()){
-                    tvNoresults.visibility = View.VISIBLE
+                spinnerStatus.adapter = ArrayAdapter(requireContext(), android.R.layout.simple_spinner_dropdown_item, viewmodel.items)
+                spinnerStatus.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+                    override fun onItemSelected(adapterView: AdapterView<*>, view: View, position: Int, id: Long) {
+                        viewmodel.onItemSelected(position)
+                        submissionsAdapter = SubmissionsRecyclerViewAdapter(resumeList[position])
+                        rvSubmissions.adapter = submissionsAdapter
+                        if (resumeList[position].isEmpty()){
+                            tvNoresults.visibility = View.VISIBLE
+                        }
+                    }
+                    override fun onNothingSelected(adapterView: AdapterView<*>) {}
                 }
             }
         }

@@ -31,6 +31,7 @@
 
         </LinearLayout>
 
+        <!-- Loading Animation -->
         <LinearLayout
             android:id="@+id/loading_animation"
             android:layout_width="0dp"

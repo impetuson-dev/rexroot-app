@@ -65,7 +65,7 @@ dependencies {
     implementation("com.google.firebase:firebase-storage-ktx")
 
     // Livedata
-    implementation("androidx.lifecycle:lifecycle-livedata-ktx:2.3.1")
+    implementation("androidx.lifecycle:lifecycle-livedata-ktx:2.4.1")
 
     // ViewModel
     implementation("androidx.lifecycle:lifecycle-viewmodel-ktx: 2.3.1")

@@ -1,9 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools">
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
-
+        <variable
+            name="submissionsVieModel"
+            type="com.impetuson.rexroot.viewmodel.jobreq.SubmissionsViewModel" />
     </data>
 
     <LinearLayout
@@ -12,6 +15,29 @@
         android:background="@color/white"
         android:orientation="vertical"
         tools:context=".view.jobreq.JobreqSubmissionsFragment">
+
+        <RelativeLayout
+            android:paddingBottom="8sp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <com.google.android.material.card.MaterialCardView
+                android:layout_alignParentEnd="true"
+                app:cardCornerRadius="50sp"
+                android:background="#fffbfe"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+
+                <Spinner
+                    android:id="@+id/spinner_status"
+                    android:layout_width="wrap_content"
+                    android:layout_height="30sp"
+                    android:entries="@array/status_list">
+                </Spinner>
+
+            </com.google.android.material.card.MaterialCardView>
+
+        </RelativeLayout>
 
         <RelativeLayout
             android:layout_width="match_parent"

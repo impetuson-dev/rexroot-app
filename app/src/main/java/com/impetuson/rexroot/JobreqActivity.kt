@@ -10,6 +10,8 @@ import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.viewpager2.widget.ViewPager2
+import com.google.android.material.badge.BadgeDrawable
+import com.google.android.material.badge.BadgeDrawable.BOTTOM_END
 import com.google.android.material.snackbar.Snackbar
 import com.google.android.material.tabs.TabLayoutMediator
 import com.impetuson.rexroot.databinding.ActivityJobreqBinding
@@ -59,9 +61,15 @@ class JobreqActivity: AppCompatActivity() {
             viewPager.adapter = jobreqViewPageAdapter
             TabLayoutMediator(jobreqTablayout, viewPager){ tab,position ->
                 when(position){
-                    0 -> tab.text = "Job Details"
-                    1 -> tab.text = "Submissions"
-                    2 -> tab.text = "Actions"
+                    0 -> {
+                        tab.text = "Job Details"
+                    }
+                    1 -> {
+                        tab.text = "Submissions"
+                    }
+                    2 -> {
+                        tab.text = "Actions"
+                    }
                 }
             }.attach()
 

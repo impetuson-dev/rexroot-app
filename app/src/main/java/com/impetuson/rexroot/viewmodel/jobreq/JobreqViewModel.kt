@@ -186,12 +186,14 @@ class JobreqViewModel : ViewModel() {
         val submitdata = mapOf<String,Any>(
             "submitdata" to mapOf(
                 jobId to mapOf(
-                    resumeDataId to mapOf(
-                        "resumeid" to resumeId,
-                        "resumepost" to postedDate,
-                        "resumestatus" to "0",
-                        "resumename" to resumeName,
-                        "resumeurl" to resumeUrl
+                    "resume" to mapOf(
+                        resumeDataId to mapOf(
+                            "resumeid" to resumeId,
+                            "resumepost" to postedDate,
+                            "resumestatus" to "0",
+                            "resumename" to resumeName,
+                            "resumeurl" to resumeUrl
+                        )
                     )
                 )
             )
