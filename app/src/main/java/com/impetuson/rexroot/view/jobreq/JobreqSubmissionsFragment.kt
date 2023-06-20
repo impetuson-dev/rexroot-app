@@ -41,6 +41,8 @@ class JobreqSubmissionsFragment(jobId: String) : Fragment() {
             context?.let { viewmodel.fetchDataSharedPref(it.getSharedPreferences("profiledata",MODE_PRIVATE)) }
 
             rvSubmissions.layoutManager = LinearLayoutManager(requireContext())
+            pbLoading.visibility = View.VISIBLE
+
             MainScope().launch {
                 resumeList = viewmodel.fetchDataFromFirestore()
 
@@ -50,6 +52,8 @@ class JobreqSubmissionsFragment(jobId: String) : Fragment() {
                         viewmodel.onItemSelected(position)
                         submissionsAdapter = SubmissionsRecyclerViewAdapter(resumeList[position])
                         rvSubmissions.adapter = submissionsAdapter
+
+                        pbLoading.visibility = View.GONE
                         if (resumeList[position].isEmpty()){
                             tvNoresults.visibility = View.VISIBLE
                         }
