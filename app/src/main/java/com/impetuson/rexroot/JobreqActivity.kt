@@ -1,6 +1,7 @@
 package com.impetuson.rexroot
 
 import android.app.Activity
+import android.app.Dialog
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
@@ -12,6 +13,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.viewpager2.widget.ViewPager2
 import com.google.android.material.badge.BadgeDrawable
 import com.google.android.material.badge.BadgeDrawable.BOTTOM_END
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.android.material.snackbar.Snackbar
 import com.google.android.material.tabs.TabLayoutMediator
 import com.impetuson.rexroot.databinding.ActivityJobreqBinding
@@ -21,6 +23,9 @@ import com.impetuson.rexroot.view.jobreq.JobreqSubmissionsFragment
 import com.impetuson.rexroot.view.jobreq.JobreqViewPagerAdapter
 import com.impetuson.rexroot.viewmodel.jobreq.JobreqViewModel
 import com.impetuson.rexroot.viewmodel.jobreq.SubmissionsViewModel
+import kotlinx.coroutines.DelicateCoroutinesApi
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.MainScope
 import kotlinx.coroutines.launch
 
@@ -28,17 +33,22 @@ class JobreqActivity: AppCompatActivity() {
 
     private val PDF_REQUEST_CODE = 123
 
+    private var alert: Boolean = false
     var jobId: String = ""
+
+    private lateinit var alertDialog: Dialog
     private lateinit var binding: ActivityJobreqBinding
     private lateinit var jobreqViewPageAdapter: JobreqViewPagerAdapter
     private val jobreqViewModel: JobreqViewModel by viewModels()
 
+    @OptIn(DelicateCoroutinesApi::class)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityJobreqBinding.inflate(layoutInflater)
         val view = binding.root
         setContentView(view)
 
+        alertDialog = MaterialAlertDialogBuilder(this).setTitle("Uploading Resume(s)").setMessage("Please wait...").setCancelable(false).create()
         jobId = intent.getStringExtra("jobid") ?: ""
         jobreqViewPageAdapter = JobreqViewPagerAdapter(this)
 
@@ -95,6 +105,10 @@ class JobreqActivity: AppCompatActivity() {
                     val uploadMsg = jobreqViewModel.btnSubmitHandler(contentResolver)
                     Toast.makeText(this@JobreqActivity, uploadMsg, Toast.LENGTH_SHORT).show()
                     progressIndicator.visibility = View.GONE
+                    if (alert){
+                        alert = false
+                        alertDialog.dismiss()
+                    }
                 }
             }
         }
@@ -109,7 +123,12 @@ class JobreqActivity: AppCompatActivity() {
     }
 
     override fun onBackPressed() {
-        finish()
-        super.onBackPressed()
+        if (binding.progressIndicator.visibility == View.VISIBLE){
+            alert = true
+            alertDialog.show()
+        } else {
+            finish()
+            super.onBackPressed()
+        }
     }
 }
