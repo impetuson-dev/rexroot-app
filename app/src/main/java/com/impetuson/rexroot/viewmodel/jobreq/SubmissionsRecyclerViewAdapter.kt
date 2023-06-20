@@ -6,8 +6,9 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.impetuson.rexroot.R
+import com.impetuson.rexroot.model.jobreq.SubmissionsModelClass
 
-class SubmissionsRecyclerViewAdapter(private val dataList: List<String>): RecyclerView.Adapter<SubmissionsRecyclerViewAdapter.ViewHolder>() {
+class SubmissionsRecyclerViewAdapter(private val dataList: List<SubmissionsModelClass>): RecyclerView.Adapter<SubmissionsRecyclerViewAdapter.ViewHolder>() {
     override fun onCreateViewHolder(
         parent: ViewGroup,
         viewType: Int
@@ -30,8 +31,10 @@ class SubmissionsRecyclerViewAdapter(private val dataList: List<String>): Recycl
 
     inner class ViewHolder(itemView: View): RecyclerView.ViewHolder(itemView) {
         private val resumeName: TextView = itemView.findViewById(R.id.tv_resumename)
-        fun bind(data: String) {
-            resumeName.text = data
+        private val resumePost: TextView = itemView.findViewById(R.id.tv_resumepost)
+        fun bind(data: SubmissionsModelClass) {
+            resumeName.text = data.resumename
+            resumePost.text = "Posted on: " + data.resumepost
         }
     }
 }

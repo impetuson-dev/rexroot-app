@@ -38,7 +38,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@id/header"
-            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintBottom_toBottomOf="@id/ll_footer"
             android:background="@color/white"
             android:orientation="horizontal">
 
@@ -63,7 +63,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@id/header"
-            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintBottom_toTopOf="@id/ll_footer"
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:orientation="vertical">
@@ -148,30 +148,29 @@
 
                 </com.google.android.material.tabs.TabLayout>
 
-                <ScrollView
+                <androidx.viewpager2.widget.ViewPager2
+                    android:id="@+id/view_pager"
+                    android:paddingStart="10sp"
+                    android:paddingEnd="10sp"
+                    android:paddingTop="10sp"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent">
 
-                    <androidx.viewpager2.widget.ViewPager2
-                        android:id="@+id/view_pager"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:padding="15sp">
-
-                    </androidx.viewpager2.widget.ViewPager2>
-
-                </ScrollView>
+                </androidx.viewpager2.widget.ViewPager2>
 
             </LinearLayout>
 
         </LinearLayout>
 
         <LinearLayout
+            android:id="@+id/ll_footer"
+            app:layout_constraintTop_toBottomOf="@id/body"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:background="@color/white"
             android:orientation="vertical">
 
             <com.google.android.material.progressindicator.LinearProgressIndicator
@@ -185,7 +184,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:paddingTop="5sp"
-                android:paddingBottom="5sp"
                 android:weightSum="1">
 
                 <Button
@@ -222,8 +220,6 @@
             </LinearLayout>
 
         </LinearLayout>
-
-
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

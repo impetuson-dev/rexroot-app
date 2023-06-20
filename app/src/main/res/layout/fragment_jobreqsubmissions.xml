@@ -18,6 +18,8 @@
             android:layout_height="wrap_content">
 
             <TextView
+                android:id="@+id/tv_noresults"
+                android:visibility="gone"
                 android:layout_marginTop="30sp"
                 android:layout_centerHorizontal="true"
                 android:layout_width="wrap_content"

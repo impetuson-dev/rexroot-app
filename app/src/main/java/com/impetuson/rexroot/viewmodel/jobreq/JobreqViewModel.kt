@@ -93,9 +93,15 @@ class JobreqViewModel : ViewModel() {
         return gson.fromJson(jsonString, object : TypeToken<JobReqModelClass>() {}.type)
     }
 
-    fun calcJobPostedTime(): String {
+    private fun calcJobPostedTime(): String {
         val currentDateTime = LocalDateTime.now()
-        val formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm")
+        val formatter = DateTimeFormatter.ofPattern("HHmmss")
+        return currentDateTime.format(formatter).toString()
+    }
+
+    private fun calcJobPostedDate(): String {
+        val currentDateTime = LocalDateTime.now()
+        val formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm")
         return currentDateTime.format(formatter).toString()
     }
 
@@ -173,12 +179,16 @@ class JobreqViewModel : ViewModel() {
     }
 
     private fun storeDataToFirestore(resumeId: String, resumeName: String, resumeUrl: String, index: Int) {
+        val postedTime = calcJobPostedTime()
+        val postedDate = calcJobPostedDate()
+        val resumeDataId = postedTime + resumeId
 
         val submitdata = mapOf<String,Any>(
             "submitdata" to mapOf(
                 jobId to mapOf(
-                    resumeId to mapOf(
+                    resumeDataId to mapOf(
                         "resumeid" to resumeId,
+                        "resumepost" to postedDate,
                         "resumestatus" to "0",
                         "resumename" to resumeName,
                         "resumeurl" to resumeUrl

@@ -10,6 +10,7 @@ import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.impetuson.rexroot.R
 import com.impetuson.rexroot.databinding.FragmentJobreqsubmissionsBinding
+import com.impetuson.rexroot.model.jobreq.SubmissionsModelClass
 import com.impetuson.rexroot.viewmodel.jobreq.SubmissionsRecyclerViewAdapter
 import com.impetuson.rexroot.viewmodel.jobreq.SubmissionsViewModel
 import kotlinx.coroutines.MainScope
@@ -18,7 +19,7 @@ import kotlinx.coroutines.launch
 class JobreqSubmissionsFragment(jobId: String) : Fragment() {
 
     private var binding: FragmentJobreqsubmissionsBinding ?= null
-    private lateinit var resumeList: List<String>
+    private lateinit var resumeList: List<SubmissionsModelClass>
     private lateinit var submissionsAdapter: SubmissionsRecyclerViewAdapter
     private val viewmodel = SubmissionsViewModel(jobId)
 
@@ -26,7 +27,6 @@ class JobreqSubmissionsFragment(jobId: String) : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_jobreqsubmissions, container, false)
         return binding!!.root
     }
@@ -43,8 +43,11 @@ class JobreqSubmissionsFragment(jobId: String) : Fragment() {
                 resumeList = viewmodel.fetchDataFromFirestore()
                 submissionsAdapter = SubmissionsRecyclerViewAdapter(resumeList)
                 rvSubmissions.adapter = submissionsAdapter
-            }
 
+                if (resumeList.isEmpty()){
+                    tvNoresults.visibility = View.VISIBLE
+                }
+            }
         }
     }
 }
