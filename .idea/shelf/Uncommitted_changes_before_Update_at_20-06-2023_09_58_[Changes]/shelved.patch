@@ -1,0 +1,171 @@
+Index: .idea/shelf/Uncommitted_changes_before_Update_at_13-06-2023_09_23_[Changes]/shelved.patch
+===================================================================
+diff --git a/.idea/shelf/Uncommitted_changes_before_Update_at_13-06-2023_09_23_[Changes]/shelved.patch b/.idea/shelf/Uncommitted_changes_before_Update_at_13-06-2023_09_23_[Changes]/shelved.patch
+deleted file mode 100644
+--- a/.idea/shelf/Uncommitted_changes_before_Update_at_13-06-2023_09_23_[Changes]/shelved.patch	(revision d1f231c7be31e8b7fd39a89f5ca52f90efde2158)
++++ /dev/null	(revision d1f231c7be31e8b7fd39a89f5ca52f90efde2158)
+@@ -1,32 +0,0 @@
+-Index: .idea/deploymentTargetDropDown.xml
+-IDEA additional info:
+-Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+-<+><?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n<project version=\"4\">\r\n  <component name=\"deploymentTargetDropDown\">\r\n    <value>\r\n      <entry key=\"app\">\r\n        <State>\r\n          <runningDeviceTargetSelectedWithDropDown>\r\n            <Target>\r\n              <type value=\"RUNNING_DEVICE_TARGET\" />\r\n              <deviceKey>\r\n                <Key>\r\n                  <type value=\"VIRTUAL_DEVICE_PATH\" />\r\n                  <value value=\"C:\\Users\\patri\\.android\\avd\\Pixel_7_Pro_API_33.avd\" />\r\n                </Key>\r\n              </deviceKey>\r\n            </Target>\r\n          </runningDeviceTargetSelectedWithDropDown>\r\n          <timeTargetWasSelectedWithDropDown value=\"2023-06-12T10:07:43.627948800Z\" />\r\n        </State>\r\n      </entry>\r\n    </value>\r\n  </component>\r\n</project>
+-Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+-<+>UTF-8
+-===================================================================
+-diff --git a/.idea/deploymentTargetDropDown.xml b/.idea/deploymentTargetDropDown.xml
+---- a/.idea/deploymentTargetDropDown.xml	(revision 646393966c0b6149ec5e333688df7a03b67cfa18)
+-+++ b/.idea/deploymentTargetDropDown.xml	(date 1686628184483)
+-@@ -3,20 +3,7 @@
+-   <component name="deploymentTargetDropDown">
+-     <value>
+-       <entry key="app">
+--        <State>
+--          <runningDeviceTargetSelectedWithDropDown>
+--            <Target>
+--              <type value="RUNNING_DEVICE_TARGET" />
+--              <deviceKey>
+--                <Key>
+--                  <type value="VIRTUAL_DEVICE_PATH" />
+--                  <value value="C:\Users\patri\.android\avd\Pixel_7_Pro_API_33.avd" />
+--                </Key>
+--              </deviceKey>
+--            </Target>
+--          </runningDeviceTargetSelectedWithDropDown>
+--          <timeTargetWasSelectedWithDropDown value="2023-06-12T10:07:43.627948800Z" />
+--        </State>
+-+        <State />
+-       </entry>
+-     </value>
+-   </component>
+Index: app/src/main/java/com/impetuson/rexroot/viewmodel/jobreq/JobreqViewModel.kt
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package com.impetuson.rexroot.viewmodel.jobreq\r\n\r\nimport android.app.Application\r\nimport android.content.ContentResolver\r\nimport android.content.Context\r\nimport android.content.Intent\r\nimport android.content.SharedPreferences\r\nimport android.media.MediaPlayer\r\nimport android.net.Uri\r\nimport android.provider.OpenableColumns\r\nimport android.util.Log\r\nimport androidx.lifecycle.LiveData\r\nimport androidx.lifecycle.MutableLiveData\r\nimport androidx.lifecycle.ViewModel\r\nimport com.google.firebase.database.DatabaseReference\r\nimport com.google.firebase.database.FirebaseDatabase\r\nimport com.google.firebase.database.ktx.database\r\nimport com.google.firebase.firestore.FirebaseFirestore\r\nimport com.google.firebase.ktx.Firebase\r\nimport com.google.firebase.storage.ktx.storage\r\nimport com.google.firebase.firestore.SetOptions\r\nimport com.google.gson.Gson\r\nimport com.google.gson.reflect.TypeToken\r\nimport com.impetuson.rexroot.R\r\nimport com.impetuson.rexroot.model.jobreq.JobReqModelClass\r\nimport kotlinx.coroutines.Dispatchers\r\nimport kotlinx.coroutines.MainScope\r\nimport kotlinx.coroutines.launch\r\nimport kotlinx.coroutines.withContext\r\nimport kotlinx.coroutines.tasks.await\r\nimport java.time.LocalDateTime\r\nimport java.time.format.DateTimeFormatter\r\nimport java.util.UUID\r\n\r\nclass JobreqViewModel : ViewModel() {\r\n\r\n    private lateinit var realtimeDB: DatabaseReference\r\n    private lateinit var mediaPlayer: MediaPlayer\r\n\r\n    private var selectedFilesUri = mutableListOf<Uri>()\r\n    private var selectedFilesNames = mutableListOf<String>()\r\n    private var selectedUUIDFilesNames = mutableListOf<String>()\r\n\r\n    private val _btnChooseText = MutableLiveData<String>(\"Choose Resume(s)\")\r\n    var btnChooseText: LiveData<String> = _btnChooseText\r\n\r\n    private val _btnSubmitText = MutableLiveData<String>(\"Submit\")\r\n    var btnSubmitText: LiveData<String> = _btnSubmitText\r\n\r\n    private val _btnSubmitStatus = MutableLiveData<Boolean>(false)\r\n    var btnSubmitStatus: LiveData<Boolean> = _btnSubmitStatus\r\n\r\n    private val _btnChooseStatus = MutableLiveData<Boolean>(true)\r\n    var btnChooseStatus: LiveData<Boolean> = _btnChooseStatus\r\n\r\n    private val _jobreqModel = MutableLiveData<JobReqModelClass>()\r\n    var jobreqModel: LiveData<JobReqModelClass> = _jobreqModel\r\n\r\n    private var userId: String = \"\"\r\n    var jobId: String = \"\"\r\n\r\n    suspend fun fetchRealtimeDB() = withContext(Dispatchers.IO){\r\n        realtimeDB = Firebase.database.reference\r\n        Log.d(\"Firebase RealtimeDB\",\"Jobid: ${jobId}\")\r\n\r\n        try {\r\n            realtimeDB.child(\"jobreq\").child(jobId).get().addOnSuccessListener { dataSnapshot ->\r\n                if (dataSnapshot.exists()){\r\n                    val value = dataSnapshot.value\r\n                    val jobDataMap = value as Map<String, Any>\r\n                    val jobData = convertMapToObject(jobDataMap)\r\n                    _jobreqModel.value = jobData\r\n\r\n                    Log.d(\"Firebase RealtimeDB\",\"$jobDataMap\")\r\n                }\r\n            }.await()\r\n\r\n            Log.d(\"Firebase RealtimeDB\",\"Fetched data successfully\")\r\n        } catch (e: Exception) {\r\n            Log.d(\"Firebase RealtimeDB\",\"Error: ${e.message}\")\r\n        }\r\n    }\r\n\r\n    fun fetchDataSharedPref(sharedPreferences: SharedPreferences){\r\n        userId = sharedPreferences.getString(\"userid\",\"\").toString()\r\n    }\r\n\r\n    private fun convertMapToObject(jobDataMap: Map<String,Any>): JobReqModelClass{\r\n        val gson = Gson()\r\n        val jsonString = gson.toJson(jobDataMap)\r\n        return gson.fromJson(jsonString, object : TypeToken<JobReqModelClass>() {}.type)\r\n    }\r\n\r\n    fun calcJobPostedTime(): String {\r\n        val currentDateTime = LocalDateTime.now()\r\n        val formatter = DateTimeFormatter.ofPattern(\"dd-MM-yyyy HH:mm\")\r\n        return currentDateTime.format(formatter).toString()\r\n    }\r\n\r\n    fun getSelectedFiles(data: Intent?): Boolean{\r\n        selectedFilesUri.clear()\r\n        selectedFilesNames.clear()\r\n        selectedUUIDFilesNames.clear()\r\n\r\n        // Single file selection\r\n        data?.data?.let{ selectedFilesUri.add(it) }\r\n\r\n        // Multiple files selection\r\n        data?.clipData?.let{\r\n            for (i in 0 until it.itemCount){\r\n                selectedFilesUri.add(it.getItemAt(i).uri)\r\n            }\r\n        }\r\n\r\n        _btnChooseText.value = \"Reselect Resume(s)\"\r\n        _btnSubmitStatus.value = selectedFilesUri.isNotEmpty()\r\n        return selectedFilesUri.isNotEmpty()\r\n    }\r\n\r\n    suspend fun btnSubmitHandler(contentResolver: ContentResolver): String{\r\n        _btnSubmitText.value = \"Uploading...\"\r\n        _btnChooseStatus.value = false\r\n        _btnSubmitStatus.value = false\r\n        val uploadMsg = uploadToFireStorage(selectedFilesUri, contentResolver)\r\n        _btnSubmitText.value = \"Submit\"\r\n        _btnChooseText.value = \"Choose Resume(s)\"\r\n        _btnChooseStatus.value = true\r\n\r\n        return uploadMsg\r\n    }\r\n\r\n    private suspend fun uploadToFireStorage(fileUris: List<Uri>, contentResolver: ContentResolver): String = withContext(Dispatchers.IO){\r\n        val storageRef = Firebase.storage.reference\r\n        var uploadMsg = \"\"\r\n\r\n        fileUris.forEachIndexed { index, fileUri ->\r\n            val fileName = UUID.randomUUID().toString()\r\n            val pdfRef = storageRef.child(\"$userId/submissions/$jobId/$fileName\")\r\n\r\n            selectedUUIDFilesNames.add(fileName)\r\n            selectedFilesNames.add(getFileNameFromUri(fileUri, contentResolver))\r\n\r\n            try {\r\n                pdfRef.putFile(fileUri).await()\r\n                uploadMsg = \"Resume(s) Uploaded successfully\"\r\n                Log.d(\"Firebase Storage\",\"Resume(s) Uploaded successfully: $fileName\")\r\n            } catch(e: Exception) {\r\n                uploadMsg = \"Database error occurred\"\r\n                Log.d(\"Firebase Storage\",\"Error: ${e.message}\")\r\n                throw e\r\n            }\r\n        }\r\n\r\n        uploadMsg\r\n    }\r\n\r\n    private fun getFileNameFromUri(uri: Uri, contentResolver: ContentResolver): String {\r\n        var fileName: String? = null\r\n        val scheme = uri.scheme\r\n        if (scheme == \"content\") {\r\n            val cursor = contentResolver.query(uri, null, null, null, null)\r\n            cursor?.use {\r\n                if (it.moveToFirst()) {\r\n                    val displayNameIndex = it.getColumnIndex(OpenableColumns.DISPLAY_NAME)\r\n                    if (displayNameIndex != -1) {\r\n                        fileName = it.getString(displayNameIndex)\r\n                    }\r\n                }\r\n            }\r\n        }\r\n        if (fileName == null) {\r\n            fileName = uri.lastPathSegment\r\n        }\r\n        return fileName ?: \"N/A\"\r\n    }\r\n\r\n}
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/java/com/impetuson/rexroot/viewmodel/jobreq/JobreqViewModel.kt b/app/src/main/java/com/impetuson/rexroot/viewmodel/jobreq/JobreqViewModel.kt
+--- a/app/src/main/java/com/impetuson/rexroot/viewmodel/jobreq/JobreqViewModel.kt	(revision d1f231c7be31e8b7fd39a89f5ca52f90efde2158)
++++ b/app/src/main/java/com/impetuson/rexroot/viewmodel/jobreq/JobreqViewModel.kt	(date 1687177377452)
+@@ -117,7 +117,7 @@
+         return selectedFilesUri.isNotEmpty()
+     }
+ 
+-    suspend fun btnSubmitHandler(contentResolver: ContentResolver): String{
++    suspend fun btnSubmitHandler(contentResolver: ContentResolver): List<Any> {
+         _btnSubmitText.value = "Uploading..."
+         _btnChooseStatus.value = false
+         _btnSubmitStatus.value = false
+@@ -129,9 +129,10 @@
+         return uploadMsg
+     }
+ 
+-    private suspend fun uploadToFireStorage(fileUris: List<Uri>, contentResolver: ContentResolver): String = withContext(Dispatchers.IO){
++    private suspend fun uploadToFireStorage(fileUris: List<Uri>, contentResolver: ContentResolver): List<Any> = withContext(Dispatchers.IO){
+         val storageRef = Firebase.storage.reference
+         var uploadMsg = ""
++        var uploadStatus = false
+ 
+         fileUris.forEachIndexed { index, fileUri ->
+             val fileName = UUID.randomUUID().toString()
+@@ -143,6 +144,7 @@
+             try {
+                 pdfRef.putFile(fileUri).await()
+                 uploadMsg = "Resume(s) Uploaded successfully"
++                uploadStatus = true
+                 Log.d("Firebase Storage","Resume(s) Uploaded successfully: $fileName")
+             } catch(e: Exception) {
+                 uploadMsg = "Database error occurred"
+@@ -151,7 +153,13 @@
+             }
+         }
+ 
+-        uploadMsg
++        listOf(uploadStatus, uploadMsg)
++    }
++
++    private suspend fun storeDataToFirestore(){
++        var storeMsg: String = ""
++        var storeStatus: Boolean = false
++
+     }
+ 
+     private fun getFileNameFromUri(uri: Uri, contentResolver: ContentResolver): String {
+Index: app/src/main/java/com/impetuson/rexroot/JobreqActivity.kt
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package com.impetuson.rexroot\r\n\r\nimport android.app.Activity\r\nimport android.content.Intent\r\nimport android.net.Uri\r\nimport android.os.Bundle\r\nimport android.view.View\r\nimport android.widget.Toast\r\nimport androidx.activity.viewModels\r\nimport androidx.appcompat.app.AppCompatActivity\r\nimport androidx.viewpager2.widget.ViewPager2\r\nimport com.google.android.material.snackbar.Snackbar\r\nimport com.google.android.material.tabs.TabLayoutMediator\r\nimport com.impetuson.rexroot.databinding.ActivityJobreqBinding\r\nimport com.impetuson.rexroot.view.jobreq.JobreqActionsFragment\r\nimport com.impetuson.rexroot.view.jobreq.JobreqDetailsFragment\r\nimport com.impetuson.rexroot.view.jobreq.JobreqSubmissionsFragment\r\nimport com.impetuson.rexroot.view.jobreq.JobreqViewPagerAdapter\r\nimport com.impetuson.rexroot.viewmodel.jobreq.JobreqViewModel\r\nimport kotlinx.coroutines.MainScope\r\nimport kotlinx.coroutines.launch\r\n\r\nclass JobreqActivity: AppCompatActivity() {\r\n\r\n    private val PDF_REQUEST_CODE = 123\r\n\r\n\r\n    private lateinit var jobId: String\r\n    private lateinit var binding: ActivityJobreqBinding\r\n    private lateinit var jobreqViewPageAdapter: JobreqViewPagerAdapter\r\n    private val viewmodel: JobreqViewModel by viewModels()\r\n\r\n    override fun onCreate(savedInstanceState: Bundle?) {\r\n        super.onCreate(savedInstanceState)\r\n        binding = ActivityJobreqBinding.inflate(layoutInflater)\r\n        val view = binding.root\r\n        setContentView(view)\r\n\r\n        jobId = intent.getStringExtra(\"jobid\") ?: \"\"\r\n        jobreqViewPageAdapter = JobreqViewPagerAdapter(this)\r\n\r\n        jobreqViewPageAdapter.addFragment(JobreqDetailsFragment())\r\n        jobreqViewPageAdapter.addFragment(JobreqSubmissionsFragment())\r\n        jobreqViewPageAdapter.addFragment(JobreqActionsFragment())\r\n\r\n        viewmodel.fetchDataSharedPref(this.getSharedPreferences(\"profiledata\", MODE_PRIVATE))\r\n        viewmodel.jobId = jobId\r\n\r\n        binding.apply{\r\n            lifecycleOwner = this@JobreqActivity\r\n            jobreqviewmodel = viewmodel\r\n\r\n\r\n            ivGoback.setOnClickListener {\r\n                onBackPressed()\r\n            }\r\n\r\n            viewPager.adapter = jobreqViewPageAdapter\r\n            TabLayoutMediator(jobreqTablayout, viewPager){ tab,position ->\r\n                when(position){\r\n                    0 -> tab.text = \"Job Details\"\r\n                    1 -> tab.text = \"Submissions\"\r\n                    2 -> tab.text = \"Actions\"\r\n                }\r\n            }.attach()\r\n\r\n            loadingAnimation.visibility = View.VISIBLE\r\n            body.visibility = View.GONE\r\n            MainScope().launch {\r\n                viewmodel.fetchRealtimeDB()\r\n                loadingAnimation.visibility = View.GONE\r\n                body.visibility = View.VISIBLE\r\n            }\r\n\r\n\r\n            btnChoose.setOnClickListener {\r\n                val intent = Intent(Intent.ACTION_GET_CONTENT)\r\n                intent.type = \"application/pdf\"\r\n                intent.putExtra(Intent.EXTRA_ALLOW_MULTIPLE, true)\r\n                startActivityForResult(Intent.createChooser(intent, \"Select Resume\"), PDF_REQUEST_CODE)\r\n            }\r\n\r\n            btnSubmit.setOnClickListener {\r\n                MainScope().launch {\r\n                    progressIndicator.visibility = View.VISIBLE\r\n                    val uploadMsg = viewmodel.btnSubmitHandler(contentResolver)\r\n                    Toast.makeText(this@JobreqActivity, uploadMsg, Toast.LENGTH_SHORT).show()\r\n                    progressIndicator.visibility = View.GONE\r\n                }\r\n            }\r\n\r\n        }\r\n    }\r\n\r\n    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {\r\n        super.onActivityResult(requestCode, resultCode, data)\r\n        if (requestCode == PDF_REQUEST_CODE && resultCode == Activity.RESULT_OK){\r\n            viewmodel.getSelectedFiles(data)\r\n        }\r\n    }\r\n\r\n    override fun onBackPressed() {\r\n        finish()\r\n        super.onBackPressed()\r\n    }\r\n}
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/java/com/impetuson/rexroot/JobreqActivity.kt b/app/src/main/java/com/impetuson/rexroot/JobreqActivity.kt
+--- a/app/src/main/java/com/impetuson/rexroot/JobreqActivity.kt	(revision d1f231c7be31e8b7fd39a89f5ca52f90efde2158)
++++ b/app/src/main/java/com/impetuson/rexroot/JobreqActivity.kt	(date 1687176644363)
+@@ -2,6 +2,7 @@
+ 
+ import android.app.Activity
+ import android.content.Intent
++import android.media.MediaPlayer
+ import android.net.Uri
+ import android.os.Bundle
+ import android.view.View
+@@ -28,6 +29,7 @@
+     private lateinit var jobId: String
+     private lateinit var binding: ActivityJobreqBinding
+     private lateinit var jobreqViewPageAdapter: JobreqViewPagerAdapter
++    private lateinit var mediaPlayer: MediaPlayer
+     private val viewmodel: JobreqViewModel by viewModels()
+ 
+     override fun onCreate(savedInstanceState: Bundle?) {
+@@ -36,6 +38,8 @@
+         val view = binding.root
+         setContentView(view)
+ 
++        mediaPlayer = MediaPlayer.create(this@JobreqActivity, R.raw.file_upload_success)
++
+         jobId = intent.getStringExtra("jobid") ?: ""
+         jobreqViewPageAdapter = JobreqViewPagerAdapter(this)
+ 
+@@ -83,8 +87,9 @@
+             btnSubmit.setOnClickListener {
+                 MainScope().launch {
+                     progressIndicator.visibility = View.VISIBLE
+-                    val uploadMsg = viewmodel.btnSubmitHandler(contentResolver)
+-                    Toast.makeText(this@JobreqActivity, uploadMsg, Toast.LENGTH_SHORT).show()
++                    val (uploadStatus, uploadMsg) = viewmodel.btnSubmitHandler(contentResolver)
++                    if (uploadStatus as Boolean) { mediaPlayer.start() }
++                    Toast.makeText(this@JobreqActivity, uploadMsg.toString(), Toast.LENGTH_SHORT).show()
+                     progressIndicator.visibility = View.GONE
+                 }
+             }
+Index: app/src/main/res/layout/activity_jobreq.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"utf-8\"?>\r\n<layout xmlns:android=\"http://schemas.android.com/apk/res/android\"\r\n    xmlns:app=\"http://schemas.android.com/apk/res-auto\">\r\n\r\n    <data>\r\n        <variable\r\n            name=\"jobreqviewmodel\"\r\n            type=\"com.impetuson.rexroot.viewmodel.jobreq.JobreqViewModel\" />\r\n    </data>\r\n\r\n    <androidx.constraintlayout.widget.ConstraintLayout\r\n        android:background=\"@color/white\"\r\n        android:layout_width=\"match_parent\"\r\n        android:layout_height=\"match_parent\">\r\n\r\n        <LinearLayout\r\n            android:id=\"@+id/header\"\r\n            android:layout_width=\"0dp\"\r\n            android:layout_height=\"wrap_content\"\r\n            android:padding=\"15sp\"\r\n            app:layout_constraintEnd_toEndOf=\"parent\"\r\n            app:layout_constraintStart_toStartOf=\"parent\"\r\n            app:layout_constraintTop_toTopOf=\"parent\">\r\n\r\n            <ImageView\r\n                android:id=\"@+id/iv_goback\"\r\n                android:layout_width=\"25sp\"\r\n                android:layout_height=\"25sp\"\r\n                android:src=\"@drawable/icon_exit_black\">\r\n            </ImageView>\r\n\r\n        </LinearLayout>\r\n\r\n        <LinearLayout\r\n            android:id=\"@+id/loading_animation\"\r\n            android:layout_width=\"0dp\"\r\n            android:layout_height=\"0dp\"\r\n            app:layout_constraintStart_toStartOf=\"parent\"\r\n            app:layout_constraintEnd_toEndOf=\"parent\"\r\n            app:layout_constraintTop_toBottomOf=\"@id/header\"\r\n            app:layout_constraintBottom_toBottomOf=\"parent\"\r\n            android:background=\"@color/white\"\r\n            android:orientation=\"horizontal\">\r\n\r\n            <com.airbnb.lottie.LottieAnimationView\r\n                app:layout_constraintStart_toStartOf=\"parent\"\r\n                app:layout_constraintEnd_toEndOf=\"parent\"\r\n                app:layout_constraintTop_toTopOf=\"parent\"\r\n                app:layout_constraintBottom_toBottomOf=\"parent\"\r\n                android:layout_width=\"match_parent\"\r\n                android:layout_height=\"match_parent\"\r\n                app:lottie_rawRes=\"@raw/loading_anim\"\r\n                app:lottie_speed=\"2.5\"\r\n                app:lottie_autoPlay=\"true\"\r\n                app:lottie_loop=\"true\">\r\n\r\n            </com.airbnb.lottie.LottieAnimationView>\r\n\r\n        </LinearLayout>\r\n\r\n        <LinearLayout\r\n            android:id=\"@+id/body\"\r\n            app:layout_constraintStart_toStartOf=\"parent\"\r\n            app:layout_constraintEnd_toEndOf=\"parent\"\r\n            app:layout_constraintTop_toBottomOf=\"@id/header\"\r\n            app:layout_constraintBottom_toBottomOf=\"parent\"\r\n            android:layout_width=\"0dp\"\r\n            android:layout_height=\"0dp\"\r\n            android:orientation=\"vertical\">\r\n\r\n\r\n            <LinearLayout\r\n                android:paddingLeft=\"20sp\"\r\n                android:paddingRight=\"20sp\"\r\n                android:paddingBottom=\"10sp\"\r\n                android:layout_marginBottom=\"10sp\"\r\n                android:layout_width=\"match_parent\"\r\n                android:layout_height=\"wrap_content\"\r\n                android:orientation=\"vertical\">\r\n\r\n                <TextView\r\n                    android:layout_width=\"wrap_content\"\r\n                    android:layout_height=\"wrap_content\"\r\n                    android:text=\"@{jobreqviewmodel.jobreqModel.jobrole}\"\r\n                    android:textStyle=\"bold\"\r\n                    android:textSize=\"22sp\">\r\n                </TextView>\r\n\r\n                <TextView\r\n                    android:layout_width=\"wrap_content\"\r\n                    android:layout_height=\"wrap_content\"\r\n                    android:text=\"@{jobreqviewmodel.jobreqModel.compname}\"\r\n                    android:textSize=\"14sp\">\r\n                </TextView>\r\n\r\n                <TextView\r\n                    android:layout_width=\"wrap_content\"\r\n                    android:layout_height=\"wrap_content\"\r\n                    android:textColor=\"@color/dark_grey\"\r\n                    android:text=\"Posted 0d ago\"\r\n                    android:textSize=\"12sp\">\r\n                </TextView>\r\n\r\n\r\n            </LinearLayout>\r\n\r\n            <LinearLayout\r\n                android:layout_width=\"match_parent\"\r\n                android:layout_height=\"match_parent\"\r\n                android:orientation=\"vertical\">\r\n\r\n                <com.google.android.material.tabs.TabLayout\r\n                    android:id=\"@+id/jobreq_tablayout\"\r\n                    android:layout_width=\"match_parent\"\r\n                    android:layout_height=\"wrap_content\">\r\n\r\n                    <com.google.android.material.tabs.TabItem\r\n                        android:layout_width=\"match_parent\"\r\n                        android:layout_height=\"wrap_content\"\r\n                        android:text=\"Job Details\">\r\n                    </com.google.android.material.tabs.TabItem>\r\n\r\n                    <com.google.android.material.tabs.TabItem\r\n                        android:layout_width=\"match_parent\"\r\n                        android:layout_height=\"wrap_content\"\r\n                        android:text=\"Submissions\">\r\n                    </com.google.android.material.tabs.TabItem>\r\n\r\n                    <com.google.android.material.tabs.TabItem\r\n                        android:layout_width=\"match_parent\"\r\n                        android:layout_height=\"wrap_content\"\r\n                        android:text=\"Actions\">\r\n                    </com.google.android.material.tabs.TabItem>\r\n\r\n                </com.google.android.material.tabs.TabLayout>\r\n\r\n                <ScrollView\r\n                    android:layout_width=\"match_parent\"\r\n                    android:layout_height=\"match_parent\">\r\n\r\n                    <androidx.viewpager2.widget.ViewPager2\r\n                        android:id=\"@+id/view_pager\"\r\n                        android:layout_width=\"match_parent\"\r\n                        android:layout_height=\"match_parent\"\r\n                        android:padding=\"15sp\">\r\n\r\n                    </androidx.viewpager2.widget.ViewPager2>\r\n\r\n                </ScrollView>\r\n\r\n            </LinearLayout>\r\n\r\n        </LinearLayout>\r\n\r\n        <LinearLayout\r\n            app:layout_constraintBottom_toBottomOf=\"parent\"\r\n            app:layout_constraintEnd_toEndOf=\"parent\"\r\n            app:layout_constraintStart_toStartOf=\"parent\"\r\n            android:layout_width=\"match_parent\"\r\n            android:layout_height=\"wrap_content\"\r\n            android:orientation=\"vertical\">\r\n\r\n            <com.google.android.material.progressindicator.LinearProgressIndicator\r\n                android:id=\"@+id/progress_indicator\"\r\n                android:layout_width=\"match_parent\"\r\n                android:layout_height=\"wrap_content\"\r\n                android:visibility=\"gone\"\r\n                android:indeterminate=\"true\" />\r\n\r\n            <LinearLayout\r\n                android:layout_width=\"match_parent\"\r\n                android:layout_height=\"wrap_content\"\r\n                android:paddingTop=\"5sp\"\r\n                android:paddingBottom=\"5sp\"\r\n                android:weightSum=\"1\">\r\n\r\n                <Button\r\n                    android:id=\"@+id/btn_choose\"\r\n                    android:layout_width=\"match_parent\"\r\n                    android:layout_height=\"wrap_content\"\r\n                    android:layout_marginStart=\"15sp\"\r\n                    android:layout_marginEnd=\"15sp\"\r\n                    android:layout_weight=\"0.5\"\r\n                    android:padding=\"10sp\"\r\n                    android:enabled=\"@{jobreqviewmodel.btnChooseStatus}\"\r\n                    android:text=\"@{jobreqviewmodel.btnChooseText}\"\r\n                    android:textAllCaps=\"false\"\r\n                    android:textColor=\"@color/white\"\r\n                    android:textStyle=\"bold\">\r\n                </Button>\r\n\r\n                <Button\r\n                    android:id=\"@+id/btn_submit\"\r\n                    android:layout_width=\"match_parent\"\r\n                    android:layout_height=\"wrap_content\"\r\n                    android:layout_marginStart=\"15sp\"\r\n                    android:layout_marginEnd=\"15sp\"\r\n                    android:layout_weight=\"0.5\"\r\n                    android:padding=\"10sp\"\r\n                    android:enabled=\"@{jobreqviewmodel.btnSubmitStatus}\"\r\n                    android:text=\"@{jobreqviewmodel.btnSubmitText}\"\r\n                    android:textAllCaps=\"false\"\r\n                    android:textColor=\"@color/white\"\r\n                    android:textStyle=\"bold\">\r\n                </Button>\r\n\r\n\r\n            </LinearLayout>\r\n\r\n        </LinearLayout>\r\n\r\n\r\n\r\n    </androidx.constraintlayout.widget.ConstraintLayout>\r\n</layout>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/res/layout/activity_jobreq.xml b/app/src/main/res/layout/activity_jobreq.xml
+--- a/app/src/main/res/layout/activity_jobreq.xml	(revision d1f231c7be31e8b7fd39a89f5ca52f90efde2158)
++++ b/app/src/main/res/layout/activity_jobreq.xml	(date 1687175987137)
+@@ -101,6 +101,20 @@
+                     android:textSize="12sp">
+                 </TextView>
+ 
++                <TextView
++                    android:layout_width="wrap_content"
++                    android:layout_height="wrap_content"
++                    android:text="@{`Payment per closure: ₹` + jobreqviewmodel.jobreqModel.priceperclosure}"
++                    android:textSize="14sp">
++                </TextView>
++
++                <TextView
++                    android:layout_width="wrap_content"
++                    android:layout_height="wrap_content"
++                    android:text="@{`Payment Date: ` + jobreqviewmodel.jobreqModel.partnerpayment}"
++                    android:textSize="14sp">
++                </TextView>
++
+ 
+             </LinearLayout>
+ 

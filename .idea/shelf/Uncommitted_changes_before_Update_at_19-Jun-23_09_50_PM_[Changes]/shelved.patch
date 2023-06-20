@@ -1,0 +1,66 @@
+Index: app/src/main/res/layout/activity_jobreq.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"utf-8\"?>\r\n<androidx.constraintlayout.widget.ConstraintLayout xmlns:android=\"http://schemas.android.com/apk/res/android\"\r\n    xmlns:app=\"http://schemas.android.com/apk/res-auto\"\r\n    android:layout_width=\"match_parent\"\r\n    android:layout_height=\"match_parent\">\r\n\r\n    <com.airbnb.lottie.LottieAnimationView\r\n        android:id=\"@+id/loading_animation\"\r\n        app:layout_constraintStart_toStartOf=\"parent\"\r\n        app:layout_constraintEnd_toEndOf=\"parent\"\r\n        app:layout_constraintTop_toTopOf=\"parent\"\r\n        app:layout_constraintBottom_toBottomOf=\"parent\"\r\n        android:layout_width=\"match_parent\"\r\n        android:layout_height=\"400sp\"\r\n        app:lottie_rawRes=\"@raw/loading_anim\"\r\n        app:lottie_speed=\"2.5\"\r\n        app:lottie_autoPlay=\"true\"\r\n        app:lottie_loop=\"true\">\r\n\r\n    </com.airbnb.lottie.LottieAnimationView>\r\n\r\n</androidx.constraintlayout.widget.ConstraintLayout>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/res/layout/activity_jobreq.xml b/app/src/main/res/layout/activity_jobreq.xml
+--- a/app/src/main/res/layout/activity_jobreq.xml	(revision 91c76e67ae4564c54cf5497dedbac4ede76b3f88)
++++ b/app/src/main/res/layout/activity_jobreq.xml	(date 1687003374394)
+@@ -6,6 +6,7 @@
+ 
+     <com.airbnb.lottie.LottieAnimationView
+         android:id="@+id/loading_animation"
++        android:visibility="gone"
+         app:layout_constraintStart_toStartOf="parent"
+         app:layout_constraintEnd_toEndOf="parent"
+         app:layout_constraintTop_toTopOf="parent"
+@@ -19,4 +20,7 @@
+ 
+     </com.airbnb.lottie.LottieAnimationView>
+ 
++
++
++
+ </androidx.constraintlayout.widget.ConstraintLayout>
+\ No newline at end of file
+Index: .idea/shelf/Uncommitted_changes_before_Update_at_12-06-2023_09_35_[Changes]/shelved.patch
+===================================================================
+diff --git a/.idea/shelf/Uncommitted_changes_before_Update_at_12-06-2023_09_35_[Changes]/shelved.patch b/.idea/shelf/Uncommitted_changes_before_Update_at_12-06-2023_09_35_[Changes]/shelved.patch
+deleted file mode 100644
+--- a/.idea/shelf/Uncommitted_changes_before_Update_at_12-06-2023_09_35_[Changes]/shelved.patch	(revision 91c76e67ae4564c54cf5497dedbac4ede76b3f88)
++++ /dev/null	(revision 91c76e67ae4564c54cf5497dedbac4ede76b3f88)
+@@ -1,32 +0,0 @@
+-Index: .idea/deploymentTargetDropDown.xml
+-IDEA additional info:
+-Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+-<+><?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n<project version=\"4\">\r\n  <component name=\"deploymentTargetDropDown\">\r\n    <value>\r\n      <entry key=\"app\">\r\n        <State>\r\n          <runningDeviceTargetSelectedWithDropDown>\r\n            <Target>\r\n              <type value=\"RUNNING_DEVICE_TARGET\" />\r\n              <deviceKey>\r\n                <Key>\r\n                  <type value=\"VIRTUAL_DEVICE_PATH\" />\r\n                  <value value=\"C:\\Users\\patri\\.android\\avd\\Pixel_7_Pro_API_33.avd\" />\r\n                </Key>\r\n              </deviceKey>\r\n            </Target>\r\n          </runningDeviceTargetSelectedWithDropDown>\r\n          <timeTargetWasSelectedWithDropDown value=\"2023-06-09T11:50:16.755536Z\" />\r\n        </State>\r\n      </entry>\r\n    </value>\r\n  </component>\r\n</project>
+-Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+-<+>UTF-8
+-===================================================================
+-diff --git a/.idea/deploymentTargetDropDown.xml b/.idea/deploymentTargetDropDown.xml
+---- a/.idea/deploymentTargetDropDown.xml	(revision 6ddad8cb4255af0b251d4c26edf22d6f74adfa00)
+-+++ b/.idea/deploymentTargetDropDown.xml	(date 1686542509009)
+-@@ -3,20 +3,7 @@
+-   <component name="deploymentTargetDropDown">
+-     <value>
+-       <entry key="app">
+--        <State>
+--          <runningDeviceTargetSelectedWithDropDown>
+--            <Target>
+--              <type value="RUNNING_DEVICE_TARGET" />
+--              <deviceKey>
+--                <Key>
+--                  <type value="VIRTUAL_DEVICE_PATH" />
+--                  <value value="C:\Users\patri\.android\avd\Pixel_7_Pro_API_33.avd" />
+--                </Key>
+--              </deviceKey>
+--            </Target>
+--          </runningDeviceTargetSelectedWithDropDown>
+--          <timeTargetWasSelectedWithDropDown value="2023-06-09T11:50:16.755536Z" />
+--        </State>
+-+        <State />
+-       </entry>
+-     </value>
+-   </component>

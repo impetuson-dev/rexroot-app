@@ -1,7 +1,6 @@
 package com.impetuson.rexroot.view.main
 
 import android.content.Context
-import android.content.Intent
 import android.content.SharedPreferences
 import android.graphics.Color
 import android.os.Bundle
@@ -22,10 +21,9 @@ import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.DatabaseError
-import com.impetuson.rexroot.ProfileActivity
 import com.impetuson.rexroot.R
 import com.impetuson.rexroot.databinding.FragmentHomeBinding
-import com.impetuson.rexroot.model.profile.JobReqModelClass
+import com.impetuson.rexroot.model.jobreq.JobReqModelClass
 import com.impetuson.rexroot.viewmodel.main.HomeViewModel
 import com.impetuson.rexroot.viewmodel.main.JobReqRecyclerViewAdapter
 import kotlinx.coroutines.CompletableDeferred
@@ -62,11 +60,6 @@ class HomeFragment : Fragment() {
             val sharedPreference: SharedPreferences =  requireContext().getSharedPreferences("profiledata", Context.MODE_PRIVATE)
             viewmodel.getUserProfileDetails(sharedPreference)
 
-            btnMyprofile.setOnClickListener {
-                val intent = Intent(context,ProfileActivity::class.java)
-                startActivity(intent)
-            }
-
             rvJobreq.layoutManager = LinearLayoutManager(requireContext())
             jobReqList = ArrayList<JobReqModelClass>()
             jobreqadapter = JobReqRecyclerViewAdapter(jobReqList)
@@ -86,7 +79,7 @@ class HomeFragment : Fragment() {
 
         // Exit app
         requireActivity().onBackPressedDispatcher.addCallback(this) {
-            activity?.finish()
+            activity?.finishAffinity()
         }
     }
 

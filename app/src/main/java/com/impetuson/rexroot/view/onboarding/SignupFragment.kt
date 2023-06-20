@@ -40,8 +40,6 @@ class SignupFragment : Fragment() {
             binding?.signupFragment = this@SignupFragment
             signupViewModel = viewmodel
         }
-
-
     }
 
     fun redirectToLogIn(){
@@ -62,6 +60,8 @@ class SignupFragment : Fragment() {
 
                     Toast.makeText(context,"$authMsg",Toast.LENGTH_SHORT).show()
                     findNavController().navigate(R.id.action_signupFragment_to_userdetailsFragment)
+                } else {
+                    Toast.makeText(context,"$authMsg",Toast.LENGTH_SHORT).show()
                 }
                 binding!!.progressBar.visibility = View.GONE
             }

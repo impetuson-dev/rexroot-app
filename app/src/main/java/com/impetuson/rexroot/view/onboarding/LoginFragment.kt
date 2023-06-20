@@ -1,6 +1,7 @@
 package com.impetuson.rexroot.view.onboarding
 
 import android.content.Context
+import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -11,6 +12,7 @@ import androidx.activity.addCallback
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
+import com.impetuson.rexroot.MainActivity
 import com.impetuson.rexroot.R
 import com.impetuson.rexroot.databinding.FragmentLoginBinding
 import com.impetuson.rexroot.viewmodel.onboarding.LoginViewModel
@@ -63,7 +65,7 @@ class LoginFragment : Fragment() {
 
                 Toast.makeText(context,"$authMsg",Toast.LENGTH_SHORT).show()
                 if (authStatus as Boolean){
-                    findNavController().navigate(R.id.action_loginFragment_to_homeFragment)
+                    startActivity(Intent(requireContext(),MainActivity::class.java))
                 }
                 binding!!.progressBar.visibility = View.GONE
             }

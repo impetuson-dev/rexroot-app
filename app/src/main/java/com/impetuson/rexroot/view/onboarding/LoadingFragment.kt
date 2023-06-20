@@ -1,5 +1,6 @@
 package com.impetuson.rexroot.view.onboarding
 
+import android.content.Intent
 import android.os.Bundle
 import android.os.Handler
 import androidx.fragment.app.Fragment
@@ -7,6 +8,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.navigation.fragment.findNavController
+import com.impetuson.rexroot.MainActivity
 import com.impetuson.rexroot.R
 import com.impetuson.rexroot.databinding.FragmentLoadingBinding
 
@@ -34,7 +36,7 @@ class LoadingFragment : Fragment() {
         }
 
         Handler().postDelayed({
-            findNavController().navigate(R.id.action_loadingFragment_to_homeFragment)}
+            startActivity(Intent(requireContext(),MainActivity::class.java)) }
             , TIME_OUT)
     }
 

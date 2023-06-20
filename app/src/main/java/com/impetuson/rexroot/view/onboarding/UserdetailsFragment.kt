@@ -46,14 +46,17 @@ class UserdetailsFragment : Fragment() {
     }
 
     fun btnContinueHandler() {
-        MainScope().launch {
-            binding!!.progressBar.visibility = View.VISIBLE
-            val (storeStatus,storeMsg) = userdetailsviewmodel.storeDataToFirestore()
-            Toast.makeText(context,"$storeMsg", Toast.LENGTH_LONG).show()
-            if (storeStatus as Boolean){
-                findNavController().navigate(R.id.action_userdetailsFragment_to_loadingFragment)
+        if (userdetailsviewmodel.formValidation()){
+            MainScope().launch {
+                binding!!.progressBar.visibility = View.VISIBLE
+
+                val (storeStatus,storeMsg) = userdetailsviewmodel.storeDataToFirestore()
+                Toast.makeText(context,"$storeMsg", Toast.LENGTH_LONG).show()
+                if (storeStatus as Boolean){
+                    findNavController().navigate(R.id.action_userdetailsFragment_to_loadingFragment)
+                }
+                binding!!.progressBar.visibility = View.GONE
             }
-            binding!!.progressBar.visibility = View.GONE
         }
     }
 

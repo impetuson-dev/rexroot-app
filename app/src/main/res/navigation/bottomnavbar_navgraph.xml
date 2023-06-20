@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/bottomnavbar_navgraph"
+    app:startDestination="@id/homeFragment">
+
+    <fragment
+        android:id="@+id/homeFragment"
+        android:name="com.impetuson.rexroot.view.main.HomeFragment"
+        android:label="HomeFragment"
+        tools:layout="@layout/fragment_home" />
+    <fragment
+        android:id="@+id/earningsFragment"
+        android:name="com.impetuson.rexroot.view.main.EarningsFragment"
+        android:label="fragment_earnings"
+        tools:layout="@layout/fragment_earnings" />
+    <fragment
+        android:id="@+id/actionsFragment"
+        android:name="com.impetuson.rexroot.view.main.ActionsFragment"
+        android:label="fragment_actions"
+        tools:layout="@layout/fragment_actions" />
+    <fragment
+        android:id="@+id/profileFragment"
+        android:name="com.impetuson.rexroot.view.main.MyProfileFragment"
+        android:label="fragment_my_profile"
+        tools:layout="@layout/fragment_my_profile" >
+        <action
+            android:id="@+id/action_profileFragment_to_splashscreenFragment2"
+            app:destination="@id/splashscreenFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/splashscreenFragment"
+        android:name="com.impetuson.rexroot.view.onboarding.SplashscreenFragment"
+        android:label="fragment_splashscreen"
+        tools:layout="@layout/fragment_splashscreen" />
+
+</navigation>

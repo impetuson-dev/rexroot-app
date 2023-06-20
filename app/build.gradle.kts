@@ -12,7 +12,7 @@ android {
 
     defaultConfig {
         applicationId = "com.impetuson.rexroot"
-        minSdk = 23
+        minSdk = 26
         targetSdk = 33
         versionCode = 1
         versionName = "1.0"
@@ -55,11 +55,17 @@ dependencies {
     androidTestImplementation(libs.androidx.test.ext.junit)
     androidTestImplementation(libs.espresso.core)
 
+    // Firebase BOM
+    implementation(platform("com.google.firebase:firebase-bom:32.1.1"))
+
     // Firestore
-    implementation("com.google.firebase:firebase-firestore-ktx:24.6.1")
+    implementation("com.google.firebase:firebase-firestore-ktx")
+
+    // Firebase Storage
+    implementation("com.google.firebase:firebase-storage-ktx")
 
     // Livedata
-    implementation("androidx.lifecycle:lifecycle-livedata-ktx:2.3.1")
+    implementation("androidx.lifecycle:lifecycle-livedata-ktx:2.4.1")
 
     // ViewModel
     implementation("androidx.lifecycle:lifecycle-viewmodel-ktx: 2.3.1")
@@ -79,4 +85,7 @@ dependencies {
 
     // Material
     implementation("com.google.android.material:material:1.0.0")
+
+    // ViewPager2
+    implementation("androidx.viewpager2:viewpager2:1.0.0")
 }

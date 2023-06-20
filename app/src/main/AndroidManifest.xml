@@ -2,6 +2,9 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
 
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.INTERNET"/>
+
     <application
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
@@ -22,7 +25,19 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".ProfileActivity"
+            android:name=".MainActivity"
+            android:exported="true">
+        </activity>
+        <activity
+            android:name=".JobreqActivity"
+            android:exported="true">
+        </activity>
+        <activity
+            android:name=".view.profile.PartnerActivity"
+            android:exported="true">
+        </activity>
+        <activity
+            android:name=".view.profile.CandidateActivity"
             android:exported="true">
         </activity>
     </application>
