@@ -101,6 +101,20 @@
                     android:textSize="12sp">
                 </TextView>
 
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@{`Payment per closure: ₹` + jobreqviewmodel.jobreqModel.priceperclosure}"
+                    android:textSize="14sp">
+                </TextView>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@{`Payment Date: ` + jobreqviewmodel.jobreqModel.partnerpayment}"
+                    android:textSize="14sp">
+                </TextView>
+
 
             </LinearLayout>
 
