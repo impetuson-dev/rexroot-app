@@ -99,7 +99,18 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintBottom_toTopOf="@id/ll_footer"
             android:layout_width="match_parent"
-            android:layout_height="0dp">
+            android:layout_height="0dp"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/tv_jobcount"
+                android:visibility="gone"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10sp"
+                android:textStyle="bold"
+                android:text="250 jobs">
+            </TextView>
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/rv_jobs"
@@ -111,7 +122,7 @@
 
         <LinearLayout
             android:id="@+id/ll_footer"
-            android:padding="10sp"
+            android:padding="5sp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -119,11 +130,167 @@
             android:layout_height="wrap_content"
             android:orientation="horizontal">
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Filters">
-            </TextView>
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/cv_filter"
+                android:layout_width="45sp"
+                android:layout_height="45sp"
+                android:clickable="true"
+                android:layout_marginRight="10sp"
+                app:strokeColor="@color/white"
+                android:backgroundTint="@color/white"
+                android:foreground="?android:attr/selectableItemBackground"
+                app:cardCornerRadius="500sp"
+                app:cardElevation="0dp">
+
+                <ImageView
+                    android:layout_width="30sp"
+                    android:layout_height="30sp"
+                    android:layout_gravity="center"
+                    android:src="@drawable/icon_filter_violet">
+                </ImageView>
+
+
+            </com.google.android.material.card.MaterialCardView>
+
+            <HorizontalScrollView
+                android:scrollbars="none"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <com.google.android.material.card.MaterialCardView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_marginRight="10sp"
+                        android:clickable="true"
+                        android:backgroundTint="@color/white"
+                        android:foreground="?android:attr/selectableItemBackground"
+                        app:cardCornerRadius="500sp"
+                        app:cardElevation="0dp">
+
+                        <TextView
+                            android:paddingLeft="15sp"
+                            android:paddingRight="15sp"
+                            android:paddingTop="5sp"
+                            android:paddingBottom="5sp"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:text="Payment">
+                        </TextView>
+
+
+                    </com.google.android.material.card.MaterialCardView>
+
+                    <com.google.android.material.card.MaterialCardView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:clickable="true"
+                        android:backgroundTint="@color/white"
+                        android:layout_marginRight="10sp"
+                        android:foreground="?android:attr/selectableItemBackground"
+                        app:cardCornerRadius="500sp"
+                        app:cardElevation="0dp">
+
+                        <TextView
+                            android:paddingLeft="15sp"
+                            android:paddingRight="15sp"
+                            android:paddingTop="5sp"
+                            android:paddingBottom="5sp"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:text="Salary">
+                        </TextView>
+
+
+                    </com.google.android.material.card.MaterialCardView>
+
+                    <com.google.android.material.card.MaterialCardView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:clickable="true"
+                        android:backgroundTint="@color/white"
+                        android:layout_marginRight="10sp"
+                        android:foreground="?android:attr/selectableItemBackground"
+                        app:cardCornerRadius="500sp"
+                        app:cardElevation="0dp">
+
+                        <TextView
+                            android:paddingLeft="15sp"
+                            android:paddingRight="15sp"
+                            android:paddingTop="5sp"
+                            android:paddingBottom="5sp"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:text="Work mode">
+                        </TextView>
+
+
+                    </com.google.android.material.card.MaterialCardView>
+
+                    <com.google.android.material.card.MaterialCardView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:clickable="true"
+                        android:backgroundTint="@color/white"
+                        android:layout_marginRight="10sp"
+                        android:foreground="?android:attr/selectableItemBackground"
+                        app:cardCornerRadius="500sp"
+                        app:cardElevation="0dp">
+
+                        <TextView
+                            android:paddingLeft="15sp"
+                            android:paddingRight="15sp"
+                            android:paddingTop="5sp"
+                            android:paddingBottom="5sp"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:text="Experience">
+                        </TextView>
+
+
+                    </com.google.android.material.card.MaterialCardView>
+
+                    <com.google.android.material.card.MaterialCardView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:clickable="true"
+                        android:backgroundTint="@color/white"
+                        android:layout_marginRight="10sp"
+                        android:foreground="?android:attr/selectableItemBackground"
+                        app:cardCornerRadius="500sp"
+                        app:cardElevation="0dp">
+
+                        <TextView
+                            android:paddingLeft="15sp"
+                            android:paddingRight="15sp"
+                            android:paddingTop="5sp"
+                            android:paddingBottom="5sp"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:text="Posted by">
+                        </TextView>
+
+
+                    </com.google.android.material.card.MaterialCardView>
+
+
+                </LinearLayout>
+
+            </HorizontalScrollView>
+
 
         </LinearLayout>
 

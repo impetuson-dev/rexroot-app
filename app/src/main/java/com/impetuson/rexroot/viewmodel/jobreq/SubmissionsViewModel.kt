@@ -22,7 +22,7 @@ class SubmissionsViewModel(private var jobId: String): ViewModel() {
     var selectedItem: LiveData<String> = _selectedItem
 
     fun onItemSelected(position: Int) {
-        _selectedItem.value = items[position]
+        _selectedItem.value = items[position].trim()
     }
 
     fun setFilteredList(){

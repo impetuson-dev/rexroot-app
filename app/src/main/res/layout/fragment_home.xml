@@ -15,6 +15,7 @@
         android:background="@color/white"
         tools:context=".view.main.HomeFragment">
 
+        <!--   Lavender: #e5e5ff     -->
         <LinearLayout
             android:background="#e5e5ff"
             android:layout_width="match_parent"

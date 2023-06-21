@@ -34,8 +34,8 @@ class JobsActivity: AppCompatActivity() {
         setContentView(view)
 
         binding.apply {
-            val jobsearch = intent.getStringExtra("jobsearch")
-            val location = intent.getStringExtra("location")
+            val jobsearch = intent.getStringExtra("jobsearch").toString()
+            val location = intent.getStringExtra("location").toString()
             tvJobsearch.text = "Jobs for $jobsearch, $location"
 
             ivGoback.setOnClickListener {
@@ -48,7 +48,7 @@ class JobsActivity: AppCompatActivity() {
             rvJobs.adapter = jobreqadapter
 
             MainScope().launch {
-                recyclerViewLoader()
+                recyclerViewLoader(jobsearch,location)
                 pbLoading.visibility = View.GONE
 
                 if (jobReqList.isEmpty()){ tvNoresults.visibility = View.VISIBLE }
@@ -56,16 +56,28 @@ class JobsActivity: AppCompatActivity() {
         }
     }
 
-    private suspend fun recyclerViewLoader() = withContext(Dispatchers.IO){
+    private suspend fun recyclerViewLoader(jobsearch: String, location: String) = withContext(Dispatchers.IO){
         // Since the .addChildEventListener() does not return any object that can be awaited
         val jobReqDeferred = CompletableDeferred<Unit>()
 
         firebaseDB.addChildEventListener(object : ChildEventListener {
             override fun onChildAdded(snapshot: DataSnapshot, previousChildName: String?) {
                 val jobReqCard = snapshot.getValue(JobReqModelClass::class.java)
-                jobReqList.add(0,jobReqCard!!)
-                binding!!.rvJobs.adapter?.notifyDataSetChanged()
 
+                if (jobReqCard != null) {
+                    if (searchFilter(jobReqCard,jobsearch,location)){
+                        jobReqList.add(0,jobReqCard)
+                    }
+                }
+
+                if (jobReqList.isEmpty()){
+                    binding.tvNoresults.visibility = View.VISIBLE
+                } else{
+                    binding.tvNoresults.visibility = View.GONE
+                }
+
+
+                binding!!.rvJobs.adapter?.notifyDataSetChanged()
                 binding.pbLoading.visibility = View.GONE
             }
 
@@ -99,5 +111,19 @@ class JobsActivity: AppCompatActivity() {
         })
 
         jobReqDeferred.await()
+    }
+
+    private fun searchFilter(jobReqCard: JobReqModelClass, userJobSearch: String, userJobLocation: String): Boolean{
+        val jobRole = jobReqCard.jobrole
+        val compName = jobReqCard.compname
+        val compLocation = jobReqCard.complocation
+
+        if (jobRole.contains(userJobSearch, true) && compLocation.contains(userJobLocation, true)){
+            return true
+        } else if (compName.contains(userJobSearch,true) && compLocation.contains(userJobLocation, true)) {
+            return true
+        }
+
+        return false
     }
 }

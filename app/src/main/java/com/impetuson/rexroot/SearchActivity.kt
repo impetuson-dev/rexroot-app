@@ -1,9 +1,12 @@
 package com.impetuson.rexroot
 
 import android.content.Intent
+import android.content.res.Resources
 import android.os.Bundle
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat
+import com.google.rpc.context.AttributeContext.Resource
 import com.impetuson.rexroot.databinding.ActivitySearchBinding
 
 class SearchActivity: AppCompatActivity() {
@@ -19,10 +22,12 @@ class SearchActivity: AppCompatActivity() {
             lifecycleOwner = this@SearchActivity
 
             btnSearch.setOnClickListener {
-                val intent = Intent(this@SearchActivity,JobsActivity::class.java)
-                intent.putExtra("jobsearch",etJobsearch.text.toString())
-                intent.putExtra("location",etLocation.text.toString())
-                startActivity(intent)
+                if (formValidation()){
+                    val intent = Intent(this@SearchActivity,JobsActivity::class.java)
+                    intent.putExtra("jobsearch",etJobsearch.text.toString())
+                    intent.putExtra("location",etLocation.text.toString())
+                    startActivity(intent)
+                }
             }
 
             ivGoback.setOnClickListener {
@@ -39,5 +44,20 @@ class SearchActivity: AppCompatActivity() {
                 else { if (etLocation.text.isEmpty()){ tvHint2.visibility = View.INVISIBLE } }
             }
         }
+    }
+
+    private fun formValidation(): Boolean{
+        if (binding.etJobsearch.text.isEmpty() && binding.etLocation.text.isEmpty()){
+            binding.etJobsearch.hint = "Type here to search"
+            binding.etLocation.hint = "Type here to search"
+            binding.tvHint1.visibility = View.VISIBLE
+            binding.tvHint2.visibility = View.VISIBLE
+            binding.tvHint1.setTextColor(ContextCompat.getColor(this, R.color.primary_red))
+            binding.tvHint2.setTextColor(ContextCompat.getColor(this, R.color.primary_red))
+            return false
+        }
+        binding.tvHint1.setTextColor(ContextCompat.getColor(this, R.color.violet))
+        binding.tvHint2.setTextColor(ContextCompat.getColor(this, R.color.violet))
+        return true
     }
 }
