@@ -110,6 +110,7 @@ class JobreqActivity: AppCompatActivity() {
                     mediaPlayer.start()
                     Toast.makeText(this@JobreqActivity, uploadMsg, Toast.LENGTH_SHORT).show()
                     progressIndicator.visibility = View.GONE
+
                     if (alert){
                         alert = false
                         alertDialog.dismiss()

@@ -25,12 +25,6 @@ class SubmissionsViewModel(private var jobId: String): ViewModel() {
         _selectedItem.value = items[position].trim()
     }
 
-    fun setFilteredList(){
-        when (selectedItem.value){
-
-        }
-    }
-
     suspend fun fetchDataFromFirestore(): List<List<SubmissionsModelClass>> {
         val activeList = mutableListOf<SubmissionsModelClass>()
         val selectList = mutableListOf<SubmissionsModelClass>()

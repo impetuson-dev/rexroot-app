@@ -12,150 +12,201 @@
         android:background="@color/white">
 
         <ProgressBar
-            app:layout_constraintTop_toTopOf="@id/ll_body"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
             android:id="@+id/pb_loading"
-            android:layout_marginTop="20sp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginTop="20sp"
             android:indeterminate="true"
-            android:indeterminateTint="#8b74bb">
-        </ProgressBar>
+            android:indeterminateTint="#8b74bb"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@id/ll_body"></ProgressBar>
 
         <TextView
-            app:layout_constraintTop_toTopOf="@id/ll_body"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
             android:id="@+id/tv_noresults"
-            android:visibility="gone"
-            android:layout_marginTop="30sp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="No results available">
-        </TextView>
+            android:layout_marginTop="30sp"
+            android:text="No results available"
+            android:visibility="gone"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@id/ll_body"></TextView>
 
         <LinearLayout
             android:id="@+id/ll_header"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            android:paddingLeft="10sp"
-            android:paddingRight="10sp"
-            android:paddingTop="15sp"
-            android:paddingBottom="15sp"
             android:layout_width="0dp"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:paddingLeft="10sp"
+            android:paddingTop="15sp"
+            android:paddingRight="10sp"
+            android:paddingBottom="15sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:orientation="horizontal">
 
 
             <ImageView
                 android:id="@+id/iv_goback"
-                android:layout_gravity="center"
                 android:layout_width="30sp"
                 android:layout_height="30sp"
+                android:layout_gravity="start"
                 android:src="@drawable/icon_goback_darkgrey">
             </ImageView>
 
             <LinearLayout
-                android:id="@+id/ll_search"
+                android:id="@+id/ll_searchfields"
                 android:layout_marginLeft="15sp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:padding="8sp"
-                android:background="@drawable/bg_homesearchbar">
+                android:visibility="gone"
+                android:orientation="vertical">
+
+                <EditText
+                    android:id="@+id/et_jobsearch"
+                    android:theme="@style/EditTextTheme"
+                    android:textSize="16sp"
+                    android:hint="Job role, companies, skills"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+                </EditText>
+
+                <EditText
+                    android:id="@+id/et_location"
+                    android:layout_width="match_parent"
+                    android:textSize="16sp"
+                    android:layout_height="match_parent"
+                    android:hint="Location"
+                    android:theme="@style/EditTextTheme">
+                </EditText>
+
+                <LinearLayout
+                    android:weightSum="1"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <Button
+                        android:id="@+id/btn_cancel"
+                        style="?attr/materialButtonOutlinedStyle"
+                        android:text="Cancel"
+                        android:layout_marginStart="30sp"
+                        android:layout_marginEnd="30sp"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="0.5"
+                        android:textAllCaps="false">
+                    </Button>
+
+                    <Button
+                        android:id="@+id/btn_search"
+                        android:text="Search"
+
+                        android:layout_marginEnd="30sp"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="0.5"
+                        android:textAllCaps="false">
+                    </Button>
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/ll_search"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="15sp"
+                android:background="@drawable/bg_homesearchbar"
+                android:padding="8sp">
 
                 <ImageView
                     android:layout_width="20sp"
                     android:layout_height="20sp"
                     android:layout_gravity="center"
-                    android:src="@drawable/icon_search_darkgrey">
-                </ImageView>
+                    android:src="@drawable/icon_search_darkgrey"></ImageView>
 
                 <TextView
                     android:id="@+id/tv_jobsearch"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
-                    android:textSize="12sp"
                     android:layout_marginLeft="8sp"
-                    android:textColor="@color/dark_grey"
-                    android:maxLines="1"
                     android:ellipsize="end"
-                    android:text="Seach jobs here...">
-                </TextView>
+                    android:maxLines="1"
+                    android:text="Seach jobs here..."
+                    android:textColor="@color/dark_grey"
+                    android:textSize="12sp"></TextView>
 
             </LinearLayout>
-
 
 
         </LinearLayout>
 
         <LinearLayout
             android:id="@+id/ll_body"
-            android:paddingLeft="10sp"
-            android:paddingRight="10sp"
-            app:layout_constraintTop_toBottomOf="@id/ll_header"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintBottom_toTopOf="@id/ll_footer"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:paddingLeft="10sp"
+            android:paddingRight="10sp"
+            app:layout_constraintBottom_toTopOf="@id/ll_footer"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/ll_header">
 
             <TextView
                 android:id="@+id/tv_jobcount"
-                android:visibility="gone"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="10sp"
+                android:text="250 jobs"
                 android:textStyle="bold"
-                android:text="250 jobs">
-            </TextView>
+                android:visibility="gone"></TextView>
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/rv_jobs"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
-            </androidx.recyclerview.widget.RecyclerView>
+                android:layout_height="match_parent"></androidx.recyclerview.widget.RecyclerView>
 
         </LinearLayout>
 
         <LinearLayout
             android:id="@+id/ll_footer"
-            android:padding="5sp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            android:padding="5sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent">
 
             <com.google.android.material.card.MaterialCardView
                 android:id="@+id/cv_filter"
                 android:layout_width="45sp"
                 android:layout_height="45sp"
-                android:clickable="true"
                 android:layout_marginRight="10sp"
-                app:strokeColor="@color/white"
                 android:backgroundTint="@color/white"
+                android:clickable="true"
                 android:foreground="?android:attr/selectableItemBackground"
                 app:cardCornerRadius="500sp"
-                app:cardElevation="0dp">
+                app:cardElevation="0dp"
+                app:strokeColor="@color/white">
 
                 <ImageView
                     android:layout_width="30sp"
                     android:layout_height="30sp"
                     android:layout_gravity="center"
-                    android:src="@drawable/icon_filter_violet">
-                </ImageView>
+                    android:src="@drawable/icon_filter_violet"></ImageView>
 
 
             </com.google.android.material.card.MaterialCardView>
 
             <HorizontalScrollView
-                android:scrollbars="none"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
+                android:layout_height="match_parent"
+                android:scrollbars="none">
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -166,22 +217,21 @@
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
                         android:layout_marginRight="10sp"
-                        android:clickable="true"
                         android:backgroundTint="@color/white"
+                        android:clickable="true"
                         android:foreground="?android:attr/selectableItemBackground"
                         app:cardCornerRadius="500sp"
                         app:cardElevation="0dp">
 
                         <TextView
-                            android:paddingLeft="15sp"
-                            android:paddingRight="15sp"
-                            android:paddingTop="5sp"
-                            android:paddingBottom="5sp"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center"
-                            android:text="Payment">
-                        </TextView>
+                            android:paddingLeft="15sp"
+                            android:paddingTop="5sp"
+                            android:paddingRight="15sp"
+                            android:paddingBottom="5sp"
+                            android:text="Payment"></TextView>
 
 
                     </com.google.android.material.card.MaterialCardView>
@@ -190,23 +240,22 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
-                        android:clickable="true"
-                        android:backgroundTint="@color/white"
                         android:layout_marginRight="10sp"
+                        android:backgroundTint="@color/white"
+                        android:clickable="true"
                         android:foreground="?android:attr/selectableItemBackground"
                         app:cardCornerRadius="500sp"
                         app:cardElevation="0dp">
 
                         <TextView
-                            android:paddingLeft="15sp"
-                            android:paddingRight="15sp"
-                            android:paddingTop="5sp"
-                            android:paddingBottom="5sp"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center"
-                            android:text="Salary">
-                        </TextView>
+                            android:paddingLeft="15sp"
+                            android:paddingTop="5sp"
+                            android:paddingRight="15sp"
+                            android:paddingBottom="5sp"
+                            android:text="Salary"></TextView>
 
 
                     </com.google.android.material.card.MaterialCardView>
@@ -215,23 +264,22 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
-                        android:clickable="true"
-                        android:backgroundTint="@color/white"
                         android:layout_marginRight="10sp"
+                        android:backgroundTint="@color/white"
+                        android:clickable="true"
                         android:foreground="?android:attr/selectableItemBackground"
                         app:cardCornerRadius="500sp"
                         app:cardElevation="0dp">
 
                         <TextView
-                            android:paddingLeft="15sp"
-                            android:paddingRight="15sp"
-                            android:paddingTop="5sp"
-                            android:paddingBottom="5sp"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center"
-                            android:text="Work mode">
-                        </TextView>
+                            android:paddingLeft="15sp"
+                            android:paddingTop="5sp"
+                            android:paddingRight="15sp"
+                            android:paddingBottom="5sp"
+                            android:text="Work mode"></TextView>
 
 
                     </com.google.android.material.card.MaterialCardView>
@@ -240,23 +288,22 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
-                        android:clickable="true"
-                        android:backgroundTint="@color/white"
                         android:layout_marginRight="10sp"
+                        android:backgroundTint="@color/white"
+                        android:clickable="true"
                         android:foreground="?android:attr/selectableItemBackground"
                         app:cardCornerRadius="500sp"
                         app:cardElevation="0dp">
 
                         <TextView
-                            android:paddingLeft="15sp"
-                            android:paddingRight="15sp"
-                            android:paddingTop="5sp"
-                            android:paddingBottom="5sp"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center"
-                            android:text="Experience">
-                        </TextView>
+                            android:paddingLeft="15sp"
+                            android:paddingTop="5sp"
+                            android:paddingRight="15sp"
+                            android:paddingBottom="5sp"
+                            android:text="Experience"></TextView>
 
 
                     </com.google.android.material.card.MaterialCardView>
@@ -265,23 +312,22 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
-                        android:clickable="true"
-                        android:backgroundTint="@color/white"
                         android:layout_marginRight="10sp"
+                        android:backgroundTint="@color/white"
+                        android:clickable="true"
                         android:foreground="?android:attr/selectableItemBackground"
                         app:cardCornerRadius="500sp"
                         app:cardElevation="0dp">
 
                         <TextView
-                            android:paddingLeft="15sp"
-                            android:paddingRight="15sp"
-                            android:paddingTop="5sp"
-                            android:paddingBottom="5sp"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center"
-                            android:text="Posted by">
-                        </TextView>
+                            android:paddingLeft="15sp"
+                            android:paddingTop="5sp"
+                            android:paddingRight="15sp"
+                            android:paddingBottom="5sp"
+                            android:text="Posted by"></TextView>
 
 
                     </com.google.android.material.card.MaterialCardView>

@@ -23,7 +23,7 @@ class JobreqSubmissionsFragment(jobId: String) : Fragment() {
     private var binding: FragmentJobreqsubmissionsBinding ?= null
     private lateinit var resumeList: List<List<SubmissionsModelClass>>
     private lateinit var submissionsAdapter: SubmissionsRecyclerViewAdapter
-    private val viewmodel = SubmissionsViewModel(jobId)
+    val viewmodel = SubmissionsViewModel(jobId)
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -65,4 +65,5 @@ class JobreqSubmissionsFragment(jobId: String) : Fragment() {
             }
         }
     }
+
 }
