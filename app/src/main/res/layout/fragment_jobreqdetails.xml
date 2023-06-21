@@ -41,8 +41,8 @@
                         android:layout_height="wrap_content">
 
                         <ImageView
-                            android:layout_width="20sp"
-                            android:layout_height="20sp"
+                            android:layout_width="25sp"
+                            android:layout_height="25sp"
                             android:layout_gravity="center"
                             android:layout_marginRight="8sp"
                             android:src="@drawable/icon_salary">
@@ -51,6 +51,7 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:textSize="14sp"
                             android:layout_gravity="center"
                             android:text="@{jobreqviewmodel.jobreqModel.jobsalary}">
                         </TextView>
@@ -63,8 +64,8 @@
                         android:layout_height="wrap_content">
 
                         <ImageView
-                            android:layout_width="20sp"
-                            android:layout_height="20sp"
+                            android:layout_width="25sp"
+                            android:layout_height="25sp"
                             android:layout_gravity="center"
                             android:layout_marginRight="8sp"
                             android:src="@drawable/icon_suitcase">
@@ -74,6 +75,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center"
+                            android:textSize="14sp"
                             android:text="@{jobreqviewmodel.jobreqModel.reqjobexp}"></TextView>
 
                     </LinearLayout>
@@ -87,8 +89,8 @@
                     android:layout_height="wrap_content">
 
                     <ImageView
-                        android:layout_width="20sp"
-                        android:layout_height="20sp"
+                        android:layout_width="25sp"
+                        android:layout_height="25sp"
                         android:layout_gravity="center"
                         android:layout_marginRight="8sp"
                         android:src="@drawable/icon_location">
@@ -108,8 +110,8 @@
                     android:layout_height="wrap_content">
 
                     <ImageView
-                        android:layout_width="20sp"
-                        android:layout_height="20sp"
+                        android:layout_width="25sp"
+                        android:layout_height="25sp"
                         android:layout_gravity="center"
                         android:layout_marginRight="8sp"
                         android:src="@drawable/icon_degree">

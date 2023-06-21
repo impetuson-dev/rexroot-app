@@ -15,7 +15,6 @@ import com.impetuson.rexroot.model.jobreq.JobReqModelClass
 class JobReqRecyclerViewAdapter(private val dataList: List<JobReqModelClass>) : RecyclerView.Adapter<JobReqRecyclerViewAdapter.ViewHolder>() {
 
     inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        private val cardView: MaterialCardView = itemView.findViewById(R.id.cv_jobreq)
         private val jobRole: TextView = itemView.findViewById(R.id.tv_jobrole)
         private val companyName: TextView = itemView.findViewById(R.id.tv_compname)
         private val companyLocation: TextView = itemView.findViewById(R.id.tv_complocation)
@@ -25,8 +24,6 @@ class JobReqRecyclerViewAdapter(private val dataList: List<JobReqModelClass>) : 
         private val pricePerClosure: TextView = itemView.findViewById(R.id.tv_priceperclosure)
 
         fun bind(data: JobReqModelClass) {
-            cardView.startAnimation(AnimationUtils.loadAnimation(itemView.context,R.anim.anim_rvcards))
-
             jobRole.text = data.jobrole
             companyName.text = data.compname
             companyLocation.text = data.complocation
