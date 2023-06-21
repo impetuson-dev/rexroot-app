@@ -1,0 +1,157 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/white">
+
+        <LinearLayout
+            android:id="@+id/ll_search"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:orientation="vertical"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content">
+
+            <LinearLayout
+                android:paddingTop="20sp"
+                android:paddingLeft="20sp"
+                android:paddingBottom="10sp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <ImageView
+                    android:id="@+id/iv_goback"
+                    android:layout_width="30sp"
+                    android:layout_height="30sp"
+                    android:src="@drawable/icon_goback_darkgrey"></ImageView>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:padding="20sp"
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textStyle="bold"
+                    android:textSize="20sp"
+                    android:textColor="@color/black"
+                    android:text="Search jobs">
+                </TextView>
+
+                <LinearLayout
+                    android:layout_marginTop="20sp"
+                    android:orientation="vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:id="@+id/tv_hint1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:paddingLeft="5sp"
+                        android:textSize="12sp"
+                        android:textStyle="bold"
+                        android:textColor="@color/violet"
+                        android:visibility="invisible"
+                        android:text="Job role, companies, skills">
+                    </TextView>
+
+                    <EditText
+                        android:id="@+id/et_jobsearch"
+                        android:theme="@style/EditTextTheme"
+                        android:hint="Job role, companies, skills"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
+                    </EditText>
+
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_marginTop="20sp"
+                    android:orientation="vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:id="@+id/tv_hint2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:paddingLeft="5sp"
+                        android:textSize="12sp"
+                        android:textStyle="bold"
+                        android:textColor="@color/violet"
+                        android:visibility="invisible"
+                        android:text="Location">
+                    </TextView>
+
+                    <EditText
+                        android:id="@+id/et_location"
+                        android:theme="@style/EditTextTheme"
+                        android:hint="Location"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
+                    </EditText>
+
+
+                </LinearLayout>
+
+
+                <Button
+                    android:id="@+id/btn_search"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20sp"
+                    android:layout_gravity="end"
+                    android:text="Search jobs"
+                    android:textAllCaps="false"
+                    android:textColor="@color/white">
+                </Button>
+
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+
+        <LinearLayout
+            app:layout_constraintTop_toBottomOf="@id/ll_search"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:paddingTop="20sp"
+            android:paddingLeft="20sp"
+            android:paddingRight="20sp"
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/black"
+                android:textStyle="bold"
+                android:textSize="18sp"
+                android:text="Most recent searches"></TextView>
+
+            <TextView
+                android:layout_marginTop="20sp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="No results available"></TextView>
+
+        </LinearLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

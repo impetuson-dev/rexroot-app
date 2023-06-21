@@ -29,7 +29,15 @@
             android:exported="true">
         </activity>
         <activity
+            android:name=".SearchActivity"
+            android:exported="true">
+        </activity>
+        <activity
             android:name=".JobreqActivity"
+            android:exported="true">
+        </activity>
+        <activity
+            android:name=".JobsActivity"
             android:exported="true">
         </activity>
         <activity
@@ -40,6 +48,7 @@
             android:name=".view.profile.CandidateActivity"
             android:exported="true">
         </activity>
+
     </application>
 
 </manifest>

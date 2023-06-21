@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/white">
+
+        <ProgressBar
+            app:layout_constraintTop_toTopOf="@id/ll_body"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:id="@+id/pb_loading"
+            android:layout_marginTop="20sp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:indeterminate="true"
+            android:indeterminateTint="#8b74bb">
+        </ProgressBar>
+
+        <TextView
+            app:layout_constraintTop_toTopOf="@id/ll_body"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:id="@+id/tv_noresults"
+            android:visibility="gone"
+            android:layout_marginTop="30sp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="No results available">
+        </TextView>
+
+        <LinearLayout
+            android:id="@+id/ll_header"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:paddingLeft="10sp"
+            android:paddingRight="10sp"
+            android:paddingTop="15sp"
+            android:paddingBottom="15sp"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content">
+
+
+            <ImageView
+                android:id="@+id/iv_goback"
+                android:layout_gravity="center"
+                android:layout_width="30sp"
+                android:layout_height="30sp"
+                android:src="@drawable/icon_goback_darkgrey">
+            </ImageView>
+
+            <LinearLayout
+                android:id="@+id/ll_search"
+                android:layout_marginLeft="15sp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="8sp"
+                android:background="@drawable/bg_homesearchbar">
+
+                <ImageView
+                    android:layout_width="20sp"
+                    android:layout_height="20sp"
+                    android:layout_gravity="center"
+                    android:src="@drawable/icon_search_darkgrey">
+                </ImageView>
+
+                <TextView
+                    android:id="@+id/tv_jobsearch"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:textSize="12sp"
+                    android:layout_marginLeft="8sp"
+                    android:textColor="@color/dark_grey"
+                    android:maxLines="1"
+                    android:ellipsize="end"
+                    android:text="Seach jobs here...">
+                </TextView>
+
+            </LinearLayout>
+
+
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/ll_body"
+            android:paddingLeft="10sp"
+            android:paddingRight="10sp"
+            app:layout_constraintTop_toBottomOf="@id/ll_header"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toTopOf="@id/ll_footer"
+            android:layout_width="match_parent"
+            android:layout_height="0dp">
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rv_jobs"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+            </androidx.recyclerview.widget.RecyclerView>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/ll_footer"
+            android:padding="10sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Filters">
+            </TextView>
+
+        </LinearLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

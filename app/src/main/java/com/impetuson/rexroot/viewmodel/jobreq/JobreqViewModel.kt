@@ -201,11 +201,6 @@ class JobreqViewModel : ViewModel() {
 
         firestoreDB.collection("users").document(userId).set(submitdata, SetOptions.merge())
 
-        firestoreDB.collection("users").document(userId).update(mapOf(
-            "submitdata.$jobId.count.submitted" to "${index+1}",
-            "submitdata.$jobId.count.accepted" to "0",
-            "submitdata.$jobId.count.rejected" to "0"
-        ))
     }
 
     private fun getFileNameFromUri(uri: Uri, contentResolver: ContentResolver): String {

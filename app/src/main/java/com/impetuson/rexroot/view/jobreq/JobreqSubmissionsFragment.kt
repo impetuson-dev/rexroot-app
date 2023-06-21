@@ -56,6 +56,8 @@ class JobreqSubmissionsFragment(jobId: String) : Fragment() {
                         pbLoading.visibility = View.GONE
                         if (resumeList[position].isEmpty()){
                             tvNoresults.visibility = View.VISIBLE
+                        } else {
+                            tvNoresults.visibility = View.GONE
                         }
                     }
                     override fun onNothingSelected(adapterView: AdapterView<*>) {}
