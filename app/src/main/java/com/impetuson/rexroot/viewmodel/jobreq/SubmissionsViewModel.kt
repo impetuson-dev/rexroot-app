@@ -22,13 +22,7 @@ class SubmissionsViewModel(private var jobId: String): ViewModel() {
     var selectedItem: LiveData<String> = _selectedItem
 
     fun onItemSelected(position: Int) {
-        _selectedItem.value = items[position]
-    }
-
-    fun setFilteredList(){
-        when (selectedItem.value){
-
-        }
+        _selectedItem.value = items[position].trim()
     }
 
     suspend fun fetchDataFromFirestore(): List<List<SubmissionsModelClass>> {

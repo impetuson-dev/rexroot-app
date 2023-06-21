@@ -81,10 +81,8 @@
                         android:id="@+id/et_email_layout"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        app:boxStrokeColor="#2196F3"
                         app:error="@{loginViewModel.userEmailError}"
                         app:errorEnabled="true"
-                        app:hintTextColor="#2196F3"
                         app:placeholderText="Eg: john@example.com"
                         app:placeholderTextColor="#A9A9A9"
                         app:startIconDrawable="@drawable/baseline_mail_24">
@@ -110,10 +108,8 @@
                     <com.google.android.material.textfield.TextInputLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        app:boxStrokeColor="#2196F3"
                         app:error="@{loginViewModel.userPasswordError}"
                         app:errorEnabled="true"
-                        app:hintTextColor="#2196F3"
                         app:passwordToggleEnabled="true"
                         app:placeholderText="Enter your password"
                         app:placeholderTextColor="#A9A9A9"

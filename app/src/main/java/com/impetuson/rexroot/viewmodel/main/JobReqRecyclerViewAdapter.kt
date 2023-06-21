@@ -5,8 +5,10 @@ import android.text.TextUtils
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.animation.AnimationUtils
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import com.google.android.material.card.MaterialCardView
 import com.impetuson.rexroot.JobreqActivity
 import com.impetuson.rexroot.R
 import com.impetuson.rexroot.model.jobreq.JobReqModelClass

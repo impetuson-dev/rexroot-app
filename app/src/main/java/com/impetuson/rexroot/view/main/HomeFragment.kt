@@ -1,6 +1,7 @@
 package com.impetuson.rexroot.view.main
 
 import android.content.Context
+import android.content.Intent
 import android.content.SharedPreferences
 import android.graphics.Color
 import android.os.Bundle
@@ -22,6 +23,7 @@ import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.DatabaseError
 import com.impetuson.rexroot.R
+import com.impetuson.rexroot.SearchActivity
 import com.impetuson.rexroot.databinding.FragmentHomeBinding
 import com.impetuson.rexroot.model.jobreq.JobReqModelClass
 import com.impetuson.rexroot.viewmodel.main.HomeViewModel
@@ -56,6 +58,10 @@ class HomeFragment : Fragment() {
         binding?.apply {
             lifecycleOwner = viewLifecycleOwner
             viewModel = viewmodel
+
+            llSearch.setOnClickListener {
+                startActivity(Intent(requireContext(), SearchActivity::class.java))
+            }
 
             val sharedPreference: SharedPreferences =  requireContext().getSharedPreferences("profiledata", Context.MODE_PRIVATE)
             viewmodel.getUserProfileDetails(sharedPreference)

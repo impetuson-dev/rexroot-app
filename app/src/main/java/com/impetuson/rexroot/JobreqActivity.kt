@@ -3,6 +3,7 @@ package com.impetuson.rexroot
 import android.app.Activity
 import android.app.Dialog
 import android.content.Intent
+import android.media.MediaPlayer
 import android.net.Uri
 import android.os.Bundle
 import android.util.Log
@@ -41,12 +42,15 @@ class JobreqActivity: AppCompatActivity() {
     private lateinit var jobreqViewPageAdapter: JobreqViewPagerAdapter
     private val jobreqViewModel: JobreqViewModel by viewModels()
 
-    @OptIn(DelicateCoroutinesApi::class)
+    private lateinit var mediaPlayer: MediaPlayer
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityJobreqBinding.inflate(layoutInflater)
         val view = binding.root
         setContentView(view)
+
+        mediaPlayer = MediaPlayer.create(this, R.raw.file_upload_success)
 
         alertDialog = MaterialAlertDialogBuilder(this).setTitle("Uploading Resume(s)").setMessage("Please wait...").setCancelable(false).create()
         jobId = intent.getStringExtra("jobid") ?: ""
@@ -103,8 +107,10 @@ class JobreqActivity: AppCompatActivity() {
                 MainScope().launch {
                     progressIndicator.visibility = View.VISIBLE
                     val uploadMsg = jobreqViewModel.btnSubmitHandler(contentResolver)
+                    mediaPlayer.start()
                     Toast.makeText(this@JobreqActivity, uploadMsg, Toast.LENGTH_SHORT).show()
                     progressIndicator.visibility = View.GONE
+
                     if (alert){
                         alert = false
                         alertDialog.dismiss()

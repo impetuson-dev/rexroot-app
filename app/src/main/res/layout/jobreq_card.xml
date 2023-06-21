@@ -2,6 +2,7 @@
 <com.google.android.material.card.MaterialCardView
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/cv_jobreq"
     app:cardCornerRadius="12sp"
     android:orientation="vertical"
     app:cardBackgroundColor="@color/white"
@@ -32,8 +33,8 @@
             android:layout_height="wrap_content">
 
             <ImageView
-                android:layout_width="15sp"
-                android:layout_height="15sp"
+                android:layout_width="20sp"
+                android:layout_height="20sp"
                 android:layout_gravity="center"
                 android:src="@drawable/icon_company">
             </ImageView>
@@ -43,6 +44,7 @@
                 android:id="@+id/tv_compname"
                 android:textColor="@color/black"
                 android:textSize="12sp"
+                android:layout_gravity="center"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Company Name">
@@ -56,8 +58,8 @@
             android:layout_height="wrap_content">
 
             <ImageView
-                android:layout_width="15sp"
-                android:layout_height="15sp"
+                android:layout_width="20sp"
+                android:layout_height="20sp"
                 android:layout_gravity="center"
                 android:src="@drawable/icon_location">
             </ImageView>
@@ -67,6 +69,7 @@
                 android:id="@+id/tv_complocation"
                 android:textColor="@color/black"
                 android:textSize="12sp"
+                android:layout_gravity="center"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Company Location">
@@ -87,21 +90,21 @@
                 android:layout_height="wrap_content">
 
                 <ImageView
-                    android:layout_width="15sp"
-                    android:layout_height="15sp"
+                    android:layout_width="20sp"
+                    android:layout_height="20sp"
                     android:layout_gravity="center"
                     android:src="@drawable/icon_salary">
                 </ImageView>
 
                 <TextView
-                    android:layout_marginLeft="10sp"
                     android:id="@+id/tv_jobsalary"
-                    android:textColor="@color/dark_grey"
-                    android:textSize="12sp"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Job Salary">
-                </TextView>
+                    android:layout_height="17dp"
+                    android:layout_gravity="center"
+                    android:layout_marginLeft="10sp"
+                    android:text="Job Salary"
+                    android:textColor="@color/metal_grey"
+                    android:textSize="12sp"></TextView>
 
             </LinearLayout>
 
@@ -112,8 +115,8 @@
                 android:layout_height="wrap_content">
 
                 <ImageView
-                    android:layout_width="15sp"
-                    android:layout_height="15sp"
+                    android:layout_width="20sp"
+                    android:layout_height="20sp"
                     android:layout_gravity="center"
                     android:src="@drawable/icon_suitcase">
                 </ImageView>
@@ -122,7 +125,7 @@
                     android:layout_marginLeft="10sp"
                     android:id="@+id/tv_reqjobexp"
                     android:textSize="12sp"
-                    android:textColor="@color/dark_grey"
+                    android:textColor="@color/metal_grey"
                     android:layout_gravity="center"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -164,6 +167,7 @@
                     android:textColor="@color/black"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_gravity="center"
                     android:textSize="12sp"
                     android:textStyle="bold"
                     android:text="Price per closure: ">

@@ -174,8 +174,6 @@
                     app:error="@{userdetailsViewModel.dobUserError}"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    app:boxStrokeColor="#2196F3"
-                    app:hintTextColor="#2196F3"
                     app:placeholderText="Eg: 01-01-2000"
                     app:placeholderTextColor="#A9A9A9"
                     app:startIconDrawable="@drawable/baseline_date_range_24">

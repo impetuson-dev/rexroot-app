@@ -23,7 +23,7 @@ class JobreqSubmissionsFragment(jobId: String) : Fragment() {
     private var binding: FragmentJobreqsubmissionsBinding ?= null
     private lateinit var resumeList: List<List<SubmissionsModelClass>>
     private lateinit var submissionsAdapter: SubmissionsRecyclerViewAdapter
-    private val viewmodel = SubmissionsViewModel(jobId)
+    val viewmodel = SubmissionsViewModel(jobId)
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -41,6 +41,8 @@ class JobreqSubmissionsFragment(jobId: String) : Fragment() {
             context?.let { viewmodel.fetchDataSharedPref(it.getSharedPreferences("profiledata",MODE_PRIVATE)) }
 
             rvSubmissions.layoutManager = LinearLayoutManager(requireContext())
+            pbLoading.visibility = View.VISIBLE
+
             MainScope().launch {
                 resumeList = viewmodel.fetchDataFromFirestore()
 
@@ -50,8 +52,12 @@ class JobreqSubmissionsFragment(jobId: String) : Fragment() {
                         viewmodel.onItemSelected(position)
                         submissionsAdapter = SubmissionsRecyclerViewAdapter(resumeList[position])
                         rvSubmissions.adapter = submissionsAdapter
+
+                        pbLoading.visibility = View.GONE
                         if (resumeList[position].isEmpty()){
                             tvNoresults.visibility = View.VISIBLE
+                        } else {
+                            tvNoresults.visibility = View.GONE
                         }
                     }
                     override fun onNothingSelected(adapterView: AdapterView<*>) {}
@@ -59,4 +65,5 @@ class JobreqSubmissionsFragment(jobId: String) : Fragment() {
             }
         }
     }
+
 }
