@@ -1,6 +1,5 @@
-package com.impetuson.rexroot
+package com.impetuson.rexroot.view.jobs
 
-import android.app.Activity
 import android.content.Context
 import android.os.Bundle
 import android.util.Log
@@ -9,10 +8,13 @@ import android.view.inputmethod.InputMethodManager
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.google.android.material.bottomsheet.BottomSheetBehavior
+import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.firebase.database.ChildEventListener
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
+import com.impetuson.rexroot.R
 import com.impetuson.rexroot.databinding.ActivityJobsBinding
 import com.impetuson.rexroot.model.jobreq.JobReqModelClass
 import com.impetuson.rexroot.viewmodel.main.JobReqRecyclerViewAdapter
@@ -41,7 +43,7 @@ class JobsActivity: AppCompatActivity() {
         binding.apply {
             jobsearch = intent.getStringExtra("jobsearch").toString()
             location = intent.getStringExtra("location").toString()
-            tvJobsearch.text = "Jobs for $jobsearch, $location"
+            tvJobsearch.text = "Jobs for ${jobsearch.trim()}, ${location.trim()}"
 
             ivGoback.setOnClickListener {
                 onBackPressed()
@@ -78,7 +80,7 @@ class JobsActivity: AppCompatActivity() {
 
                 jobsearch = etJobsearch.text.toString()
                 location = etLocation.text.toString()
-                tvJobsearch.text = "Jobs for $jobsearch, $location"
+                tvJobsearch.text = "Jobs for ${jobsearch.trim()}, ${location.trim()}"
                 pbLoading.visibility = View.VISIBLE
 
                 MainScope().launch {
@@ -86,6 +88,11 @@ class JobsActivity: AppCompatActivity() {
                     pbLoading.visibility = View.GONE
                     if (jobReqList.isEmpty()){ tvNoresults.visibility = View.VISIBLE }
                 }
+            }
+
+            cvFilter.setOnClickListener {
+                val modalBottomSheet = FilterFragment()
+                modalBottomSheet.show(supportFragmentManager, FilterFragment.TAG)
             }
         }
     }

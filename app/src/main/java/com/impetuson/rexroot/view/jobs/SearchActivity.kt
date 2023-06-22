@@ -1,29 +1,53 @@
-package com.impetuson.rexroot
+package com.impetuson.rexroot.view.jobs
 
+import android.content.Context
 import android.content.Intent
-import android.content.res.Resources
+import android.content.SharedPreferences
 import android.os.Bundle
+import android.preference.PreferenceManager
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
-import com.google.rpc.context.AttributeContext.Resource
+import androidx.recyclerview.widget.LinearLayoutManager
+import com.google.gson.Gson
+import com.google.gson.reflect.TypeToken
+import com.impetuson.rexroot.R
 import com.impetuson.rexroot.databinding.ActivitySearchBinding
+import com.impetuson.rexroot.model.jobs.SearchModelClass
+import com.impetuson.rexroot.viewmodel.jobs.SearchRecyclerViewAdapter
 
 class SearchActivity: AppCompatActivity() {
 
     private lateinit var binding: ActivitySearchBinding
+    private lateinit var searchesAdapter: SearchRecyclerViewAdapter
+    private lateinit var sharedPreferences: SharedPreferences
+
+    private var searchesList: List<SearchModelClass> = listOf()
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivitySearchBinding.inflate(layoutInflater)
         val view = binding.root
         setContentView(view)
 
+        sharedPreferences = this.getSharedPreferences("recentsearches", Context.MODE_PRIVATE)
+
+        if (searchesList.isEmpty()){ searchesList = getSearchList("searchesList") }
+
         binding.apply {
             lifecycleOwner = this@SearchActivity
 
+            if (searchesList.isEmpty()){ tvNoresults.visibility = View.VISIBLE }
+
+            rvRecentsearches.layoutManager = LinearLayoutManager(this@SearchActivity, LinearLayoutManager.HORIZONTAL, false)
+            searchesAdapter = SearchRecyclerViewAdapter(searchesList)
+            rvRecentsearches.adapter = searchesAdapter
+
             btnSearch.setOnClickListener {
                 if (formValidation()){
-                    val intent = Intent(this@SearchActivity,JobsActivity::class.java)
+                    saveSearchList("searchesList", SearchModelClass(etJobsearch.text.toString(),etLocation.text.toString()))
+
+                    val intent = Intent(this@SearchActivity, JobsActivity::class.java)
                     intent.putExtra("jobsearch",etJobsearch.text.toString())
                     intent.putExtra("location",etLocation.text.toString())
                     startActivity(intent)
@@ -59,5 +83,24 @@ class SearchActivity: AppCompatActivity() {
         binding.tvHint1.setTextColor(ContextCompat.getColor(this, R.color.violet))
         binding.tvHint2.setTextColor(ContextCompat.getColor(this, R.color.violet))
         return true
+    }
+
+    private fun saveSearchList(key: String, search: SearchModelClass) {
+        val searches = getSearchList(key).toMutableList()
+        searches.add(0,search)
+        if (searches.size > 10){ searches.removeLast() }
+
+        val editor = sharedPreferences.edit()
+        val gson = Gson()
+        val json = gson.toJson(searches)
+        editor.putString(key, json)
+        editor.apply()
+    }
+
+    private fun getSearchList(key: String): List<SearchModelClass> {
+        val gson = Gson()
+        val json = sharedPreferences.getString(key, null)
+        val type = object : TypeToken<List<SearchModelClass>>() {}.type
+        return gson.fromJson(json, type) ?: emptyList()
     }
 }

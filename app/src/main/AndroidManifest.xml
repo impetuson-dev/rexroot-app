@@ -29,7 +29,7 @@
             android:exported="true">
         </activity>
         <activity
-            android:name=".SearchActivity"
+            android:name=".view.jobs.SearchActivity"
             android:exported="true">
         </activity>
         <activity
@@ -37,7 +37,7 @@
             android:exported="true">
         </activity>
         <activity
-            android:name=".JobsActivity"
+            android:name=".view.jobs.JobsActivity"
             android:exported="true">
         </activity>
         <activity

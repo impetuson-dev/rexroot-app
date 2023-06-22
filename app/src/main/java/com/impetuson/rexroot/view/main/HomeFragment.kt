@@ -23,7 +23,7 @@ import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.DatabaseError
 import com.impetuson.rexroot.R
-import com.impetuson.rexroot.SearchActivity
+import com.impetuson.rexroot.view.jobs.SearchActivity
 import com.impetuson.rexroot.databinding.FragmentHomeBinding
 import com.impetuson.rexroot.model.jobreq.JobReqModelClass
 import com.impetuson.rexroot.viewmodel.main.HomeViewModel
