@@ -95,7 +95,7 @@ class JobreqViewModel : ViewModel() {
 
     private fun calcJobPostedTime(): String {
         val currentDateTime = LocalDateTime.now()
-        val formatter = DateTimeFormatter.ofPattern("HHmmss")
+        val formatter = DateTimeFormatter.ofPattern("yyyMMddHHmmss")
         return currentDateTime.format(formatter).toString()
     }
 
@@ -181,7 +181,7 @@ class JobreqViewModel : ViewModel() {
     private fun storeDataToFirestore(resumeId: String, resumeName: String, resumeUrl: String, index: Int) {
         val postedTime = calcJobPostedTime()
         val postedDate = calcJobPostedDate()
-        val resumeDataId = postedTime + resumeId
+        val resumeDataId = "$postedTime-$resumeId"
 
         val submitdata = mapOf<String,Any>(
             "submitdata" to mapOf(
