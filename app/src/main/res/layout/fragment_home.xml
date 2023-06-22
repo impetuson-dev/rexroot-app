@@ -16,15 +16,17 @@
         tools:context=".view.main.HomeFragment">
 
         <!--   Lavender: #e5e5ff     -->
-        <LinearLayout
-            android:background="#e5e5ff"
-            android:layout_width="match_parent"
-            android:layout_height="90sp">
-        </LinearLayout>
+<!--        <LinearLayout-->
+<!--            android:background="#e5e5ff"-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="90sp">-->
+<!--        </LinearLayout>-->
 
         <androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_marginTop="5sp"
+            android:paddingTop="10sp"
+            android:paddingBottom="10sp"
             android:id="@+id/cl_header"
+            android:background="#e5e5ff"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
@@ -99,131 +101,174 @@
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
-        <LinearLayout
-            android:id="@+id/ll_section"
-            android:weightSum="1"
-            android:layout_margin="5sp"
+        <ScrollView
             android:layout_below="@id/cl_header"
+            android:scrollbars="none"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="match_parent">
 
-            <com.google.android.material.card.MaterialCardView
-                android:id="@+id/btn_myprofile"
-                app:cardBackgroundColor="@color/white"
-                android:foreground="?android:attr/selectableItemBackground"
-                android:clickable="true"
-                android:layout_margin="5sp"
-                android:elevation="0dp"
-                app:cardCornerRadius="10sp"
-                android:layout_weight="0.5"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
 
                 <LinearLayout
-                    android:padding="10sp"
+                    android:id="@+id/ll_section"
+                    android:weightSum="1"
+                    android:layout_margin="5sp"
+                    android:layout_below="@id/cl_header"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content">
 
-                    <LinearLayout
-                        android:layout_weight="0.7"
-                        android:orientation="vertical"
+                    <com.google.android.material.card.MaterialCardView
+                        android:id="@+id/btn_myprofile"
+                        app:cardBackgroundColor="@color/white"
+                        android:foreground="?android:attr/selectableItemBackground"
+                        android:clickable="true"
+                        android:layout_margin="5sp"
+                        android:elevation="0dp"
+                        app:cardCornerRadius="10sp"
+                        android:layout_weight="0.5"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content">
 
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="Hello!"
-                            android:textSize="12sp"
-                            android:textStyle="bold">
-                        </TextView>
+                        <LinearLayout
+                            android:padding="10sp"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content">
 
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:maxLines="1"
-                            android:ellipsize="end"
-                            android:text="@{viewModel.userName}"
-                            android:textStyle="bold">
-                        </TextView>
+                            <LinearLayout
+                                android:layout_weight="0.7"
+                                android:orientation="vertical"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content">
 
-                    </LinearLayout>
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="Hello!"
+                                    android:textSize="12sp"
+                                    android:textStyle="bold">
+                                </TextView>
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:maxLines="1"
+                                    android:ellipsize="end"
+                                    android:text="@{viewModel.userName}"
+                                    android:textStyle="bold">
+                                </TextView>
+
+                            </LinearLayout>
+
+                        </LinearLayout>
+
+
+                    </com.google.android.material.card.MaterialCardView>
+
+                    <com.google.android.material.card.MaterialCardView
+                        app:cardBackgroundColor="@color/white"
+                        android:foreground="?android:attr/selectableItemBackground"
+                        android:clickable="true"
+                        android:layout_margin="5sp"
+                        android:elevation="0dp"
+                        app:cardCornerRadius="10sp"
+                        android:layout_weight="0.5"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content">
+
+                        <LinearLayout
+                            android:padding="10sp"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Actions"
+                                android:textStyle="bold">
+                            </TextView>
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="10 new"
+                                android:textSize="12sp"
+                                android:textStyle="bold">
+                            </TextView>
+
+                        </LinearLayout>
+
+
+
+                    </com.google.android.material.card.MaterialCardView>
 
                 </LinearLayout>
-
-
-            </com.google.android.material.card.MaterialCardView>
-
-            <com.google.android.material.card.MaterialCardView
-                app:cardBackgroundColor="@color/white"
-                android:foreground="?android:attr/selectableItemBackground"
-                android:clickable="true"
-                android:layout_margin="5sp"
-                android:elevation="0dp"
-                app:cardCornerRadius="10sp"
-                android:layout_weight="0.5"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content">
 
                 <LinearLayout
-                    android:padding="10sp"
+                    android:id="@+id/ll_recent"
+                    android:layout_below="@id/ll_section"
+                    android:paddingStart="10sp"
+                    android:paddingEnd="10sp"
+                    android:orientation="vertical"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical">
+                    android:layout_height="wrap_content">
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Actions"
-                        android:textStyle="bold">
+                        android:paddingTop="5sp"
+                        android:paddingBottom="5sp"
+                        android:textStyle="bold"
+                        android:textSize="16sp"
+                        android:textColor="@color/black"
+                        android:text="Recent jobs">
                     </TextView>
 
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="10 new"
-                        android:textSize="12sp"
-                        android:textStyle="bold">
-                    </TextView>
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/rv_recentjobs"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
+
+                    </androidx.recyclerview.widget.RecyclerView>
 
                 </LinearLayout>
 
+                <LinearLayout
+                    android:layout_below="@id/ll_recent"
+                    android:paddingTop="20sp"
+                    android:paddingStart="10sp"
+                    android:paddingEnd="10sp"
+                    android:orientation="vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
 
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:paddingTop="5sp"
+                        android:paddingBottom="5sp"
+                        android:textStyle="bold"
+                        android:textSize="16sp"
+                        android:textColor="@color/black"
+                        android:text="Recommended jobs">
+                    </TextView>
 
-            </com.google.android.material.card.MaterialCardView>
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/rv_jobreq"
 
-        </LinearLayout>
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
 
+                    </androidx.recyclerview.widget.RecyclerView>
 
-        <LinearLayout
-            android:layout_below="@id/ll_section"
-            android:paddingStart="10sp"
-            android:paddingEnd="10sp"
-            android:orientation="vertical"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+                </LinearLayout>
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:paddingTop="5sp"
-                android:paddingBottom="5sp"
-                android:textStyle="bold"
-                android:textSize="16sp"
-                android:textColor="@color/black"
-                android:text="Recommended jobs">
-            </TextView>
+            </LinearLayout>
 
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/rv_jobreq"
-
-                android:layout_width="match_parent"
-                android:layout_height="match_parent">
-
-            </androidx.recyclerview.widget.RecyclerView>
-
-        </LinearLayout>
-
+        </ScrollView>
 
         <LinearLayout
             android:id="@+id/loading_animation"

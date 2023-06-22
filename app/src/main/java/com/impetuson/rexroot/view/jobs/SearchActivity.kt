@@ -103,4 +103,5 @@ class SearchActivity: AppCompatActivity() {
         val type = object : TypeToken<List<SearchModelClass>>() {}.type
         return gson.fromJson(json, type) ?: emptyList()
     }
+
 }

@@ -170,7 +170,7 @@
                     android:layout_gravity="center"
                     android:textSize="12sp"
                     android:textStyle="bold"
-                    android:text="Price per closure: ">
+                    android:text="Payment per closure: ">
                 </TextView>
 
                 <TextView

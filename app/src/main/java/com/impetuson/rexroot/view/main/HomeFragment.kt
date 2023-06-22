@@ -28,6 +28,7 @@ import com.impetuson.rexroot.databinding.FragmentHomeBinding
 import com.impetuson.rexroot.model.jobreq.JobReqModelClass
 import com.impetuson.rexroot.viewmodel.main.HomeViewModel
 import com.impetuson.rexroot.viewmodel.main.JobReqRecyclerViewAdapter
+import com.impetuson.rexroot.viewmodel.main.RecentJobsRecyclerViewAdapter
 import kotlinx.coroutines.CompletableDeferred
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.MainScope
@@ -39,6 +40,8 @@ class HomeFragment : Fragment() {
     private var binding: FragmentHomeBinding? = null
     private lateinit var jobReqList: ArrayList<JobReqModelClass>
     private lateinit var jobreqadapter: JobReqRecyclerViewAdapter
+    private lateinit var recentJobsList: ArrayList<JobReqModelClass>
+    private lateinit var recentjobsadapter: RecentJobsRecyclerViewAdapter
     private lateinit var firebaseDB : DatabaseReference
     private val viewmodel: HomeViewModel by activityViewModels()
 
@@ -70,6 +73,11 @@ class HomeFragment : Fragment() {
             jobReqList = ArrayList<JobReqModelClass>()
             jobreqadapter = JobReqRecyclerViewAdapter(jobReqList)
             rvJobreq.adapter = jobreqadapter
+
+            rvRecentjobs.layoutManager = LinearLayoutManager(requireContext(),LinearLayoutManager.HORIZONTAL,false)
+            recentJobsList = ArrayList<JobReqModelClass>()
+            recentjobsadapter = RecentJobsRecyclerViewAdapter(recentJobsList)
+            rvRecentjobs.adapter = recentjobsadapter
 
             loadingAnimation.visibility = View.VISIBLE
 
@@ -103,6 +111,9 @@ class HomeFragment : Fragment() {
             override fun onChildAdded(snapshot: DataSnapshot, previousChildName: String?) {
                 val jobReqCard = snapshot.getValue(JobReqModelClass::class.java)
                 jobReqList.add(0,jobReqCard!!)
+                recentJobsList.add(0, jobReqCard)
+
+                binding!!.rvRecentjobs.adapter?.notifyDataSetChanged()
                 binding!!.rvJobreq.adapter?.notifyDataSetChanged()
 
                 binding!!.loadingAnimation.visibility = View.GONE
