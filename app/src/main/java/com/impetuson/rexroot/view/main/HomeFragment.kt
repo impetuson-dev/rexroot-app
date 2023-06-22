@@ -22,12 +22,14 @@ import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.DatabaseError
+import com.google.firebase.database.Query
 import com.impetuson.rexroot.R
-import com.impetuson.rexroot.SearchActivity
+import com.impetuson.rexroot.view.jobs.SearchActivity
 import com.impetuson.rexroot.databinding.FragmentHomeBinding
 import com.impetuson.rexroot.model.jobreq.JobReqModelClass
 import com.impetuson.rexroot.viewmodel.main.HomeViewModel
 import com.impetuson.rexroot.viewmodel.main.JobReqRecyclerViewAdapter
+import com.impetuson.rexroot.viewmodel.main.RecentJobsRecyclerViewAdapter
 import kotlinx.coroutines.CompletableDeferred
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.MainScope
@@ -39,7 +41,12 @@ class HomeFragment : Fragment() {
     private var binding: FragmentHomeBinding? = null
     private lateinit var jobReqList: ArrayList<JobReqModelClass>
     private lateinit var jobreqadapter: JobReqRecyclerViewAdapter
+    private lateinit var recomJobsList: ArrayList<JobReqModelClass>
+    private lateinit var recomjobsadapter: JobReqRecyclerViewAdapter
+    private lateinit var recentJobsList: ArrayList<JobReqModelClass>
+    private lateinit var recentjobsadapter: RecentJobsRecyclerViewAdapter
     private lateinit var firebaseDB : DatabaseReference
+    private lateinit var dbQuery: Query
     private val viewmodel: HomeViewModel by activityViewModels()
 
     override fun onCreateView(
@@ -71,16 +78,28 @@ class HomeFragment : Fragment() {
             jobreqadapter = JobReqRecyclerViewAdapter(jobReqList)
             rvJobreq.adapter = jobreqadapter
 
+            rvRecentjobs.layoutManager = LinearLayoutManager(requireContext(),LinearLayoutManager.HORIZONTAL,false)
+            recentJobsList = ArrayList<JobReqModelClass>()
+            recentjobsadapter = RecentJobsRecyclerViewAdapter(recentJobsList)
+            rvRecentjobs.adapter = recentjobsadapter
+
+            rvRecomjobs.layoutManager = LinearLayoutManager(requireContext())
+            recomJobsList = ArrayList<JobReqModelClass>()
+            recomjobsadapter = JobReqRecyclerViewAdapter(recomJobsList)
+            rvRecomjobs.adapter = recomjobsadapter
+
             loadingAnimation.visibility = View.VISIBLE
 
             firebaseDB = FirebaseDatabase.getInstance().getReference("jobreq")
+            dbQuery = firebaseDB.limitToLast(5)
 
             MainScope().launch {
                 recyclerViewLoader()
-                loadingAnimation.visibility = View.GONE
 
+                loadingAnimation.visibility = View.GONE
                 if (jobReqList.isEmpty()){ noresultsAnimation.visibility = View.VISIBLE }
             }
+
         }
 
         // Exit app
@@ -99,11 +118,17 @@ class HomeFragment : Fragment() {
         // Since the .addChildEventListener() does not return any object that can be awaited
         val jobReqDeferred = CompletableDeferred<Unit>()
 
-        firebaseDB.addChildEventListener(object : ChildEventListener{
+        dbQuery.addChildEventListener(object : ChildEventListener{
             override fun onChildAdded(snapshot: DataSnapshot, previousChildName: String?) {
                 val jobReqCard = snapshot.getValue(JobReqModelClass::class.java)
-                jobReqList.add(0,jobReqCard!!)
+
+                jobReqList.add(0, jobReqCard!!)
+                recentJobsList.add(0, jobReqCard)
+                recomJobsList.add(0, jobReqCard)
+
+                binding!!.rvRecentjobs.adapter?.notifyDataSetChanged()
                 binding!!.rvJobreq.adapter?.notifyDataSetChanged()
+                binding!!.rvRecomjobs.adapter?.notifyDataSetChanged()
 
                 binding!!.loadingAnimation.visibility = View.GONE
             }

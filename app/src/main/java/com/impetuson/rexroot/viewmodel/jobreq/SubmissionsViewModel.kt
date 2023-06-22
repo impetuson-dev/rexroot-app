@@ -52,10 +52,10 @@ class SubmissionsViewModel(private var jobId: String): ViewModel() {
                 )
 
                 when (u["resumestatus"].toString()){
-                    "0" -> activeList.add(0, submissionsModel)
-                    "1" -> selectList.add(0, submissionsModel)
-                    "-1" -> rejectList.add(0, submissionsModel)
-                    else -> activeList.add(0, submissionsModel)
+                    "0" -> activeList.add(submissionsModel)
+                    "1" -> selectList.add(submissionsModel)
+                    "-1" -> rejectList.add(submissionsModel)
+                    else -> activeList.add(submissionsModel)
                 }
 
             }

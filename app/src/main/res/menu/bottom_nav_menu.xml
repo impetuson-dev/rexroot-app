@@ -8,11 +8,11 @@
         android:icon="@drawable/baseline_home_24"
         android:title="Home" />
     <item
-        android:id="@+id/earningsFragment"
+        android:id="@+id/dashboardFragment"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:icon="@drawable/baseline_receipt_24"
-        android:title="Earnings" />
+        android:title="Dashboard" />
     <item
         android:id="@+id/actionsFragment"
         android:layout_width="wrap_content"

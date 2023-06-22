@@ -16,15 +16,17 @@
         tools:context=".view.main.HomeFragment">
 
         <!--   Lavender: #e5e5ff     -->
-        <LinearLayout
-            android:background="#e5e5ff"
-            android:layout_width="match_parent"
-            android:layout_height="90sp">
-        </LinearLayout>
+<!--        <LinearLayout-->
+<!--            android:background="#e5e5ff"-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="90sp">-->
+<!--        </LinearLayout>-->
 
         <androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_marginTop="5sp"
+            android:paddingTop="10sp"
+            android:paddingBottom="10sp"
             android:id="@+id/cl_header"
+            android:background="#e5e5ff"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
@@ -73,7 +75,7 @@
                     android:textSize="12sp"
                     android:layout_marginLeft="8sp"
                     android:textColor="@color/dark_grey"
-                    android:text="Seach jobs here...">
+                    android:text="Search jobs here...">
                 </TextView>
 
             </LinearLayout>
@@ -94,171 +96,313 @@
                     android:src="@drawable/icon_bell">
                 </ImageView>
 
-
             </LinearLayout>
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
-        <LinearLayout
-            android:id="@+id/ll_section"
-            android:weightSum="1"
-            android:layout_margin="5sp"
+        <ScrollView
             android:layout_below="@id/cl_header"
+            android:scrollbars="none"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="match_parent">
 
-            <com.google.android.material.card.MaterialCardView
-                android:id="@+id/btn_myprofile"
-                app:cardBackgroundColor="@color/white"
-                android:foreground="?android:attr/selectableItemBackground"
-                android:clickable="true"
-                android:layout_margin="5sp"
-                android:elevation="0dp"
-                app:cardCornerRadius="10sp"
-                android:layout_weight="0.5"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content">
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
 
                 <LinearLayout
-                    android:padding="10sp"
+                    android:layout_alignParentStart="true"
+                    android:layout_alignParentEnd="true"
+                    android:layout_width="match_parent"
+                    android:layout_height="50sp"
+                    android:background="#e5e5ff">
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/ll_section"
+                    android:weightSum="1"
+                    android:layout_margin="5sp"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content">
 
-                    <LinearLayout
-                        android:layout_weight="0.7"
-                        android:orientation="vertical"
+                    <com.google.android.material.card.MaterialCardView
+                        android:id="@+id/btn_myprofile"
+                        app:cardBackgroundColor="@color/white"
+                        android:foreground="?android:attr/selectableItemBackground"
+                        android:clickable="true"
+                        android:layout_margin="5sp"
+                        android:elevation="0dp"
+                        app:cardCornerRadius="10sp"
+                        android:layout_weight="0.5"
                         android:layout_width="0dp"
+                        android:layout_height="wrap_content">
+
+                        <LinearLayout
+                            android:padding="10sp"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content">
+
+                            <LinearLayout
+                                android:layout_weight="0.7"
+                                android:orientation="vertical"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content">
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="Hello!"
+                                    android:textSize="12sp"
+                                    android:textStyle="bold">
+                                </TextView>
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:maxLines="1"
+                                    android:ellipsize="end"
+                                    android:text="@{viewModel.userName}"
+                                    android:textStyle="bold">
+                                </TextView>
+
+                            </LinearLayout>
+
+                        </LinearLayout>
+
+
+                    </com.google.android.material.card.MaterialCardView>
+
+                    <com.google.android.material.card.MaterialCardView
+                        app:cardBackgroundColor="@color/white"
+                        android:foreground="?android:attr/selectableItemBackground"
+                        android:clickable="true"
+                        android:layout_margin="5sp"
+                        android:elevation="0dp"
+                        app:cardCornerRadius="10sp"
+                        android:layout_weight="0.5"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content">
+
+                        <LinearLayout
+                            android:padding="10sp"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Actions"
+                                android:textStyle="bold">
+                            </TextView>
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="10 new"
+                                android:textSize="12sp"
+                                android:textStyle="bold">
+                            </TextView>
+
+                        </LinearLayout>
+
+                    </com.google.android.material.card.MaterialCardView>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/ll_main"
+                    android:layout_alignParentStart="true"
+                    android:layout_alignParentEnd="true"
+                    android:layout_alignParentBottom="true"
+                    android:layout_below="@id/ll_section"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical">
+
+                    <LinearLayout
+                        android:id="@+id/ll_recent"
+                        android:paddingTop="5sp"
+                        android:paddingStart="10sp"
+                        android:paddingEnd="10sp"
+                        android:paddingBottom="20sp"
+                        android:orientation="vertical"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content">
 
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Hello!"
-                            android:textSize="12sp"
-                            android:textStyle="bold">
+                            android:paddingTop="10sp"
+                            android:paddingBottom="10sp"
+                            android:textStyle="bold"
+                            android:textSize="16sp"
+                            android:textColor="@color/black"
+                            android:text="Recent jobs">
+                        </TextView>
+
+                        <androidx.recyclerview.widget.RecyclerView
+                            android:id="@+id/rv_recentjobs"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent">
+
+                        </androidx.recyclerview.widget.RecyclerView>
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/ll_view1"
+                        android:layout_below="@id/ll_recent"
+                        android:background="#e5e5ff"
+                        android:layout_width="match_parent"
+                        android:layout_height="8sp"
+                        android:orientation="horizontal">
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/ll_newjobs"
+                        android:layout_below="@id/ll_view1"
+                        android:paddingTop="5sp"
+                        android:paddingStart="10sp"
+                        android:paddingEnd="10sp"
+                        android:paddingBottom="20sp"
+                        android:orientation="vertical"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:paddingTop="10sp"
+                            android:paddingBottom="10sp"
+                            android:textStyle="bold"
+                            android:textSize="16sp"
+                            android:textColor="@color/black"
+                            android:text="Newly added jobs">
+                        </TextView>
+
+                        <androidx.recyclerview.widget.RecyclerView
+                            android:id="@+id/rv_jobreq"
+                            android:nestedScrollingEnabled="false"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content">
+
+                        </androidx.recyclerview.widget.RecyclerView>
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/ll_view2"
+                        android:layout_below="@id/ll_recent"
+                        android:background="#e5e5ff"
+                        android:layout_width="match_parent"
+                        android:layout_height="8sp"
+                        android:orientation="horizontal">
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/ll_recomjobs"
+                        android:layout_below="@id/ll_view2"
+                        android:paddingTop="5sp"
+                        android:paddingStart="10sp"
+                        android:paddingEnd="10sp"
+                        android:paddingBottom="20sp"
+                        android:orientation="vertical"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:paddingTop="10sp"
+                            android:paddingBottom="10sp"
+                            android:textStyle="bold"
+                            android:textSize="16sp"
+                            android:textColor="@color/black"
+                            android:text="Recommended jobs">
+                        </TextView>
+
+                        <androidx.recyclerview.widget.RecyclerView
+                            android:id="@+id/rv_recomjobs"
+                            android:nestedScrollingEnabled="false"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content">
+
+                        </androidx.recyclerview.widget.RecyclerView>
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/ll_view3"
+                        android:background="#e5e5ff"
+                        android:paddingTop="30sp"
+                        android:paddingBottom="50sp"
+                        android:gravity="center"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textStyle="bold"
+                            android:textSize="70sp"
+                            android:textColor="@color/metal_grey"
+                            android:text="rexroot">
                         </TextView>
 
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:maxLines="1"
-                            android:ellipsize="end"
-                            android:text="@{viewModel.userName}"
-                            android:textStyle="bold">
+                            android:textSize="16sp"
+                            android:textColor="@color/dark_grey"
+                            android:text="Developed with ❤️ for recruiters">
                         </TextView>
+
 
                     </LinearLayout>
 
                 </LinearLayout>
 
-
-            </com.google.android.material.card.MaterialCardView>
-
-            <com.google.android.material.card.MaterialCardView
-                app:cardBackgroundColor="@color/white"
-                android:foreground="?android:attr/selectableItemBackground"
-                android:clickable="true"
-                android:layout_margin="5sp"
-                android:elevation="0dp"
-                app:cardCornerRadius="10sp"
-                android:layout_weight="0.5"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content">
-
                 <LinearLayout
-                    android:padding="10sp"
+                    android:id="@+id/loading_animation"
+                    android:layout_below="@id/ll_section"
+                    android:orientation="vertical"
+                    android:visibility="gone"
+                    android:background="@color/white"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical">
+                    android:layout_height="match_parent">
+
+                    <com.airbnb.lottie.LottieAnimationView
+                        android:layout_width="match_parent"
+                        android:layout_height="500sp"
+                        app:lottie_rawRes="@raw/loading_anim"
+                        app:lottie_speed="2.5"
+                        app:lottie_autoPlay="true"
+                        app:lottie_loop="true">
+
+                    </com.airbnb.lottie.LottieAnimationView>
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Actions"
-                        android:textStyle="bold">
+                        android:layout_gravity="center"
+                        android:textColor="@color/dark_grey"
+                        android:textStyle="bold"
+                        android:textSize="18sp"
+                        android:text="Loading results...">
                     </TextView>
 
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="10 new"
-                        android:textSize="12sp"
-                        android:textStyle="bold">
-                    </TextView>
 
                 </LinearLayout>
 
+            </RelativeLayout>
+
+        </ScrollView>
 
 
-            </com.google.android.material.card.MaterialCardView>
-
-        </LinearLayout>
-
-
-        <LinearLayout
-            android:layout_below="@id/ll_section"
-            android:paddingStart="10sp"
-            android:paddingEnd="10sp"
-            android:orientation="vertical"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:paddingTop="5sp"
-                android:paddingBottom="5sp"
-                android:textStyle="bold"
-                android:textSize="16sp"
-                android:textColor="@color/black"
-                android:text="Recommended jobs">
-            </TextView>
-
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/rv_jobreq"
-
-                android:layout_width="match_parent"
-                android:layout_height="match_parent">
-
-            </androidx.recyclerview.widget.RecyclerView>
-
-        </LinearLayout>
-
-
-        <LinearLayout
-            android:id="@+id/loading_animation"
-            android:orientation="vertical"
-            android:visibility="gone"
-            android:layout_centerInParent="true"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
-            <com.airbnb.lottie.LottieAnimationView
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintBottom_toBottomOf="parent"
-                android:layout_width="match_parent"
-                android:layout_height="400sp"
-                app:lottie_rawRes="@raw/loading_anim"
-                app:lottie_speed="2.5"
-                app:lottie_autoPlay="true"
-                app:lottie_loop="true">
-
-            </com.airbnb.lottie.LottieAnimationView>
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:textColor="@color/dark_grey"
-                android:textStyle="bold"
-                android:textSize="18sp"
-                android:text="Loading results...">
-            </TextView>
-
-
-        </LinearLayout>
 
         <LinearLayout
             android:id="@+id/noresults_animation"

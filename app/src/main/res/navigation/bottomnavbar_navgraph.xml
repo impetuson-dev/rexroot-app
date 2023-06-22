@@ -11,10 +11,10 @@
         android:label="HomeFragment"
         tools:layout="@layout/fragment_home" />
     <fragment
-        android:id="@+id/earningsFragment"
-        android:name="com.impetuson.rexroot.view.main.EarningsFragment"
-        android:label="fragment_earnings"
-        tools:layout="@layout/fragment_earnings" />
+        android:id="@+id/dashboardFragment"
+        android:name="com.impetuson.rexroot.view.main.DashboardFragment"
+        android:label="fragment_dashboard"
+        tools:layout="@layout/fragment_dashboard" />
     <fragment
         android:id="@+id/actionsFragment"
         android:name="com.impetuson.rexroot.view.main.ActionsFragment"
