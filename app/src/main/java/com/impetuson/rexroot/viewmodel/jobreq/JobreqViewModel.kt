@@ -1,8 +1,6 @@
 package com.impetuson.rexroot.viewmodel.jobreq
 
-import android.app.Application
 import android.content.ContentResolver
-import android.content.Context
 import android.content.Intent
 import android.content.SharedPreferences
 import android.media.MediaPlayer
@@ -13,20 +11,15 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.google.firebase.database.DatabaseReference
-import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ktx.database
-import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.ktx.Firebase
 import com.google.firebase.storage.ktx.storage
 import com.google.firebase.firestore.SetOptions
 import com.google.firebase.firestore.ktx.firestore
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
-import com.impetuson.rexroot.R
 import com.impetuson.rexroot.model.jobreq.JobReqModelClass
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.MainScope
-import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import kotlinx.coroutines.tasks.await
 import java.time.LocalDateTime
@@ -57,6 +50,8 @@ class JobreqViewModel : ViewModel() {
 
     private val _jobreqModel = MutableLiveData<JobReqModelClass>()
     var jobreqModel: LiveData<JobReqModelClass> = _jobreqModel
+
+    private val _uploadProgress = MutableLiveData<Int>()
 
     var userId: String = ""
     var jobId: String = ""
@@ -164,8 +159,8 @@ class JobreqViewModel : ViewModel() {
                     }
                     .await()
 
-                uploadMsg = "Resume(s) Uploaded successfully"
-                Log.d("Firebase Storage","Resume(s) Uploaded successfully: $fileName")
+                //_uploadProgress.value =
+                Log.d("Firebase Storage","Resume Uploaded successfully: $fileName")
 
                 storeDataToFirestore(fileName, resumeName, downloadUrl, index)
             } catch(e: Exception) {
@@ -175,6 +170,7 @@ class JobreqViewModel : ViewModel() {
             }
         }
 
+        uploadMsg = "Resume(s) Uploaded successfully"
         uploadMsg
     }
 
@@ -221,6 +217,31 @@ class JobreqViewModel : ViewModel() {
             fileName = uri.lastPathSegment
         }
         return fileName ?: "N/A"
+    }
+
+    private fun fetchRecentJobs(sharedPreference: SharedPreferences): List<String>{
+        val gson = Gson()
+        val json = sharedPreference.getString("recent_list", "")
+
+
+        val stringList: List<String> = gson.fromJson(json, object : TypeToken<List<String>>() {}.type) ?: emptyList()
+        Log.d("recent_list", stringList.toString())
+        return stringList
+    }
+
+    fun saveToRecentJobs(sharedPreferences: SharedPreferences, jobId: String){
+        val existingJobs = fetchRecentJobs(sharedPreferences).toMutableList()
+        val editor = sharedPreferences.edit()
+
+        existingJobs.add(jobId)
+
+        if (existingJobs.size > 10){ existingJobs.removeFirst() }
+
+        val gson = Gson()
+        val json = gson.toJson(existingJobs)
+
+        editor.putString("recent_list", json)
+        editor.apply()
     }
 
 }

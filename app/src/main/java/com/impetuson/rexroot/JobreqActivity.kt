@@ -61,6 +61,7 @@ class JobreqActivity: AppCompatActivity() {
         jobreqViewPageAdapter.addFragment(JobreqActionsFragment())
 
         jobreqViewModel.fetchDataSharedPref(this.getSharedPreferences("profiledata", MODE_PRIVATE))
+        jobreqViewModel.saveToRecentJobs(this.getSharedPreferences("recentjobs", MODE_PRIVATE), jobId)
         jobreqViewModel.jobId = jobId
         Log.d("jobid",jobId)
 
@@ -108,7 +109,11 @@ class JobreqActivity: AppCompatActivity() {
                     progressIndicator.visibility = View.VISIBLE
                     val uploadMsg = jobreqViewModel.btnSubmitHandler(contentResolver)
                     mediaPlayer.start()
-                    Toast.makeText(this@JobreqActivity, uploadMsg, Toast.LENGTH_SHORT).show()
+
+                    Snackbar.make(llSnackbar, uploadMsg, Snackbar.LENGTH_SHORT)
+                        .setAnchorView(llFooter)
+                        .show()
+
                     progressIndicator.visibility = View.GONE
 
                     if (alert){

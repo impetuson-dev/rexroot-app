@@ -256,7 +256,7 @@
                         android:layout_below="@id/ll_recent"
                         android:background="#e5e5ff"
                         android:layout_width="match_parent"
-                        android:layout_height="8sp"
+                        android:layout_height="15sp"
                         android:orientation="horizontal">
                     </LinearLayout>
 
@@ -297,7 +297,7 @@
                         android:layout_below="@id/ll_recent"
                         android:background="#e5e5ff"
                         android:layout_width="match_parent"
-                        android:layout_height="8sp"
+                        android:layout_height="15sp"
                         android:orientation="horizontal">
                     </LinearLayout>
 
