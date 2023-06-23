@@ -11,7 +11,13 @@ import com.impetuson.rexroot.R
 import com.impetuson.rexroot.model.jobs.SearchModelClass
 import com.impetuson.rexroot.view.jobs.JobsActivity
 
-class SearchRecyclerViewAdapter(private val searches: List<SearchModelClass>): RecyclerView.Adapter<SearchRecyclerViewAdapter.ViewHolder>() {
+class SearchRecyclerViewAdapter(private var searches: List<SearchModelClass>): RecyclerView.Adapter<SearchRecyclerViewAdapter.ViewHolder>() {
+
+    fun updateSearchesList(updatedSearches: List<SearchModelClass>){
+        searches = updatedSearches
+        notifyDataSetChanged()
+    }
+
     override fun onCreateViewHolder(
         parent: ViewGroup,
         viewType: Int
