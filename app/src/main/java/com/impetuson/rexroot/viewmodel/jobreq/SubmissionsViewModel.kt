@@ -32,7 +32,13 @@ class SubmissionsViewModel(private var jobId: String): ViewModel() {
 
         Log.d("firestoredb","fetching ... userid: $userId | jobid: $jobId")
 
-        val documentSnapshot = firestoreDB.collection("users").document(userId).get().await()
+
+        val documentSnapshot = firestoreDB.collection("users").document(userId).get()
+            .addOnFailureListener {  e ->
+                Log.d("Firebase Firestore","ERROR: ${e.message}")
+            }
+            .await()
+
         var submissionsModel: SubmissionsModelClass
 
         if (documentSnapshot != null){
@@ -52,10 +58,10 @@ class SubmissionsViewModel(private var jobId: String): ViewModel() {
                 )
 
                 when (u["resumestatus"].toString()){
-                    "0" -> activeList.add(submissionsModel)
-                    "1" -> selectList.add(submissionsModel)
-                    "-1" -> rejectList.add(submissionsModel)
-                    else -> activeList.add(submissionsModel)
+                    "0" -> activeList.add(0,submissionsModel)
+                    "1" -> selectList.add(0,submissionsModel)
+                    "-1" -> rejectList.add(0,submissionsModel)
+                    else -> activeList.add(0,submissionsModel)
                 }
 
             }

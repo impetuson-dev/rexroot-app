@@ -11,7 +11,7 @@ import com.impetuson.rexroot.JobreqActivity
 import com.impetuson.rexroot.R
 import com.impetuson.rexroot.model.jobreq.JobReqModelClass
 
-class RecentJobsRecyclerViewAdapter(private val dataList: List<JobReqModelClass>) : RecyclerView.Adapter<RecentJobsRecyclerViewAdapter.ViewHolder>() {
+class RecentJobsRecyclerViewAdapter(private var dataList: List<JobReqModelClass>) : RecyclerView.Adapter<RecentJobsRecyclerViewAdapter.ViewHolder>() {
 
     inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         private val jobRole: TextView = itemView.findViewById(R.id.tv_jobrole)

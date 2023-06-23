@@ -62,6 +62,8 @@ class HomeFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        viewmodel.fetchRecentJobs(requireContext().getSharedPreferences("recentjobs", Context.MODE_PRIVATE))
+
         binding?.apply {
             lifecycleOwner = viewLifecycleOwner
             viewModel = viewmodel
@@ -91,15 +93,15 @@ class HomeFragment : Fragment() {
             loadingAnimation.visibility = View.VISIBLE
 
             firebaseDB = FirebaseDatabase.getInstance().getReference("jobreq")
-            dbQuery = firebaseDB.limitToLast(5)
+            dbQuery = firebaseDB
 
             MainScope().launch {
                 recyclerViewLoader()
 
                 loadingAnimation.visibility = View.GONE
                 if (jobReqList.isEmpty()){ noresultsAnimation.visibility = View.VISIBLE }
-            }
 
+            }
         }
 
         // Exit app
@@ -120,13 +122,18 @@ class HomeFragment : Fragment() {
 
         dbQuery.addChildEventListener(object : ChildEventListener{
             override fun onChildAdded(snapshot: DataSnapshot, previousChildName: String?) {
-                val jobReqCard = snapshot.getValue(JobReqModelClass::class.java)
+                val jobReqCard = snapshot.getValue(JobReqModelClass::class.java) ?: JobReqModelClass()
 
-                jobReqList.add(0, jobReqCard!!)
-                recentJobsList.add(0, jobReqCard)
+                if (jobReqList.size == 3){ jobReqList.removeLast() }
+
+                if (viewmodel.recentJobsId.value?.contains(jobReqCard.jobid) == true) {
+                    recentJobsList.add(jobReqCard)
+                    binding!!.rvRecentjobs.adapter?.notifyDataSetChanged()
+                }
+
+                jobReqList.add(0, jobReqCard)
                 recomJobsList.add(0, jobReqCard)
 
-                binding!!.rvRecentjobs.adapter?.notifyDataSetChanged()
                 binding!!.rvJobreq.adapter?.notifyDataSetChanged()
                 binding!!.rvRecomjobs.adapter?.notifyDataSetChanged()
 
@@ -164,4 +171,5 @@ class HomeFragment : Fragment() {
 
         jobReqDeferred.await()
     }
+
 }

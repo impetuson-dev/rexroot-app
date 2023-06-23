@@ -26,8 +26,4 @@ class MainActivity: AppCompatActivity() {
         setupWithNavController(bottomNavigationView, navController)
     }
 
-    override fun onBackPressed() {
-        super.onBackPressed()
-        finishAffinity()
-    }
 }

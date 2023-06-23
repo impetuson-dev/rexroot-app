@@ -95,6 +95,8 @@ class SearchActivity: AppCompatActivity() {
         val json = gson.toJson(searches)
         editor.putString(key, json)
         editor.apply()
+
+        searchesAdapter.updateSearchesList(searches)
     }
 
     private fun getSearchList(key: String): List<SearchModelClass> {

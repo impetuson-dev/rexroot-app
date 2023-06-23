@@ -40,9 +40,10 @@ class JobsActivity: AppCompatActivity() {
         val view = binding.root
         setContentView(view)
 
+        jobsearch = intent.getStringExtra("jobsearch").toString()
+        location = intent.getStringExtra("location").toString()
+
         binding.apply {
-            jobsearch = intent.getStringExtra("jobsearch").toString()
-            location = intent.getStringExtra("location").toString()
             tvJobsearch.text = "Jobs for ${jobsearch.trim()}, ${location.trim()}"
 
             ivGoback.setOnClickListener {

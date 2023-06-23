@@ -60,6 +60,7 @@ class JobreqSubmissionsFragment(jobId: String) : Fragment() {
                             tvNoresults.visibility = View.GONE
                         }
                     }
+
                     override fun onNothingSelected(adapterView: AdapterView<*>) {}
                 }
             }
