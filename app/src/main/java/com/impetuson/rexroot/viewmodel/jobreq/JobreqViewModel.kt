@@ -54,6 +54,7 @@ class JobreqViewModel : ViewModel() {
     private val _uploadProgress = MutableLiveData<Int>()
 
     var userId: String = ""
+    var userName: String = ""
     var jobId: String = ""
 
     suspend fun fetchRealtimeDB() = withContext(Dispatchers.IO){
@@ -80,6 +81,7 @@ class JobreqViewModel : ViewModel() {
 
     fun fetchDataSharedPref(sharedPreferences: SharedPreferences){
         userId = sharedPreferences.getString("userid","").toString()
+        userName = sharedPreferences.getString("username","").toString()
     }
 
     private fun convertMapToObject(jobDataMap: Map<String,Any>): JobReqModelClass{
@@ -155,7 +157,9 @@ class JobreqViewModel : ViewModel() {
                         pdfRef.downloadUrl
                     }
                     .addOnCompleteListener {  task ->
-                        if (task.isSuccessful) downloadUrl = task.result.toString()
+                        if (task.isSuccessful) {
+                            downloadUrl = task.result.toString()
+                        }
                     }
                     .await()
 
@@ -197,6 +201,19 @@ class JobreqViewModel : ViewModel() {
 
         firestoreDB.collection("users").document(userId).set(submitdata, SetOptions.merge())
 
+        val resumedata = mapOf<String,Any>(
+            resumeDataId to mapOf(
+                "userid" to userId,
+                "username" to userName,
+                "resumeid" to resumeId,
+                "resumepost" to postedDate,
+                "resumestatus" to "0",
+                "resumename" to resumeName,
+                "resumeurl" to resumeUrl
+            )
+        )
+
+        firestoreDB.collection("resumes").document(jobId).set(resumedata, SetOptions.merge())
     }
 
     private fun getFileNameFromUri(uri: Uri, contentResolver: ContentResolver): String {

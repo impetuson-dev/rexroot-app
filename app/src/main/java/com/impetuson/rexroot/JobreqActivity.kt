@@ -120,6 +120,7 @@ class JobreqActivity: AppCompatActivity() {
                         alert = false
                         alertDialog.dismiss()
                     }
+
                 }
             }
         }

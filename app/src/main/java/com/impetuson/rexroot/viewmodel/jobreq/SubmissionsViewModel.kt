@@ -32,7 +32,13 @@ class SubmissionsViewModel(private var jobId: String): ViewModel() {
 
         Log.d("firestoredb","fetching ... userid: $userId | jobid: $jobId")
 
-        val documentSnapshot = firestoreDB.collection("users").document(userId).get().await()
+
+        val documentSnapshot = firestoreDB.collection("users").document(userId).get()
+            .addOnFailureListener {  e ->
+                Log.d("Firebase Firestore","ERROR: ${e.message}")
+            }
+            .await()
+
         var submissionsModel: SubmissionsModelClass
 
         if (documentSnapshot != null){
