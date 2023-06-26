@@ -26,7 +26,7 @@
                 android:id="@+id/iv_goback"
                 android:layout_width="25sp"
                 android:layout_height="25sp"
-                android:src="@drawable/icon_exit_black">
+                android:src="@drawable/icon_exit">
             </ImageView>
 
         </LinearLayout>
@@ -69,12 +69,11 @@
             android:layout_height="0dp"
             android:orientation="vertical">
 
-
             <LinearLayout
                 android:paddingLeft="20sp"
                 android:paddingRight="20sp"
                 android:paddingBottom="10sp"
-                android:layout_marginBottom="10sp"
+
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical">
@@ -126,6 +125,7 @@
 
                 <com.google.android.material.tabs.TabLayout
                     android:id="@+id/jobreq_tablayout"
+                    app:tabIndicatorFullWidth="true"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content">
 
@@ -177,7 +177,6 @@
 
         <LinearLayout
             android:id="@+id/ll_footer"
-            app:layout_constraintTop_toBottomOf="@id/body"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
