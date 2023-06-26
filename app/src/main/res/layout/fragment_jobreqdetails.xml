@@ -9,34 +9,88 @@
             type="com.impetuson.rexroot.viewmodel.jobreq.JobreqViewModel" />
     </data>
 
-    <LinearLayout
+    <ScrollView
+        android:scrollbars="none"
         tools:context=".view.jobreq.JobreqDetailsFragment"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@color/white"
-        android:orientation="vertical">
+        android:layout_height="match_parent">
 
-        <com.google.android.material.card.MaterialCardView
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:cardCornerRadius="12sp"
-            app:cardBackgroundColor="@color/white"
-            android:clickable="false">
+            android:layout_height="match_parent"
+            android:layout_marginBottom="50sp"
+            android:background="@color/white"
+            android:orientation="vertical">
 
-            <LinearLayout
-                android:padding="15sp"
+            <com.google.android.material.card.MaterialCardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical">
+                app:cardCornerRadius="12sp"
+                app:cardBackgroundColor="@color/white"
+                android:clickable="false">
 
                 <LinearLayout
-                    android:weightSum="1"
-                    android:layout_marginBottom="8sp"
+                    android:padding="15sp"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
 
                     <LinearLayout
-                        android:layout_weight="0.5"
+                        android:weightSum="1"
+                        android:layout_marginBottom="8sp"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <LinearLayout
+                            android:layout_weight="0.5"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content">
+
+                            <ImageView
+                                android:layout_width="25sp"
+                                android:layout_height="25sp"
+                                android:layout_gravity="center"
+                                android:layout_marginRight="8sp"
+                                android:src="@drawable/icon_salary">
+                            </ImageView>
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:textSize="14sp"
+                                android:layout_gravity="center"
+                                android:text="@{jobreqviewmodel.jobreqModel.jobsalary}">
+                            </TextView>
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_weight="0.5"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content">
+
+                            <ImageView
+                                android:layout_width="25sp"
+                                android:layout_height="25sp"
+                                android:layout_gravity="center"
+                                android:layout_marginRight="8sp"
+                                android:src="@drawable/icon_suitcase">
+                            </ImageView>
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center"
+                                android:textSize="14sp"
+                                android:text="@{jobreqviewmodel.jobreqModel.reqjobexp}"></TextView>
+
+                        </LinearLayout>
+
+                    </LinearLayout>
+
+
+                    <LinearLayout
+                        android:layout_marginBottom="8sp"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content">
 
@@ -45,204 +99,157 @@
                             android:layout_height="25sp"
                             android:layout_gravity="center"
                             android:layout_marginRight="8sp"
-                            android:src="@drawable/icon_salary">
+                            android:src="@drawable/icon_location">
                         </ImageView>
 
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:textSize="14sp"
                             android:layout_gravity="center"
-                            android:text="@{jobreqviewmodel.jobreqModel.jobsalary}">
+                            android:text="@{jobreqviewmodel.jobreqModel.complocation + ` (` + jobreqviewmodel.jobreqModel.jobtype + `)`}"></TextView>
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_marginBottom="8sp"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <ImageView
+                            android:layout_width="25sp"
+                            android:layout_height="25sp"
+                            android:layout_gravity="center"
+                            android:layout_marginRight="8sp"
+                            android:src="@drawable/icon_degree">
+                        </ImageView>
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:text="@{jobreqviewmodel.jobreqModel.reqeduqualify}">
                         </TextView>
 
                     </LinearLayout>
 
                     <LinearLayout
-                        android:layout_weight="0.5"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content">
-
-                        <ImageView
-                            android:layout_width="25sp"
-                            android:layout_height="25sp"
-                            android:layout_gravity="center"
-                            android:layout_marginRight="8sp"
-                            android:src="@drawable/icon_suitcase">
-                        </ImageView>
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8sp"
+                        android:layout_marginBottom="8sp"
+                        android:orientation="vertical">
 
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_gravity="center"
-                            android:textSize="14sp"
-                            android:text="@{jobreqviewmodel.jobreqModel.reqjobexp}"></TextView>
+                            android:textStyle="bold"
+                            android:text="Mandatory skills"></TextView>
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@{jobreqviewmodel.jobreqModel.jobmandskills}"></TextView>
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8sp"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textStyle="bold"
+                            android:text="Optional skills"></TextView>
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@{jobreqviewmodel.jobreqModel.joboptskills}"></TextView>
 
                     </LinearLayout>
 
                 </LinearLayout>
 
+            </com.google.android.material.card.MaterialCardView>
 
-                <LinearLayout
-                    android:layout_marginBottom="8sp"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
+            <TextView
+                android:padding="10sp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Job Instructions"
+                android:textColor="@color/black"
+                android:textStyle="bold"
+                android:textSize="16sp"></TextView>
 
-                    <ImageView
-                        android:layout_width="25sp"
-                        android:layout_height="25sp"
-                        android:layout_gravity="center"
-                        android:layout_marginRight="8sp"
-                        android:src="@drawable/icon_location">
-                    </ImageView>
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:text="@{jobreqviewmodel.jobreqModel.complocation + ` (` + jobreqviewmodel.jobreqModel.jobtype + `)`}"></TextView>
-
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_marginBottom="8sp"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
-
-                    <ImageView
-                        android:layout_width="25sp"
-                        android:layout_height="25sp"
-                        android:layout_gravity="center"
-                        android:layout_marginRight="8sp"
-                        android:src="@drawable/icon_degree">
-                    </ImageView>
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:text="@{jobreqviewmodel.jobreqModel.reqeduqualify}">
-                    </TextView>
-
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="8sp"
-                    android:layout_marginBottom="8sp"
-                    android:orientation="vertical">
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:textStyle="bold"
-                        android:text="Mandatory skills"></TextView>
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@{jobreqviewmodel.jobreqModel.jobmandskills}"></TextView>
-
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="8sp"
-                    android:orientation="vertical">
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:textStyle="bold"
-                        android:text="Optional skills"></TextView>
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@{jobreqviewmodel.jobreqModel.joboptskills}"></TextView>
-
-                </LinearLayout>
-
-            </LinearLayout>
-
-        </com.google.android.material.card.MaterialCardView>
-
-        <TextView
-            android:padding="10sp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Job Instructions"
-            android:textColor="@color/black"
-            android:textStyle="bold"
-            android:textSize="16sp"></TextView>
-
-        <com.google.android.material.card.MaterialCardView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:cardCornerRadius="12sp"
-            app:cardBackgroundColor="@color/white"
-            android:clickable="false">
-
-            <LinearLayout
-                android:padding="15sp"
+            <com.google.android.material.card.MaterialCardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical">
+                app:cardCornerRadius="12sp"
+                app:cardBackgroundColor="@color/white"
+                android:clickable="false">
 
                 <LinearLayout
+                    android:padding="15sp"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
 
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@{jobreqviewmodel.jobreqModel.jobinst}"></TextView>
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
 
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@{jobreqviewmodel.jobreqModel.jobinst}"></TextView>
+
+                    </LinearLayout>
                 </LinearLayout>
-            </LinearLayout>
 
-        </com.google.android.material.card.MaterialCardView>
+            </com.google.android.material.card.MaterialCardView>
 
-        <TextView
-            android:padding="10sp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Job Description"
-            android:textColor="@color/black"
-            android:textStyle="bold"
-            android:textSize="16sp">
-        </TextView>
+            <TextView
+                android:padding="10sp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Job Description"
+                android:textColor="@color/black"
+                android:textStyle="bold"
+                android:textSize="16sp">
+            </TextView>
 
-        <com.google.android.material.card.MaterialCardView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:cardCornerRadius="12sp"
-            app:cardBackgroundColor="@color/white"
-            android:clickable="false">
-
-            <LinearLayout
-                android:padding="15sp"
+            <com.google.android.material.card.MaterialCardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical">
+                app:cardCornerRadius="12sp"
+                app:cardBackgroundColor="@color/white"
+                android:clickable="false">
 
                 <LinearLayout
+                    android:padding="15sp"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
 
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@{jobreqviewmodel.jobreqModel.jobdesc}"></TextView>
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
 
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@{jobreqviewmodel.jobreqModel.jobdesc}"></TextView>
+
+                    </LinearLayout>
                 </LinearLayout>
-            </LinearLayout>
 
-        </com.google.android.material.card.MaterialCardView>
+            </com.google.android.material.card.MaterialCardView>
 
+        </LinearLayout>
 
+    </ScrollView>
 
-    </LinearLayout>
 </layout>
