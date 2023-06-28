@@ -2,8 +2,12 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <data>
 
+    <data>
+        <import type="androidx.core.content.ContextCompat"/>
+        <variable
+            name="viewmodel"
+            type="com.impetuson.rexroot.viewmodel.jobs.JobsViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -144,6 +148,14 @@
 
         </LinearLayout>
 
+        <View
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toTopOf="@id/ll_body"
+            android:layout_width="match_parent"
+            android:layout_height="2sp"
+            android:background="@drawable/bottom_shadow_gradient" />
+
         <LinearLayout
             android:id="@+id/ll_body"
             android:layout_width="match_parent"
@@ -163,14 +175,25 @@
                 android:layout_marginBottom="10sp"
                 android:text="250 jobs"
                 android:textStyle="bold"
-                android:visibility="gone"></TextView>
+                android:visibility="gone">
+            </TextView>
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/rv_jobs"
+                android:paddingTop="5sp"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"></androidx.recyclerview.widget.RecyclerView>
+                android:layout_height="match_parent">
+            </androidx.recyclerview.widget.RecyclerView>
 
         </LinearLayout>
+
+        <View
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toTopOf="@id/ll_footer"
+            android:layout_width="match_parent"
+            android:layout_height="5sp"
+            android:background="@drawable/top_shadow_gradient" />
 
         <LinearLayout
             android:id="@+id/ll_footer"
@@ -217,9 +240,8 @@
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
                         android:layout_marginRight="10sp"
-                        android:backgroundTint="@color/white"
+                        android:backgroundTint="@{viewmodel._paymentIsEnabled ? @android:color/black : @android:color/white}"
                         android:clickable="true"
-                        android:foreground="?android:attr/selectableItemBackground"
                         app:cardCornerRadius="500sp"
                         app:cardElevation="0dp">
 
@@ -231,7 +253,9 @@
                             android:paddingTop="5sp"
                             android:paddingRight="15sp"
                             android:paddingBottom="5sp"
-                            android:text="Payment"></TextView>
+                            android:textColor="@{viewmodel._paymentIsEnabled ? @android:color/white : @android:color/black}"
+                            android:text="Payment">
+                        </TextView>
 
 
                     </com.google.android.material.card.MaterialCardView>
