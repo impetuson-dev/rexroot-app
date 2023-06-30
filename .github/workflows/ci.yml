@@ -51,6 +51,9 @@ jobs:
         with:
           java-version: '17'
 
+      - name: Accept Android SDK licenses
+        run: echo "y" | $ANDROID_HOME/tools/bin/sdkmanager --licenses
+
       - name: Make gradlew executable
         run: chmod +x ./gradlew
 
