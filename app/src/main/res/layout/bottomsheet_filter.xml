@@ -1,20 +1,135 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    style="@style/Widget.Material3.BottomSheet"
-    app:layout_behavior="com.google.android.material.bottomsheet.BottomSheetBehavior"
-    android:orientation="vertical">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <com.google.android.material.bottomsheet.BottomSheetDragHandleView
-        android:id="@+id/drag_handle"
+    <data>
+
+    </data>
+
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
+        android:layout_height="match_parent"
+        app:behavior_draggable="false"
+        style="@style/Widget.Material3.BottomSheet"
+        app:layout_behavior="com.google.android.material.bottomsheet.BottomSheetBehavior"
+        android:background="@color/white"
+        android:orientation="vertical">
 
-    
+        <com.google.android.material.bottomsheet.BottomSheetDragHandleView
+            android:id="@+id/drag_handle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:id="@+id/tv_header"
+                android:gravity="center"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Filters"></TextView>
+
+            <RelativeLayout
+                android:padding="10sp"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:id="@+id/ll_exp_payment"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentStart="true"
+                    android:layout_alignParentTop="true"
+                    android:layout_alignParentEnd="true"
+                    android:paddingTop="5sp"
+                    android:paddingBottom="5sp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Expected Payment (in ₹): "
+                        android:textSize="14sp"></TextView>
+
+                    <EditText
+                        android:id="@+id/et_payment_start"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="10sp"
+                        android:layout_marginRight="10sp"
+                        android:background="@drawable/bg_edittext"
+                        android:hint="start"
+                        android:inputType="number"
+                        android:padding="10sp"></EditText>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="to"
+                        android:textSize="14sp"></TextView>
+
+                    <EditText
+                        android:id="@+id/et_payment_end"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="10sp"
+                        android:layout_marginRight="10sp"
+                        android:background="@drawable/bg_edittext"
+                        android:hint="end"
+                        android:inputType="number"
+                        android:padding="10sp"></EditText>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/ll_footer"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentStart="true"
+                    android:layout_alignParentEnd="true"
+                    android:layout_alignParentBottom="true"
+                    android:weightSum="1">
+
+                    <Button
+                        android:id="@+id/btn_cancel"
+                        style="?attr/materialButtonOutlinedStyle"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="15sp"
+                        android:layout_marginEnd="15sp"
+                        android:layout_weight="0.5"
+                        android:padding="10sp"
+                        android:text="Cancel"
+                        android:textAllCaps="false"
+                        android:textColor="@color/violet"
+                        android:textStyle="bold"></Button>
+
+                    <Button
+                        style="@style/Widget.Material3.Button"
+                        android:id="@+id/btn_filter"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="15sp"
+                        android:layout_marginEnd="15sp"
+                        android:layout_weight="0.5"
+                        android:padding="10sp"
+                        android:text="Filter"
+                        android:textAllCaps="false"
+                        android:textStyle="bold"></Button>
 
 
+                </LinearLayout>
 
-</LinearLayout>
+
+            </RelativeLayout>
+
+        </LinearLayout>
+
+
+    </LinearLayout>
+</layout>

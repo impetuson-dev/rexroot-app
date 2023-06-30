@@ -22,7 +22,7 @@ class LoginViewModel: ViewModel() {
     private var firestoreRef = FirebaseFirestore.getInstance().collection("users")
     private var fetchedData: Map<String,Any>? = null
 
-    private val _loginModel = MutableLiveData<LoginModelClass>(LoginModelClass("",""))
+    val _loginModel = MutableLiveData<LoginModelClass>(LoginModelClass("",""))
     val loginModel: LiveData<LoginModelClass> = _loginModel
 
     private val _userEmailError = MutableLiveData<String?>("")
