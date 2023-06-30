@@ -13,7 +13,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Start CI workflow
-        uses: echo CI Workflow started!
+        run: echo CI Workflow started!
 
   lint:
     runs-on: ubuntu-latest
