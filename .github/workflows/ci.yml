@@ -1,0 +1,62 @@
+name: CI
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+  workflow_dispatch:
+  
+jobs:
+  start:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Start CI workflow
+        uses: echo CI Workflow started!
+
+  lint:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout the code
+        uses: actions/checkout@v2
+
+      - name: Set up Java JDK 17
+        uses: actions/setup-java@v1
+        with:
+          java-version: '17'
+      
+      - name: Make gradlew executable
+        run: chmod +x ./gradlew
+
+      - name: Run Lint
+        run: ./gradlew lintDebug
+        
+      - name: Upload HTML Test Report
+        uses: actions/upload-artifact@v2
+        with: 
+          name: index.html
+          path: app/build/reports/lint-results-debug.html
+
+  unit-test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout the code
+        uses: actions/checkout@v2
+
+      - name: Set up Java JDK 17
+        uses: actions/setup-java@v1
+        with:
+          java-version: '17'
+
+      - name: Make gradlew executable
+        run: chmod +x ./gradlew
+
+      - name: Run gradlew test
+        run: ./gradlew test
+
+      - name: Upload Unit Test report
+        uses: actions/upload-artifact@v2
+        with:
+          name: unit_test_report
+          path: app/build/reports/tests/testDebugUnitTest/
