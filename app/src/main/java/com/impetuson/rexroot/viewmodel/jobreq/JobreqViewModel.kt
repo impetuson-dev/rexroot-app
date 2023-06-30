@@ -191,6 +191,7 @@ class JobreqViewModel : ViewModel() {
                             "resumeid" to resumeId,
                             "resumepost" to postedDate,
                             "resumestatus" to "0",
+                            "partnermsg" to "Waiting for Approval",
                             "resumename" to resumeName,
                             "resumeurl" to resumeUrl
                         )
@@ -208,6 +209,7 @@ class JobreqViewModel : ViewModel() {
                 "resumeid" to resumeId,
                 "resumepost" to postedDate,
                 "resumestatus" to "0",
+                "partnermsg" to "Waiting for Approval",
                 "resumename" to resumeName,
                 "resumeurl" to resumeUrl
             )

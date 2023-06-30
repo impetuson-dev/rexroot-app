@@ -54,6 +54,7 @@ class SubmissionsViewModel(private var jobId: String): ViewModel() {
                 submissionsModel = SubmissionsModelClass(
                     resumename = u["resumename"].toString(),
                     resumepost = u["resumepost"].toString(),
+                    partnerMsg = u["partnermsg"].toString(),
                     resumestatus = u["resumestatus"].toString()
                 )
 

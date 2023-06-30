@@ -1,15 +1,22 @@
 package com.impetuson.rexroot.view.jobreq
 
 import android.content.Context.MODE_PRIVATE
+import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
+import android.widget.EditText
 import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.google.android.material.bottomsheet.BottomSheetBehavior
+import com.google.android.material.bottomsheet.BottomSheetDialog
+import com.google.android.material.button.MaterialButton
+import com.impetuson.rexroot.MainActivity
 import com.impetuson.rexroot.R
 import com.impetuson.rexroot.databinding.FragmentJobreqsubmissionsBinding
 import com.impetuson.rexroot.model.jobreq.SubmissionsModelClass
@@ -18,7 +25,7 @@ import com.impetuson.rexroot.viewmodel.jobreq.SubmissionsViewModel
 import kotlinx.coroutines.MainScope
 import kotlinx.coroutines.launch
 
-class JobreqSubmissionsFragment(jobId: String) : Fragment() {
+class JobreqSubmissionsFragment(jobId: String) : Fragment(), ResumeClickInterface {
 
     private var binding: FragmentJobreqsubmissionsBinding ?= null
     private lateinit var resumeList: List<List<SubmissionsModelClass>>
@@ -46,11 +53,12 @@ class JobreqSubmissionsFragment(jobId: String) : Fragment() {
             MainScope().launch {
                 resumeList = viewmodel.fetchDataFromFirestore()
 
+
                 spinnerStatus.adapter = ArrayAdapter(requireContext(), android.R.layout.simple_spinner_dropdown_item, viewmodel.items)
                 spinnerStatus.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
                     override fun onItemSelected(adapterView: AdapterView<*>, view: View, position: Int, id: Long) {
                         viewmodel.onItemSelected(position)
-                        submissionsAdapter = SubmissionsRecyclerViewAdapter(resumeList[position])
+                        submissionsAdapter = SubmissionsRecyclerViewAdapter(resumeList[position], this@JobreqSubmissionsFragment)
                         rvSubmissions.adapter = submissionsAdapter
 
                         pbLoading.visibility = View.GONE
@@ -65,6 +73,19 @@ class JobreqSubmissionsFragment(jobId: String) : Fragment() {
                 }
             }
         }
+
+
     }
+
+    override fun onResumeClick(position: Int) {
+        val filterBottomSheet = BottomSheetDialog(requireContext())
+        filterBottomSheet.setContentView(R.layout.bottomsheet_filter)
+        val filterBottomSheetBehavior = filterBottomSheet.behavior
+
+        filterBottomSheetBehavior.state = BottomSheetBehavior.STATE_HALF_EXPANDED
+
+        filterBottomSheet.show()
+    }
+
 
 }
