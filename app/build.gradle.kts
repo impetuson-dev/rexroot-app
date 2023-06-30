@@ -7,6 +7,7 @@ plugins {
 }
 
 android {
+    buildToolsVersion = "31"
     namespace = "com.impetuson.rexroot"
     compileSdk = 31
 

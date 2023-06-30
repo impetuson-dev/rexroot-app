@@ -27,6 +27,10 @@ jobs:
         with:
           java-version: '17'
 
+      - name: Change Android SDK Level
+        run: |
+          sdkmanager --sdk_version 33
+
       - name: Make gradlew executable
         run: chmod +x ./gradlew
 
@@ -50,6 +54,10 @@ jobs:
         uses: actions/setup-java@v1
         with:
           java-version: '17'
+
+      - name: Change Android SDK Level
+        run: |
+          sdkmanager --sdk_version 33
 
       - name: Make gradlew executable
         run: chmod +x ./gradlew
