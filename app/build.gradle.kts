@@ -8,12 +8,12 @@ plugins {
 
 android {
     namespace = "com.impetuson.rexroot"
-    compileSdk = 33
+    compileSdk = 31
 
     defaultConfig {
         applicationId = "com.impetuson.rexroot"
         minSdk = 26
-        targetSdk = 33
+        targetSdk = 31
         versionCode = 1
         versionName = "1.0"
 
