@@ -7,14 +7,14 @@ plugins {
 }
 
 android {
-    buildToolsVersion = "31"
+    buildToolsVersion = "33"
     namespace = "com.impetuson.rexroot"
-    compileSdk = 31
+    compileSdk = 33
 
     defaultConfig {
         applicationId = "com.impetuson.rexroot"
         minSdk = 26
-        targetSdk = 31
+        targetSdk = 33
         versionCode = 1
         versionName = "1.0"
 

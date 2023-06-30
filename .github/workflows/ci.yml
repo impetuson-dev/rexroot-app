@@ -30,7 +30,7 @@ jobs:
       - name: Set up Android SDK
         uses: android-actions/setup-android@v2
         with:
-          sdk-platform: 'android-31'
+          sdk-platform: '33'
 
       - name: Make gradlew executable
         run: chmod +x ./gradlew
@@ -59,7 +59,7 @@ jobs:
       - name: Set up Android SDK
         uses: android-actions/setup-android@v2
         with:
-          sdk-platform: 'android-31'
+          sdk-platform: '33'
 
       - name: Make gradlew executable
         run: chmod +x ./gradlew
