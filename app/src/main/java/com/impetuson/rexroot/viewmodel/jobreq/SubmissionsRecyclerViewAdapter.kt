@@ -41,6 +41,7 @@ class SubmissionsRecyclerViewAdapter(private val dataList: List<SubmissionsModel
         private val resumeStatus: TextView = itemView.findViewById(R.id.tv_resumestatus)
         private val partnerMsg: TextView = itemView.findViewById(R.id.tv_partnermsg)
         private val cvResumeStatus: CardView = itemView.findViewById(R.id.cv_resumestatus)
+
         fun bind(data: SubmissionsModelClass) {
             resumeName.text = data.resumename
             partnerMsg.text = data.partnerMsg

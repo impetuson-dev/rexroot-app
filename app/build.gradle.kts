@@ -2,6 +2,7 @@
 plugins {
     alias(libs.plugins.androidApplication)
     alias(libs.plugins.kotlinAndroid)
+    id("org.jlleitschuh.gradle.ktlint") version "10.2.0"
     id("kotlin-kapt")
     id("com.google.gms.google-services")
 }

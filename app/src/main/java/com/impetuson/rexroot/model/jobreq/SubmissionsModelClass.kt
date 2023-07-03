@@ -5,4 +5,4 @@ data class SubmissionsModelClass(
     var resumepost: String = "",
     var partnerMsg: String = "",
     var resumestatus: String = ""
-    )
+)

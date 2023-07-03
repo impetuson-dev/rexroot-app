@@ -15,6 +15,7 @@
         android:layout_height="wrap_content"
         android:orientation="vertical">
 
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -25,23 +26,19 @@
                 android:layout_height="20sp"
                 android:layout_gravity="center"
                 android:layout_marginRight="10sp"
-                android:src="@drawable/icon_user">
-            </ImageView>
+                android:src="@drawable/icon_user"></ImageView>
 
             <TextView
                 android:id="@+id/tv_resumename"
-                android:textColor="@color/black"
-                android:textStyle="bold"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:ellipsize="end"
                 android:lines="1"
-                android:text="">
-            </TextView>
+                android:text=""
+                android:textColor="@color/black"
+                android:textStyle="bold"></TextView>
 
         </LinearLayout>
-
-
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -105,7 +102,7 @@
             <androidx.cardview.widget.CardView
                 android:id="@+id/cv_resumestatus"
                 android:layout_alignParentEnd="true"
-                android:elevation="0dp"
+                app:cardElevation="0sp"
                 app:cardCornerRadius="15dp"
                 android:backgroundTint="@color/orange"
                 android:layout_width="wrap_content"

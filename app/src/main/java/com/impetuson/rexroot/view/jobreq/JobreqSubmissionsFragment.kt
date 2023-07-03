@@ -2,6 +2,7 @@ package com.impetuson.rexroot.view.jobreq
 
 import android.content.Context.MODE_PRIVATE
 import android.content.Intent
+import android.content.res.ColorStateList
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
@@ -11,11 +12,15 @@ import android.view.ViewGroup
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.EditText
+import android.widget.TextView
+import androidx.cardview.widget.CardView
+import androidx.core.content.ContextCompat
 import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.button.MaterialButton
+import com.google.android.material.card.MaterialCardView
 import com.impetuson.rexroot.MainActivity
 import com.impetuson.rexroot.R
 import com.impetuson.rexroot.databinding.FragmentJobreqsubmissionsBinding
@@ -31,6 +36,7 @@ class JobreqSubmissionsFragment(jobId: String) : Fragment(), ResumeClickInterfac
     private lateinit var resumeList: List<List<SubmissionsModelClass>>
     private lateinit var submissionsAdapter: SubmissionsRecyclerViewAdapter
     val viewmodel = SubmissionsViewModel(jobId)
+    private var currSpinnerPosition: Int = 0
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -58,6 +64,7 @@ class JobreqSubmissionsFragment(jobId: String) : Fragment(), ResumeClickInterfac
                 spinnerStatus.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
                     override fun onItemSelected(adapterView: AdapterView<*>, view: View, position: Int, id: Long) {
                         viewmodel.onItemSelected(position)
+                        currSpinnerPosition = position
                         submissionsAdapter = SubmissionsRecyclerViewAdapter(resumeList[position], this@JobreqSubmissionsFragment)
                         rvSubmissions.adapter = submissionsAdapter
 
@@ -79,13 +86,43 @@ class JobreqSubmissionsFragment(jobId: String) : Fragment(), ResumeClickInterfac
 
     override fun onResumeClick(position: Int) {
         val filterBottomSheet = BottomSheetDialog(requireContext())
-        filterBottomSheet.setContentView(R.layout.bottomsheet_filter)
+        filterBottomSheet.setContentView(R.layout.bottomsheet_resume)
         val filterBottomSheetBehavior = filterBottomSheet.behavior
+        filterBottomSheetBehavior.isDraggable = true
+        //filterBottomSheetBehavior.state = BottomSheetBehavior.STATE_HALF_EXPANDED
 
-        filterBottomSheetBehavior.state = BottomSheetBehavior.STATE_HALF_EXPANDED
+        val resumeData = resumeList[currSpinnerPosition][position]
+
+        filterBottomSheet.findViewById<TextView>(R.id.tv_resumename)!!.text = resumeData.resumename
+        filterBottomSheet.findViewById<TextView>(R.id.tv_partnermsg)!!.text = resumeData.partnerMsg
+        val tvResumeStatus: TextView = filterBottomSheet.findViewById(R.id.tv_resumestatus)!!
+        val cvResumeStatus: CardView = filterBottomSheet.findViewById(R.id.cv_resumestatus)!!
+
+        when (resumeData.resumestatus){
+            "0" -> {
+                tvResumeStatus.text = "ACTIVE"
+                val color = ContextCompat.getColor(filterBottomSheet.context, R.color.orange)
+                cvResumeStatus.backgroundTintList = ColorStateList.valueOf(color)
+            }
+            "1" -> {
+                tvResumeStatus.text = "SELECT"
+                val color = ContextCompat.getColor(filterBottomSheet.context, R.color.primary_green)
+                cvResumeStatus.backgroundTintList = ColorStateList.valueOf(color)
+            }
+            "-1" -> {
+                tvResumeStatus.text = "REJECT"
+                val color = ContextCompat.getColor(filterBottomSheet.context, R.color.primary_red)
+                cvResumeStatus.backgroundTintList = ColorStateList.valueOf(color)
+            }
+            else -> {
+                tvResumeStatus.text = "ACTIVE"
+                val color = ContextCompat.getColor(filterBottomSheet.context, R.color.orange)
+                cvResumeStatus.backgroundTintList = ColorStateList.valueOf(color)
+            }
+        }
+        filterBottomSheet.findViewById<TextView>(R.id.tv_resumepost)!!.text = resumeData.resumepost
 
         filterBottomSheet.show()
     }
-
 
 }
