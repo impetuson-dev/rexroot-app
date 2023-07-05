@@ -147,24 +147,18 @@ class JobreqViewModel : ViewModel() {
             val resumeName = getFileNameFromUri(fileUri, contentResolver)
             selectedFilesNames.add(resumeName)
             try {
-                pdfRef.putFile(fileUri)
-                    .continueWithTask { task ->
-                        if (!task.isSuccessful) {
-                            task.exception?.let {
-                                throw it
-                            }
-                        }
-                        pdfRef.downloadUrl
-                    }
-                    .addOnCompleteListener {  task ->
-                        if (task.isSuccessful) {
-                            downloadUrl = task.result.toString()
+                downloadUrl = pdfRef.putFile(fileUri).continueWithTask { task ->
+                    if (!task.isSuccessful) {
+                        task.exception?.let {
+                            throw it
                         }
                     }
-                    .await()
+                    pdfRef.downloadUrl
+                }.await().toString()
 
                 //_uploadProgress.value =
                 Log.d("Firebase Storage","Resume Uploaded successfully: $fileName")
+                Log.d("Firebase Storage","Resume Download URL: $downloadUrl")
 
                 storeDataToFirestore(fileName, resumeName, downloadUrl, index)
             } catch(e: Exception) {
@@ -204,6 +198,7 @@ class JobreqViewModel : ViewModel() {
 
         val resumedata = mapOf<String,Any>(
             resumeDataId to mapOf(
+                "resumetimestamp" to resumeDataId,
                 "userid" to userId,
                 "username" to userName,
                 "resumeid" to resumeId,
