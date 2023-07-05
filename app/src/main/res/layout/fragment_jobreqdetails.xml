@@ -10,8 +10,13 @@
     </data>
 
     <ScrollView
+        android:paddingStart="10sp"
+        android:paddingEnd="10sp"
+        android:paddingTop="15sp"
+        android:paddingBottom="15sp"
         android:scrollbars="none"
         tools:context=".view.jobreq.JobreqDetailsFragment"
+        android:clipToPadding="false"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 

@@ -27,8 +27,10 @@ import com.impetuson.rexroot.databinding.FragmentJobreqsubmissionsBinding
 import com.impetuson.rexroot.model.jobreq.SubmissionsModelClass
 import com.impetuson.rexroot.viewmodel.jobreq.SubmissionsRecyclerViewAdapter
 import com.impetuson.rexroot.viewmodel.jobreq.SubmissionsViewModel
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.MainScope
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 class JobreqSubmissionsFragment(jobId: String) : Fragment(), ResumeClickInterface {
 
@@ -57,8 +59,7 @@ class JobreqSubmissionsFragment(jobId: String) : Fragment(), ResumeClickInterfac
             pbLoading.visibility = View.VISIBLE
 
             MainScope().launch {
-                resumeList = viewmodel.fetchDataFromFirestore()
-
+                refreshSubmissions()
 
                 spinnerStatus.adapter = ArrayAdapter(requireContext(), android.R.layout.simple_spinner_dropdown_item, viewmodel.items)
                 spinnerStatus.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
@@ -68,7 +69,7 @@ class JobreqSubmissionsFragment(jobId: String) : Fragment(), ResumeClickInterfac
                         submissionsAdapter = SubmissionsRecyclerViewAdapter(resumeList[position], this@JobreqSubmissionsFragment)
                         rvSubmissions.adapter = submissionsAdapter
 
-                        pbLoading.visibility = View.GONE
+                        binding!!.pbLoading.visibility = View.GONE
                         if (resumeList[position].isEmpty()){
                             tvNoresults.visibility = View.VISIBLE
                         } else {
@@ -79,8 +80,37 @@ class JobreqSubmissionsFragment(jobId: String) : Fragment(), ResumeClickInterfac
                     override fun onNothingSelected(adapterView: AdapterView<*>) {}
                 }
             }
-        }
 
+            swipeToRefresh.setColorSchemeColors(resources.getColor(R.color.violet))
+
+            swipeToRefresh.setOnRefreshListener {
+
+                MainScope().launch {
+                    refreshSubmissions()
+
+                    spinnerStatus.adapter = ArrayAdapter(requireContext(), android.R.layout.simple_spinner_dropdown_item, viewmodel.items)
+                    spinnerStatus.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+                        override fun onItemSelected(adapterView: AdapterView<*>, view: View, position: Int, id: Long) {
+                            viewmodel.onItemSelected(position)
+                            currSpinnerPosition = position
+                            submissionsAdapter = SubmissionsRecyclerViewAdapter(resumeList[position], this@JobreqSubmissionsFragment)
+                            rvSubmissions.adapter = submissionsAdapter
+
+                            binding!!.pbLoading.visibility = View.GONE
+                            if (resumeList[position].isEmpty()){
+                                tvNoresults.visibility = View.VISIBLE
+                            } else {
+                                tvNoresults.visibility = View.GONE
+                            }
+                        }
+
+                        override fun onNothingSelected(adapterView: AdapterView<*>) {}
+                    }
+
+                    swipeToRefresh.isRefreshing = false
+                }
+            }
+        }
 
     }
 
@@ -105,12 +135,12 @@ class JobreqSubmissionsFragment(jobId: String) : Fragment(), ResumeClickInterfac
                 cvResumeStatus.backgroundTintList = ColorStateList.valueOf(color)
             }
             "1" -> {
-                tvResumeStatus.text = "SELECT"
+                tvResumeStatus.text = "SELECTED"
                 val color = ContextCompat.getColor(filterBottomSheet.context, R.color.primary_green)
                 cvResumeStatus.backgroundTintList = ColorStateList.valueOf(color)
             }
             "-1" -> {
-                tvResumeStatus.text = "REJECT"
+                tvResumeStatus.text = "REJECTED"
                 val color = ContextCompat.getColor(filterBottomSheet.context, R.color.primary_red)
                 cvResumeStatus.backgroundTintList = ColorStateList.valueOf(color)
             }
@@ -123,6 +153,10 @@ class JobreqSubmissionsFragment(jobId: String) : Fragment(), ResumeClickInterfac
         filterBottomSheet.findViewById<TextView>(R.id.tv_resumepost)!!.text = resumeData.resumepost
 
         filterBottomSheet.show()
+    }
+
+    private suspend fun refreshSubmissions() = withContext(Dispatchers.IO){
+        resumeList = viewmodel.fetchDataFromFirestore()
     }
 
 }

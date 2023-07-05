@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android"
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
@@ -9,72 +10,107 @@
             type="com.impetuson.rexroot.viewmodel.jobreq.SubmissionsViewModel" />
     </data>
 
-    <RelativeLayout
+    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+        android:id="@+id/swipeToRefresh"
+        app:swipeRefreshLayoutProgressSpinnerBackgroundColor="@color/violet"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/white"
-        android:orientation="vertical"
         tools:context=".view.jobreq.JobreqSubmissionsFragment">
 
-        <RelativeLayout
-            android:id="@+id/header"
-            android:paddingBottom="8sp"
+        <ScrollView
+            android:scrollbars="none"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="match_parent">
 
-            <com.google.android.material.card.MaterialCardView
-                android:layout_alignParentEnd="true"
-                app:cardCornerRadius="50sp"
-                android:background="#fffbfe"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content">
-
-                <Spinner
-                    android:id="@+id/spinner_status"
-                    android:layout_width="wrap_content"
-                    android:layout_height="30sp"
-                    android:entries="@array/status_list">
-                </Spinner>
-
-            </com.google.android.material.card.MaterialCardView>
-
-        </RelativeLayout>
-
-        <RelativeLayout
-            android:id="@+id/body"
-            android:layout_below="@id/header"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
-            <ProgressBar
-                android:id="@+id/pb_loading"
-                android:layout_marginTop="30sp"
-                android:layout_centerHorizontal="true"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:indeterminate="true"
-                android:indeterminateTint="#8b74bb"
-                android:visibility="gone">
-            </ProgressBar>
-
-            <TextView
-                android:id="@+id/tv_noresults"
-                android:visibility="gone"
-                android:layout_marginTop="30sp"
-                android:layout_centerHorizontal="true"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="No submissions available">
-            </TextView>
-
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/rv_submissions"
+            <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
+                android:layout_height="match_parent"
+                android:background="@color/white"
+                android:orientation="vertical">
 
-            </androidx.recyclerview.widget.RecyclerView>
+                <RelativeLayout
+                    android:id="@+id/header"
+                    android:paddingTop="5sp"
+                    android:paddingBottom="5sp"
+                    android:paddingStart="10sp"
+                    android:paddingEnd="10sp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
 
-        </RelativeLayout>
+                    <com.google.android.material.card.MaterialCardView
+                        android:id="@+id/cv_spinner"
+                        android:layout_marginTop="5sp"
+                        android:layout_marginBottom="5sp"
+                        android:layout_alignParentEnd="true"
+                        android:background="#fffbfe"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content">
 
-    </RelativeLayout>
+                        <LinearLayout
+                            android:paddingStart="5sp"
+                            android:paddingEnd="5sp"
+                            android:paddingTop="2sp"
+                            android:paddingBottom="2sp"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent">
+
+                            <Spinner
+                                android:id="@+id/spinner_status"
+                                android:layout_width="wrap_content"
+                                android:layout_height="30sp"
+                                android:entries="@array/status_list">
+                            </Spinner>
+
+                        </LinearLayout>
+
+                    </com.google.android.material.card.MaterialCardView>
+
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:id="@+id/body"
+                    android:layout_below="@id/header"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <ProgressBar
+                        android:id="@+id/pb_loading"
+                        android:layout_marginTop="30sp"
+                        android:layout_centerHorizontal="true"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:indeterminate="true"
+                        android:indeterminateTint="#8b74bb"
+                        android:visibility="gone">
+                    </ProgressBar>
+
+                    <TextView
+                        android:id="@+id/tv_noresults"
+                        android:visibility="gone"
+                        android:layout_marginTop="30sp"
+                        android:layout_centerHorizontal="true"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="No submissions available">
+                    </TextView>
+
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/rv_submissions"
+                        android:nestedScrollingEnabled="false"
+                        android:paddingStart="10sp"
+                        android:paddingEnd="10sp"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
+
+                    </androidx.recyclerview.widget.RecyclerView>
+
+                </RelativeLayout>
+
+            </RelativeLayout>
+
+        </ScrollView>
+
+
+    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+
 </layout>
