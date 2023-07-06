@@ -19,8 +19,8 @@ jobs:
       - name: Run sample script
         run: echo Started CI pipeline
 
-  build:
-    name: Build Release AAB
+  apk:
+    name: Build Release signed APK
     needs: [start]
     runs-on: ubuntu-latest
     steps:
@@ -65,7 +65,7 @@ jobs:
           path: app/build/outputs/apk/release/rexroot-app-signed.apk
 
   bundle:
-    name: Build Release AAB
+    name: Bundle Release signed AAB
     needs: [start]
     runs-on: ubuntu-latest
     steps:
