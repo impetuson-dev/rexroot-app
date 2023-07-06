@@ -18,98 +18,114 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:paddingTop="10sp"
-                android:paddingBottom="10sp"
-                android:id="@+id/cl_header"
-                android:background="#e5e5ff"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-
-                <LinearLayout
-                    android:id="@+id/ll_menu"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    android:padding="10sp"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content">
-
-                    <ImageView
-                        android:layout_width="25sp"
-                        android:layout_height="25sp"
-                        android:src="@drawable/icon_menu_darkgrey"></ImageView>
-
-
-                </LinearLayout>
-
-                <LinearLayout
-                    android:id="@+id/ll_search"
-                    android:layout_marginLeft="8sp"
-                    android:layout_marginRight="8sp"
-                    app:layout_constraintStart_toEndOf="@id/ll_menu"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintEnd_toStartOf="@id/ll_notifications"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:padding="8sp"
-                    android:background="@drawable/bg_homesearchbar">
-
-                    <ImageView
-                        android:layout_width="20sp"
-                        android:layout_height="20sp"
-                        android:layout_gravity="center"
-                        android:src="@drawable/icon_search_darkgrey"></ImageView>
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:textSize="12sp"
-                        android:layout_marginLeft="8sp"
-                        android:textColor="@color/dark_grey"
-                        android:text="Search jobs here..."></TextView>
-
-                </LinearLayout>
-
-                <LinearLayout
-                    android:id="@+id/ll_notifications"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    android:padding="10sp"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content">
-
-                    <ImageView
-                        android:layout_width="25sp"
-                        android:layout_height="25sp"
-                        android:src="@drawable/icon_bell"></ImageView>
-
-                </LinearLayout>
-
-            </androidx.constraintlayout.widget.ConstraintLayout>
-
-            <com.google.android.material.tabs.TabLayout
+            <com.google.android.material.card.MaterialCardView
                 android:id="@+id/dashboard_tablayout"
-                android:layout_below="@id/cl_header"
-                app:tabIndicatorFullWidth="true"
-                android:background="#e5e5ff"
+                app:cardCornerRadius="0sp"
+                app:strokeWidth="0sp"
+                app:cardElevation="8sp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
 
-                <com.google.android.material.tabs.TabItem
+                <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Status"></com.google.android.material.tabs.TabItem>
+                    android:orientation="vertical">
 
-                <com.google.android.material.tabs.TabItem
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="Earnings"></com.google.android.material.tabs.TabItem>
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:paddingTop="10sp"
+                        android:paddingBottom="10sp"
+                        android:id="@+id/cl_header"
+                        android:background="#e5e5ff"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
 
-            </com.google.android.material.tabs.TabLayout>
+                        <LinearLayout
+                            android:id="@+id/ll_menu"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            android:padding="10sp"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content">
+
+                            <ImageView
+                                android:layout_width="25sp"
+                                android:layout_height="25sp"
+                                android:src="@drawable/icon_menu_darkgrey"></ImageView>
+
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:id="@+id/ll_search"
+                            android:layout_marginLeft="8sp"
+                            android:layout_marginRight="8sp"
+                            app:layout_constraintStart_toEndOf="@id/ll_menu"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:layout_constraintEnd_toStartOf="@id/ll_notifications"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:padding="8sp"
+                            android:background="@drawable/bg_homesearchbar">
+
+                            <ImageView
+                                android:layout_width="20sp"
+                                android:layout_height="20sp"
+                                android:layout_gravity="center"
+                                android:src="@drawable/icon_search_darkgrey"></ImageView>
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center"
+                                android:textSize="12sp"
+                                android:layout_marginLeft="8sp"
+                                android:textColor="@color/dark_grey"
+                                android:text="Search jobs here..."></TextView>
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:id="@+id/ll_notifications"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            android:padding="10sp"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content">
+
+                            <ImageView
+                                android:layout_width="25sp"
+                                android:layout_height="25sp"
+                                android:src="@drawable/icon_bell"></ImageView>
+
+                        </LinearLayout>
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+                    <com.google.android.material.tabs.TabLayout
+                        android:layout_below="@id/cl_header"
+                        app:tabIndicatorFullWidth="true"
+                        android:background="#e5e5ff"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <com.google.android.material.tabs.TabItem
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="Status"></com.google.android.material.tabs.TabItem>
+
+                        <com.google.android.material.tabs.TabItem
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="Earnings"></com.google.android.material.tabs.TabItem>
+
+                    </com.google.android.material.tabs.TabLayout>
+
+                </LinearLayout>
+
+            </com.google.android.material.card.MaterialCardView>
 
             <LinearLayout
                 android:layout_below="@id/dashboard_tablayout"
@@ -134,16 +150,18 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:visibility="gone"
                     android:layout_centerHorizontal="true"
                     android:layout_centerVertical="true"
-                    android:text="No results available"></TextView>
+                    android:text="No results available">
+                </TextView>
 
                 <com.google.android.material.progressindicator.CircularProgressIndicator
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_centerHorizontal="true"
-                    android:indeterminate="true"></com.google.android.material.progressindicator.CircularProgressIndicator>
+                    android:visibility="gone"
+                    android:indeterminate="true">
+                </com.google.android.material.progressindicator.CircularProgressIndicator>
 
 
             </RelativeLayout>

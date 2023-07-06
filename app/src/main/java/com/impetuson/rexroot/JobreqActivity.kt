@@ -7,13 +7,16 @@ import android.media.MediaPlayer
 import android.net.Uri
 import android.os.Bundle
 import android.util.Log
+import android.view.LayoutInflater
 import android.view.View
+import android.view.ViewGroup
 import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.viewpager2.widget.ViewPager2
 import com.google.android.material.badge.BadgeDrawable
 import com.google.android.material.badge.BadgeDrawable.BOTTOM_END
+import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.android.material.snackbar.Snackbar
 import com.google.android.material.tabs.TabLayoutMediator
@@ -69,7 +72,7 @@ class JobreqActivity: AppCompatActivity() {
             lifecycleOwner = this@JobreqActivity
             jobreqviewmodel = jobreqViewModel
 
-            ivGoback.setOnClickListener {
+            cvGoback.setOnClickListener {
                 onBackPressed()
             }
 
@@ -96,7 +99,6 @@ class JobreqActivity: AppCompatActivity() {
                 body.visibility = View.VISIBLE
             }
 
-
             btnChoose.setOnClickListener {
                 val intent = Intent(Intent.ACTION_GET_CONTENT)
                 intent.type = "application/pdf"
@@ -106,15 +108,16 @@ class JobreqActivity: AppCompatActivity() {
 
             btnSubmit.setOnClickListener {
                 MainScope().launch {
+                    viewTopShadow.visibility = View.GONE
                     progressIndicator.visibility = View.VISIBLE
                     val uploadMsg = jobreqViewModel.btnSubmitHandler(contentResolver)
+
                     mediaPlayer.start()
 
-                    Snackbar.make(llSnackbar, uploadMsg, Snackbar.LENGTH_SHORT)
-                        .setAnchorView(llFooter)
-                        .show()
+                    Snackbar.make(llSnackbar, uploadMsg, Snackbar.LENGTH_SHORT).setAnchorView(llFooter).show()
 
                     progressIndicator.visibility = View.GONE
+                    viewTopShadow.visibility = View.VISIBLE
 
                     if (alert){
                         alert = false

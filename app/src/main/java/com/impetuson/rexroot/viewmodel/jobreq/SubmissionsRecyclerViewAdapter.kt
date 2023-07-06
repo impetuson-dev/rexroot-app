@@ -12,7 +12,12 @@ import com.impetuson.rexroot.R
 import com.impetuson.rexroot.model.jobreq.SubmissionsModelClass
 import com.impetuson.rexroot.view.jobreq.ResumeClickInterface
 
-class SubmissionsRecyclerViewAdapter(private val dataList: List<SubmissionsModelClass>, private val resumeClickInterface: ResumeClickInterface): RecyclerView.Adapter<SubmissionsRecyclerViewAdapter.ViewHolder>(), ResumeClickInterface {
+class SubmissionsRecyclerViewAdapter(private var dataList: List<SubmissionsModelClass>, private val resumeClickInterface: ResumeClickInterface): RecyclerView.Adapter<SubmissionsRecyclerViewAdapter.ViewHolder>(), ResumeClickInterface {
+
+    fun refreshSubmissions(newDataList: List<SubmissionsModelClass>) {
+        dataList = newDataList
+        notifyDataSetChanged()
+    }
 
     override fun onCreateViewHolder(
         parent: ViewGroup,
@@ -54,12 +59,12 @@ class SubmissionsRecyclerViewAdapter(private val dataList: List<SubmissionsModel
                     cvResumeStatus.backgroundTintList = ColorStateList.valueOf(color)
                 }
                 "1" -> {
-                    resumeStatus.text = "SELECT"
+                    resumeStatus.text = "SELECTED"
                     val color = ContextCompat.getColor(itemView.context, R.color.primary_green)
                     cvResumeStatus.backgroundTintList = ColorStateList.valueOf(color)
                 }
                 "-1" -> {
-                    resumeStatus.text = "REJECT"
+                    resumeStatus.text = "REJECTED"
                     val color = ContextCompat.getColor(itemView.context, R.color.primary_red)
                     cvResumeStatus.backgroundTintList = ColorStateList.valueOf(color)
                 }
