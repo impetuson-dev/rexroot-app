@@ -50,7 +50,7 @@ jobs:
         uses: r0adkll/sign-android-release@v1
         id: sign_app
         with:
-          releaseDirectory: app/build/outputs/apk/release/signed
+          releaseDirectory: app/build/outputs/apk/release
           signingKeyBase64: ${{ secrets.SIGNING_KEY }}
           alias: ${{ secrets.KEY_ALIAS }}
           keyStorePassword: ${{ secrets.KEY_STORE_PASSWORD }}
@@ -62,7 +62,7 @@ jobs:
         uses: actions/upload-artifact@v2
         with:
           name: rexroot-app-signed
-          path: app/build/outputs/apk/release/signed/app-signed.apk
+          path: app/build/outputs/apk/release/app-release-unsigned-signed.apk
 
 #  bundle:
 #    name: Bundle Release signed AAB
