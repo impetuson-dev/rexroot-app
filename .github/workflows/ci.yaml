@@ -109,6 +109,7 @@ jobs:
           name: rexroot-app-bundle
           path: app/build/outputs/bundle/release/app-release.aab
 
+
 #  lint:
 #    name: Lint check
 #    needs: [start]
