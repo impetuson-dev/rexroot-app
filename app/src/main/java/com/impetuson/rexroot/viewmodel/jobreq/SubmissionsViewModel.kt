@@ -14,9 +14,9 @@ import kotlinx.coroutines.tasks.await
 class SubmissionsViewModel(private var jobId: String): ViewModel() {
 
     private val firestoreDB = Firebase.firestore
-    private var userId = ""
+    var userId: String = ""
 
-    val items = listOf("Active", "Select", "Reject")
+    val items = listOf("Active", "Selected", "Rejected")
 
     private val _selectedItem = MutableLiveData<String>()
     var selectedItem: LiveData<String> = _selectedItem
@@ -39,8 +39,6 @@ class SubmissionsViewModel(private var jobId: String): ViewModel() {
             }
             .await()
 
-        var submissionsModel: SubmissionsModelClass
-
         if (documentSnapshot != null){
             val submitData = documentSnapshot.get("submitdata") as? Map<String,Any>
             Log.d("submitdata",submitData.toString())
@@ -48,10 +46,10 @@ class SubmissionsViewModel(private var jobId: String): ViewModel() {
             submissions = submissions?.get("resume") as? Map<String, Any>
             submissions = submissions?.toSortedMap()
 
-            submissions?.forEach { t, u ->
+            submissions?.forEach { (t, u) ->
                 u as Map<String, Any>
 
-                submissionsModel = SubmissionsModelClass(
+                val submissionsModel = SubmissionsModelClass(
                     resumename = u["resumename"].toString(),
                     resumepost = u["resumepost"].toString(),
                     partnerMsg = u["partnermsg"].toString(),
