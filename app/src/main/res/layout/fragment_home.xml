@@ -194,14 +194,13 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:text="Actions"
-                                android:textStyle="bold">
+                                android:textSize="12sp">
                             </TextView>
 
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:text="0 new"
-                                android:textSize="12sp"
                                 android:textStyle="bold">
                             </TextView>
 
@@ -223,9 +222,8 @@
 
                     <LinearLayout
                         android:id="@+id/ll_recent"
+                        android:clipToPadding="false"
                         android:paddingTop="5sp"
-                        android:paddingStart="10sp"
-                        android:paddingEnd="10sp"
                         android:paddingBottom="20sp"
                         android:orientation="vertical"
                         android:layout_width="match_parent"
@@ -234,6 +232,8 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:paddingStart="10sp"
+                            android:paddingEnd="10sp"
                             android:paddingTop="10sp"
                             android:paddingBottom="10sp"
                             android:textStyle="bold"
@@ -244,6 +244,9 @@
 
                         <androidx.recyclerview.widget.RecyclerView
                             android:id="@+id/rv_recentjobs"
+                            android:clipToPadding="false"
+                            android:paddingStart="10sp"
+                            android:paddingEnd="10sp"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent">
 

@@ -31,7 +31,7 @@ class MyProfileFragment : Fragment() {
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_my_profile ,container, false)
         return binding!!.root
     }
@@ -49,11 +49,15 @@ class MyProfileFragment : Fragment() {
             viewmodel.getUserProfileDetails(sharedPreference)
 
             cvPartner.setOnClickListener {
-                startActivity(Intent(requireContext(),PartnerActivity::class.java))
+                val intent = Intent(requireContext(),PartnerActivity::class.java)
+                intent.putExtra("userid", viewmodel.userId.value)
+                startActivity(intent)
             }
 
             cvCandidate.setOnClickListener {
-                startActivity(Intent(requireContext(),CandidateActivity::class.java))
+                val intent = Intent(requireContext(),CandidateActivity::class.java)
+                intent.putExtra("userid", viewmodel.userId.value)
+                startActivity(intent)
             }
 
             btnLogout.setOnClickListener {

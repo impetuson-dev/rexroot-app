@@ -200,7 +200,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintBottom_toTopOf="@id/ll_footer"
             android:layout_width="match_parent"
-            android:layout_height="3sp"
+            android:layout_height="2sp"
             android:background="@drawable/top_shadow_gradient" />
 
         <LinearLayout

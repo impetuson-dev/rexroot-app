@@ -14,10 +14,28 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
+        <LinearLayout
+            android:id="@+id/progress_bar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:translationZ="100sp"
+            android:visibility="gone"
+            android:padding="12dp"
+            android:background="@drawable/bg_progressbar"
+            android:layout_centerInParent="true">
+
+            <com.google.android.material.progressindicator.CircularProgressIndicator
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:indicatorColor="@color/violet"
+                android:indeterminate="true" />
+
+        </LinearLayout>
+
         <RelativeLayout
             android:id="@+id/rl_header"
             android:padding="5sp"
-            android:background="@color/primary_red"
+            android:background="@color/violet"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
@@ -27,7 +45,7 @@
                 android:id="@+id/cv_goback"
                 android:layout_width="45sp"
                 android:layout_height="45sp"
-                android:backgroundTint="@color/primary_red"
+                android:backgroundTint="@color/violet"
                 android:clickable="true"
                 android:foreground="?android:attr/selectableItemBackground"
                 app:cardCornerRadius="500sp"
@@ -53,32 +71,6 @@
                 android:textStyle="bold">
             </TextView>
 
-            <androidx.cardview.widget.CardView
-                android:layout_centerVertical="true"
-                android:layout_alignParentEnd="true"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:backgroundTint="@color/white"
-                android:clickable="true"
-                android:foreground="?android:attr/selectableItemBackground"
-                app:cardCornerRadius="20sp"
-                app:cardElevation="0dp"
-                android:onClick="@{() -> candidateViewModel.saveDetails()}">
-
-                <TextView
-                    android:paddingTop="5sp"
-                    android:paddingBottom="5sp"
-                    android:paddingLeft="15sp"
-                    android:paddingRight="15sp"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:gravity="center"
-                    android:textColor="@color/primary_red"
-                    android:textStyle="bold"
-                    android:text="Save">
-                </TextView>
-
-            </androidx.cardview.widget.CardView>
 
         </RelativeLayout>
 
@@ -272,26 +264,30 @@
 
 
                     <RadioGroup
+                        android:id="@+id/rg_relocate"
+                        android:checkedButton="@={candidateViewModel.candidateModel.candidateWillToRelocate}"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:orientation="horizontal">
 
                         <RadioButton
-                            android:id="@+id/rb_yes"
+                            android:id="@+id/rbyes"
                             android:layout_marginLeft="10sp"
                             android:layout_marginRight="10sp"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Yes">
+                            android:checked="@{candidateViewModel.candidateModel.candidateWillToRelocate == @id/rbyes}"
+                            android:text="No">
                         </RadioButton>
 
                         <RadioButton
-                            android:id="@+id/rb_no"
+                            android:id="@+id/rbno"
                             android:layout_marginLeft="10sp"
                             android:layout_marginRight="10sp"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="No">
+                            android:checked="@{candidateViewModel.candidateModel.candidateWillToRelocate == @id/rbno}"
+                            android:text="Yes">
                         </RadioButton>
 
                     </RadioGroup>
@@ -362,6 +358,18 @@
                     </EditText>
 
                 </LinearLayout>
+
+
+                <com.google.android.material.button.MaterialButton
+                    android:layout_margin="10sp"
+                    android:layout_gravity="center"
+                    android:textStyle="bold"
+                    android:onClick="@{() -> candidateViewModel.saveDetails()}"
+                    android:text="Save"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+
+                </com.google.android.material.button.MaterialButton>
 
             </LinearLayout>
 

@@ -8,7 +8,6 @@
         <item name="android:navigationBarColor">@color/white</item>
         <item name="android:windowLightStatusBar">true</item>
         <item name="android:windowDrawsSystemBarBackgrounds">true</item>
-
     </style>
 
     <style name="EditTextTheme" parent="Theme.AppCompat.Light.NoActionBar">

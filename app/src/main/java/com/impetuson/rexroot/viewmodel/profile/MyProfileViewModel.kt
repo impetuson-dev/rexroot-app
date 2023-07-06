@@ -13,6 +13,9 @@ class MyProfileViewModel: ViewModel() {
 
     private val auth: FirebaseAuth = Firebase.auth
 
+    private var _userId = MutableLiveData<String>("")
+    val userId: LiveData<String> = _userId
+
     private var _userName = MutableLiveData<String>("")
     val userName: LiveData<String> = _userName
 
@@ -23,6 +26,7 @@ class MyProfileViewModel: ViewModel() {
     val userMobileNumber: LiveData<String> = _userMobileNumber
 
     fun getUserProfileDetails(sharedPreference: SharedPreferences){
+        _userId.value = sharedPreference.getString("userid","")
         _userName.value = sharedPreference.getString("username","")
         _userEmailID.value = sharedPreference.getString("useremail","")
         _userMobileNumber.value = sharedPreference.getString("usermobilenumber","")

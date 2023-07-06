@@ -206,7 +206,7 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintBottom_toTopOf="@id/bottom_cardview"
                 android:layout_width="match_parent"
-                android:layout_height="5sp"
+                android:layout_height="2sp"
                 android:background="@drawable/top_shadow_gradient" />
 
             <LinearLayout

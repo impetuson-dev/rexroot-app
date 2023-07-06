@@ -81,7 +81,7 @@ class UserdetailsViewModel: ViewModel() {
             db.collection("users").document(userId).update(data).await()
             Log.d("FirestoreDB","Document Reference added: $userId")
             storeStatus = true
-            storeMsg = "User details added successfully"
+            storeMsg = "Welcome to Rexroot!"
         } catch (e: Exception) {
             storeMsg = "Error occurred"
         }

@@ -51,7 +51,7 @@ class UserdetailsFragment : Fragment() {
                 binding!!.progressBar.visibility = View.VISIBLE
 
                 val (storeStatus,storeMsg) = userdetailsviewmodel.storeDataToFirestore()
-                Toast.makeText(context,"$storeMsg", Toast.LENGTH_LONG).show()
+                Toast.makeText(context,"$storeMsg", Toast.LENGTH_SHORT).show()
                 if (storeStatus as Boolean){
                     findNavController().navigate(R.id.action_userdetailsFragment_to_loadingFragment)
                 }
