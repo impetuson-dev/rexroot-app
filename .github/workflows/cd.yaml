@@ -124,5 +124,3 @@ jobs:
           packageName: com.impetuson.rexroot
           releaseFiles: app/build/outputs/bundle/release/app-release.aab
           track: production
-          inAppUpdatePriority: 3
-          userFraction: 0.5
