@@ -111,7 +111,7 @@ jobs:
 
   deploy:
     name: Deploy app to play store
-    needs: [build]
+    needs: [bundle]
     runs-on: ubuntu-latest
     steps:
       - name: Checkout the code
