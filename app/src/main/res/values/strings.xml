@@ -11,4 +11,6 @@
         <item>Selected</item>
         <item>Rejected</item>
     </string-array>
+
+    <string name="versionName">1.0.1</string>
 </resources>
