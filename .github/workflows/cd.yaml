@@ -14,55 +14,55 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
 
       - name: Run sample script
         run: echo Started CD pipeline
 
-  apk:
-    name: Build Release signed APK
-    needs: [start]
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout the code
-        uses: actions/checkout@v2
-
-      - name: Set up JDK
-        uses: actions/setup-java@v3
-        with:
-          distribution: temurin
-          java-version: '17'
-
-      - name: Cache Gradle
-        uses: actions/cache@v2
-        with:
-          path: ~/.gradle/caches
-          key: ${{ runner.os }}-gradle-${{ hashFiles('**/*.gradle') }}
-          restore-keys: ${{ runner.os }}-gradle-
-
-      - name: Make Gradle executable
-        run: chmod +x ./gradlew
-
-      - name: Build Release APK
-        run: ./gradlew assembleRelease
-
-      - name: Sign APK
-        uses: r0adkll/sign-android-release@v1
-        id: sign_app
-        with:
-          releaseDirectory: app/build/outputs/apk/release
-          signingKeyBase64: ${{ secrets.SIGNING_KEY }}
-          alias: ${{ secrets.KEY_ALIAS }}
-          keyStorePassword: ${{ secrets.KEY_STORE_PASSWORD }}
-          keyPassword: ${{ secrets.KEY_PASSWORD }}
-        env:
-          BUILD_TOOLS_VERSION: "30.0.2"
-
-      - name: Upload Signed APK
-        uses: actions/upload-artifact@v2
-        with:
-          name: rexroot-app-signed
-          path: app/build/outputs/apk/release/app-release-unsigned-signed.apk
+#  apk:
+#    name: Build Release signed APK
+#    needs: [start]
+#    runs-on: ubuntu-latest
+#    steps:
+#      - name: Checkout the code
+#        uses: actions/checkout@v3
+#
+#      - name: Set up JDK
+#        uses: actions/setup-java@v3
+#        with:
+#          distribution: temurin
+#          java-version: '17'
+#
+#      - name: Cache Gradle
+#        uses: actions/cache@v2
+#        with:
+#          path: ~/.gradle/caches
+#          key: ${{ runner.os }}-gradle-${{ hashFiles('**/*.gradle') }}
+#          restore-keys: ${{ runner.os }}-gradle-
+#
+#      - name: Make Gradle executable
+#        run: chmod +x ./gradlew
+#
+#      - name: Build Release APK
+#        run: ./gradlew assembleRelease
+#
+#      - name: Sign APK
+#        uses: r0adkll/sign-android-release@v1
+#        id: sign_app
+#        with:
+#          releaseDirectory: app/build/outputs/apk/release
+#          signingKeyBase64: ${{ secrets.SIGNING_KEY }}
+#          alias: ${{ secrets.KEY_ALIAS }}
+#          keyStorePassword: ${{ secrets.KEY_STORE_PASSWORD }}
+#          keyPassword: ${{ secrets.KEY_PASSWORD }}
+#        env:
+#          BUILD_TOOLS_VERSION: "30.0.2"
+#
+#      - name: Upload Signed APK
+#        uses: actions/upload-artifact@v2
+#        with:
+#          name: rexroot-app-signed
+#          path: app/build/outputs/apk/release/app-release-unsigned-signed.apk
 
   bundle:
     name: Build Release AAB
@@ -70,7 +70,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout the code
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
 
       - name: Set up JDK
         uses: actions/setup-java@v3
@@ -115,7 +115,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout the code
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
 
       - name: Publish to Play Store
         uses: r0adkll/upload-google-play@v1
@@ -125,4 +125,4 @@ jobs:
           releaseFiles: app/build/outputs/bundle/release/app-release.aab
           track: production
           inAppUpdatePriority: 3
-          userFraction: 1.0
+          userFraction: 0.5
