@@ -54,6 +54,8 @@ class JobsActivity: AppCompatActivity() {
         location = jobsViewModel._jobLocation.value ?: ""
 
         binding.apply {
+            lifecycleOwner = this@JobsActivity
+
             tvJobsearch.text = "Jobs for ${jobsViewModel._jobSearch.value}, ${jobsViewModel._jobLocation.value}"
 
             ivGoback.setOnClickListener {
@@ -86,6 +88,9 @@ class JobsActivity: AppCompatActivity() {
 
             btnSearch.setOnClickListener {
                 it.hideKeyboard()
+                jobsearch = etJobsearch.text.toString()
+                location = etLocation.text.toString()
+                tvJobsearch.text = "Jobs for ${jobsearch}, ${location}"
                 refreshList()
             }
 

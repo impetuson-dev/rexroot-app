@@ -23,6 +23,9 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textColor="@color/black"
+            android:ellipsize="end"
+            android:maxLines="1"
+            android:textSize="16sp"
             android:text="Job Role"
             android:textStyle="bold">
         </TextView>
@@ -43,7 +46,7 @@
                 android:layout_marginLeft="10sp"
                 android:id="@+id/tv_compname"
                 android:textColor="@color/black"
-                android:textSize="12sp"
+                android:textSize="14sp"
                 android:layout_gravity="center"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -68,7 +71,7 @@
                 android:layout_marginLeft="10sp"
                 android:id="@+id/tv_complocation"
                 android:textColor="@color/black"
-                android:textSize="12sp"
+                android:textSize="14sp"
                 android:layout_gravity="center"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -103,8 +106,9 @@
                     android:layout_gravity="center"
                     android:layout_marginLeft="10sp"
                     android:text="Job Salary"
-                    android:textColor="@color/metal_grey"
-                    android:textSize="12sp"></TextView>
+                    android:textColor="@color/black"
+                    android:textSize="14sp">
+                </TextView>
 
             </LinearLayout>
 
@@ -124,8 +128,8 @@
                 <TextView
                     android:layout_marginLeft="10sp"
                     android:id="@+id/tv_reqjobexp"
-                    android:textSize="12sp"
-                    android:textColor="@color/metal_grey"
+                    android:textSize="14sp"
+                    android:textColor="@color/black"
                     android:layout_gravity="center"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -137,7 +141,7 @@
         </LinearLayout>
 
         <LinearLayout
-            android:layout_marginTop="5sp"
+            android:layout_marginTop="10sp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
@@ -159,29 +163,26 @@
             android:layout_height="wrap_content">
 
             <LinearLayout
-                android:layout_centerVertical="true"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content">
 
                 <TextView
-                    android:textColor="@color/black"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
-                    android:textSize="12sp"
-                    android:textStyle="bold"
-                    android:text="Payment per closure: ">
-                </TextView>
+                    android:text="Payment: "
+                    android:textColor="@color/black"
+                    android:textSize="14sp"
+                    android:textStyle="bold"></TextView>
 
                 <TextView
                     android:id="@+id/tv_priceperclosure"
-                    android:textColor="@color/black"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textSize="12sp"
-                    android:textStyle="bold"
-                    android:text="">
-                </TextView>
+                    android:text=""
+                    android:textColor="@color/black"
+                    android:textSize="14sp"
+                    android:textStyle="bold"></TextView>
 
             </LinearLayout>
 
@@ -190,8 +191,9 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content">
 
-                <androidx.cardview.widget.CardView
+                <com.google.android.material.card.MaterialCardView
                     android:elevation="0dp"
+                    app:strokeColor="@color/primary_green"
                     app:cardCornerRadius="15dp"
                     android:backgroundTint="@color/primary_green"
                     android:layout_width="wrap_content"
@@ -208,7 +210,7 @@
                     </TextView>
 
 
-                </androidx.cardview.widget.CardView>
+                </com.google.android.material.card.MaterialCardView>
 
             </LinearLayout>
 

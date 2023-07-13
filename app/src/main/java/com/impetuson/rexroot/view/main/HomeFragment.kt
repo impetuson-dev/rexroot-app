@@ -132,7 +132,10 @@ class HomeFragment : Fragment() {
                 }
 
                 jobReqList.add(0, jobReqCard)
-                recomJobsList.add(0, jobReqCard)
+
+                if (recomJobsList.size < 10){
+                    recomJobsList.add(0, jobReqCard)
+                }
 
                 binding!!.rvJobreq.adapter?.notifyDataSetChanged()
                 binding!!.rvRecomjobs.adapter?.notifyDataSetChanged()

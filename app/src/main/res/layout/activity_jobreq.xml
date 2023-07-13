@@ -30,10 +30,11 @@
                 app:cardElevation="0dp">
 
                 <ImageView
-                    android:layout_width="20sp"
-                    android:layout_height="20sp"
+                    android:id="@+id/iv_goback"
+                    android:layout_width="30sp"
+                    android:layout_height="30sp"
                     android:layout_gravity="center"
-                    android:src="@drawable/icon_goback_violet">
+                    android:src="@drawable/icon_goback_darkgrey">
                 </ImageView>
 
             </androidx.cardview.widget.CardView>
