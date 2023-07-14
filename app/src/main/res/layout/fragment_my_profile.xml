@@ -112,7 +112,8 @@
                         <ImageView
                             android:layout_width="120sp"
                             android:layout_height="100sp"
-                            android:src="@drawable/icon_handshake"></ImageView>
+                            android:src="@drawable/icon_handshake">
+                        </ImageView>
 
                         <TextView
                             android:layout_width="wrap_content"
@@ -181,6 +182,7 @@
 
         <LinearLayout
             android:id="@+id/ll_footer"
+            android:padding="10sp"
             app:layout_constraintTop_toBottomOf="@id/rl_body"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
@@ -190,11 +192,18 @@
             android:layout_height="wrap_content">
 
             <TextView
-                android:padding="10sp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_gravity="center"
                 android:textColor="@color/dark_grey"
-                android:text="Rexroot app version: v1.0">
+                android:text="Rexroot app version: " />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:textColor="@color/dark_grey"
+                android:text="@string/versionName">
             </TextView>
 
         </LinearLayout>

@@ -36,7 +36,6 @@ import kotlinx.coroutines.launch
 class JobreqActivity: AppCompatActivity() {
 
     private val PDF_REQUEST_CODE = 123
-
     private var alert: Boolean = false
     var jobId: String = ""
 
