@@ -16,7 +16,7 @@ android {
         applicationId = "com.impetuson.rexroot"
         minSdk = 26
         targetSdk = 33
-        versionCode = 2   // Have to be incremented by 1 for each prod release
+        versionCode = 3   // Have to be incremented by 1 for each prod release
         versionName = "@string/versionName"  // Have to be changed for each prod release
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
