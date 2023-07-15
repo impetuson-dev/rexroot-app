@@ -8,9 +8,6 @@ Use of this code by employees of our Company is permitted for internal use only.
 
 Official Websites
 
-<p>
-  ImpetusON: https://impetuson.com/
-</p>
-<p>
-  Rexroot: https://rexroot.com/
-</p>
+ImpetusON: https://impetuson.com/
+
+Rexroot: https://rexroot.com/

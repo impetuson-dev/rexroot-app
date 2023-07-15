@@ -42,7 +42,7 @@ class JobReqRecyclerViewAdapter(private val dataList: List<JobReqModelClass>) : 
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        val view = LayoutInflater.from(parent.context).inflate(R.layout.jobreq_card, parent, false)
+        val view = LayoutInflater.from(parent.context).inflate(R.layout.temp_card, parent, false)
         return ViewHolder(view)
     }
 
