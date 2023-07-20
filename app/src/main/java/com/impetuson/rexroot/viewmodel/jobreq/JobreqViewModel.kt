@@ -27,7 +27,6 @@ import java.time.format.DateTimeFormatter
 import java.util.UUID
 
 class JobreqViewModel : ViewModel() {
-
     private val firestoreDB = Firebase.firestore
     private lateinit var realtimeDB: DatabaseReference
     private lateinit var mediaPlayer: MediaPlayer
@@ -56,10 +55,16 @@ class JobreqViewModel : ViewModel() {
     var userId: String = ""
     var userName: String = ""
     var jobId: String = ""
+    var jobRole: String = ""
+    var reqjobExp: String = ""
+    var jobSalary: String = ""
 
     suspend fun fetchRealtimeDB() = withContext(Dispatchers.IO){
         realtimeDB = Firebase.database.reference
         Log.d("Firebase RealtimeDB","Jobid: ${jobId}")
+        Log.d("ViewModel Data Received", jobRole)
+        Log.d("ViewModel Data Received", reqjobExp)
+        Log.d("ViewModel Data Received", jobSalary)
 
         try {
             realtimeDB.child("jobreq").child(jobId).get().addOnSuccessListener { dataSnapshot ->
@@ -161,6 +166,7 @@ class JobreqViewModel : ViewModel() {
                 Log.d("Firebase Storage","Resume Download URL: $downloadUrl")
 
                 storeDataToFirestore(fileName, resumeName, downloadUrl, index)
+                sendEmail2(userName,jobRole,reqjobExp,jobSalary,downloadUrl)
             } catch(e: Exception) {
                 uploadMsg = "Database error occurred"
                 Log.d("Firebase Storage","Error: ${e.message}")
@@ -258,4 +264,23 @@ class JobreqViewModel : ViewModel() {
         editor.apply()
     }
 
+    fun sendEmail2(userName: String, jobRole: String, reqjobExp: String, jobSalary: String, resumeURL: String){
+        val mailData = hashMapOf(
+            "to" to arrayListOf("ryanbritto001@gmail.com"),
+            "message" to "Hello",
+        )
+
+        val nestedMailData = hashMapOf(
+            "subject" to "New Resume Uploaded",
+            "html" to "Name: <strong>${userName}</strong><br><br>Applied Job: <strong>${jobRole}</strong><br><br>Job Experience Required: <strong>${reqjobExp}</strong><br><br>Salary Package: <strong>${jobSalary}</strong><br><br>Click this link to view his Resume:<br>${resumeURL}",
+        )
+
+        mailData["message"] = nestedMailData
+
+        firestoreDB.collection("mail").add(mailData)
+        Log.d("Firebase Data Moved",userName)
+        Log.d("Firebase Data Moved", jobRole)
+        Log.d("Firebase Data Moved", reqjobExp)
+        Log.d("Firebase Data Moved", jobSalary)
+    }
 }

@@ -1,7 +1,9 @@
 package com.impetuson.rexroot.viewmodel.main
 
 import android.content.Intent
+import android.os.Bundle
 import android.text.TextUtils
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -37,7 +39,17 @@ class JobReqRecyclerViewAdapter(private val dataList: List<JobReqModelClass>) : 
 
             itemView.setOnClickListener {
                 val intent = Intent(itemView.context, JobreqActivity::class.java)
-                intent.putExtra("jobid", data.jobid)
+                val extras = Bundle().apply {
+                    putString("jobid", data.jobid)
+                    putString("jobRole", data.jobrole)
+                    putString("reqJobExp", data.reqjobexp)
+                    putString("jobSalary", data.jobsalary)
+                    Log.d("Firebase Data Fetched", data.jobid)
+                    Log.d("Firebase Data Fetched", data.jobrole)
+                    Log.d("Firebase Data Fetched", data.reqjobexp)
+                    Log.d("Firebase Data Fetched", data.jobsalary)
+                }
+                intent.putExtras(extras)
                 itemView.context.startActivity(intent)
             }
         }

@@ -38,6 +38,9 @@ class JobreqActivity: AppCompatActivity() {
     private val PDF_REQUEST_CODE = 123
     private var alert: Boolean = false
     var jobId: String = ""
+    var jobRole: String = ""
+    var reqJobExp: String = ""
+    var jobSalary: String = ""
 
     private lateinit var alertDialog: Dialog
     private lateinit var binding: ActivityJobreqBinding
@@ -55,7 +58,17 @@ class JobreqActivity: AppCompatActivity() {
         mediaPlayer = MediaPlayer.create(this, R.raw.file_upload_success)
 
         alertDialog = MaterialAlertDialogBuilder(this).setTitle("Uploading Resume(s)").setMessage("Please wait...").setCancelable(false).create()
-        jobId = intent.getStringExtra("jobid") ?: ""
+
+        jobId = getIntent().extras?.getString("jobid") ?: "Not available"
+        jobRole = getIntent().extras?.getString("jobRole") ?: "Not available"
+        reqJobExp = getIntent().extras?.getString("reqJobExp") ?: "Not available"
+        jobSalary = getIntent().extras?.getString("jobSalary") ?: "Not available"
+
+        Log.d("Activity Data Received", jobId)
+        Log.d("Activity Data Received", jobRole)
+        Log.d("Activity Data Received", reqJobExp)
+        Log.d("Activity Data Received", jobSalary)
+
         jobreqViewPageAdapter = JobreqViewPagerAdapter(this)
 
         jobreqViewPageAdapter.addFragment(JobreqDetailsFragment())
@@ -65,6 +78,9 @@ class JobreqActivity: AppCompatActivity() {
         jobreqViewModel.fetchDataSharedPref(this.getSharedPreferences("profiledata", MODE_PRIVATE))
         jobreqViewModel.saveToRecentJobs(this.getSharedPreferences("recentjobs", MODE_PRIVATE), jobId)
         jobreqViewModel.jobId = jobId
+        jobreqViewModel.jobRole = jobRole
+        jobreqViewModel.reqjobExp = reqJobExp
+        jobreqViewModel.jobSalary = jobSalary
         Log.d("jobid",jobId)
 
         binding.apply{
