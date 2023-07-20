@@ -111,9 +111,18 @@
                 </TextView>
 
                 <TextView
+                    android:id="@+id/partner_payment"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@{`Payment per closure: ₹` + jobreqviewmodel.jobreqModel.priceperclosure}"
+                    android:text="@{`Partner Payment per closure: ₹` + jobreqviewmodel.jobreqModel.priceperclosure}"
+                    android:textSize="14sp">
+                </TextView>
+
+                <TextView
+                    android:id="@+id/candidate_payment"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@{`Candidate Payment per closure: 50% of ₹` + jobreqviewmodel.jobreqModel.priceperclosure}"
                     android:textSize="14sp">
                 </TextView>
 

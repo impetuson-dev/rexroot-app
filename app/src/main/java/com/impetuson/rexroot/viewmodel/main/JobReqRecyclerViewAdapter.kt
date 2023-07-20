@@ -22,6 +22,7 @@ class JobReqRecyclerViewAdapter(private val dataList: List<JobReqModelClass>) : 
         private val jobReqExp: TextView = itemView.findViewById(R.id.tv_reqjobexp)
         private val jobSkills: TextView = itemView.findViewById(R.id.tv_jobskills)
         private val pricePerClosure: TextView = itemView.findViewById(R.id.tv_priceperclosure)
+        private val candpricePerClosure: TextView = itemView.findViewById(R.id.tv_candpriceperclosure)
 
         fun bind(data: JobReqModelClass) {
             jobRole.text = data.jobrole
@@ -32,6 +33,7 @@ class JobReqRecyclerViewAdapter(private val dataList: List<JobReqModelClass>) : 
             jobSkills.ellipsize = TextUtils.TruncateAt.END
             jobSkills.text = data.jobmandskills
             pricePerClosure.text = "₹" + data.priceperclosure
+            candpricePerClosure.text = "₹" + ((data.priceperclosure).toInt())/2
 
             itemView.setOnClickListener {
                 val intent = Intent(itemView.context, JobreqActivity::class.java)

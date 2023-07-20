@@ -7,8 +7,10 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.impetuson.rexroot.R
 import com.impetuson.rexroot.databinding.FragmentSignupBinding
 import com.impetuson.rexroot.viewmodel.onboarding.SignupViewModel
@@ -39,6 +41,21 @@ class SignupFragment : Fragment() {
             lifecycleOwner = viewLifecycleOwner
             binding?.signupFragment = this@SignupFragment
             signupViewModel = viewmodel
+            checkId.setOnCheckedChangeListener { _, _ ->
+                if(checkId.isChecked == true){
+                    MaterialAlertDialogBuilder(requireContext())
+                        .setTitle("Terms and Conditions")
+                        .setMessage(R.string.terms_and_conditions)
+                        .setCancelable(false)
+                        .setNegativeButton("DECLINE") { _, _ ->
+                            checkId.isChecked = false
+                        }
+                        .setPositiveButton("ACCEPT") { _, _ ->
+
+                        }
+                        .show()
+                }
+            }
         }
     }
 
@@ -48,7 +65,7 @@ class SignupFragment : Fragment() {
 
     fun btnSignUpHandler(){
         val validation: Boolean = viewmodel.signupFormValidation()
-        if (validation){
+        if (validation && binding!!.checkId.isChecked == true){
             MainScope().launch {
                 binding!!.progressBar.visibility = View.VISIBLE
                 val (authStatus,authMsg) = viewmodel.signupAuthentication()

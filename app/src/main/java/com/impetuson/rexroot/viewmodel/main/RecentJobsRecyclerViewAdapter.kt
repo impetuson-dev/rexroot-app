@@ -18,12 +18,14 @@ class RecentJobsRecyclerViewAdapter(private var dataList: List<JobReqModelClass>
         private val companyName: TextView = itemView.findViewById(R.id.tv_compname)
         private val companyLocation: TextView = itemView.findViewById(R.id.tv_complocation)
         private val payment: TextView = itemView.findViewById(R.id.tv_payment)
+        private val candpayment: TextView = itemView.findViewById(R.id.tv_candpayment)
 
         fun bind(data: JobReqModelClass) {
-            jobRole.text = data.jobrole
+            jobRole.text = data.jobrole + " - " + data.jobsalary
             companyName.text = data.compname
             companyLocation.text = data.complocation
             payment.text = "₹" + data.priceperclosure
+            candpayment.text = "₹" + (((data.priceperclosure).toInt())/2)
 
             itemView.setOnClickListener {
                 val intent = Intent(itemView.context, JobreqActivity::class.java)

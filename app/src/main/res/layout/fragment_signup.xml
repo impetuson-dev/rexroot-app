@@ -192,12 +192,15 @@
                     android:layout_marginBottom="25dp"
                     android:orientation="vertical">
 
-                    <TextView
+                    <CheckBox
+                        android:id="@+id/check_id"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_gravity="center"
                         android:text="By signing up, you agree to our Terms &amp; Conditions, and Privacy Policy of our application"
+                        android:textSize="13dp"
                         android:textColor="@color/black">
-                    </TextView>
+                    </CheckBox>
 
                 </LinearLayout>
 
