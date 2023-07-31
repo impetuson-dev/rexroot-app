@@ -78,6 +78,12 @@ class SignupViewModel: ViewModel() {
             passwordValidation = true
         }
 
+        if (password.length < 6){ _userPasswordError.value="Password should contain above 6 letters" }
+        else {
+            _userPasswordError.value = null
+            passwordValidation = true
+        }
+
         return fullnameValidation && emailValidation && mobilenumberValidation && passwordValidation
     }
 

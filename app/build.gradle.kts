@@ -72,8 +72,6 @@ dependencies {
     // Firebase Storage
     implementation("com.google.firebase:firebase-storage-ktx")
 
-    implementation("com.squareup.okhttp3:okhttp:3.9.0")
-
     // Livedata
     implementation("androidx.lifecycle:lifecycle-livedata-ktx:2.4.1")
 

@@ -1,5 +1,10 @@
 package com.impetuson.rexroot
 
+
+import android.app.Activity
+import androidx.activity.viewModels
+import kotlinx.coroutines.MainScope
+import kotlinx.coroutines.launch
 import android.app.Dialog
 import android.content.Intent
 import android.media.MediaPlayer
@@ -8,12 +13,13 @@ import android.os.StrictMode
 import android.util.Log
 import android.view.View
 import android.widget.Toast
-import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.android.material.snackbar.Snackbar
 import com.google.android.material.tabs.TabLayoutMediator
+import com.google.firebase.firestore.ktx.firestore
+import com.google.firebase.ktx.Firebase
 import com.impetuson.rexroot.databinding.ActivityJobreqBinding
 import com.impetuson.rexroot.databinding.BottomsheetApplyResumeBinding
 import com.impetuson.rexroot.view.jobreq.JobreqActionsFragment
@@ -22,14 +28,6 @@ import com.impetuson.rexroot.view.jobreq.JobreqSubmissionsFragment
 import com.impetuson.rexroot.view.jobreq.JobreqViewPagerAdapter
 import com.impetuson.rexroot.viewmodel.jobreq.JobreqViewModel
 import com.impetuson.rexroot.viewmodel.jobreq.PartnerSmsViewModel
-import kotlinx.coroutines.MainScope
-import kotlinx.coroutines.launch
-import okhttp3.MediaType
-import okhttp3.OkHttpClient
-import okhttp3.Request
-import okhttp3.RequestBody
-import okhttp3.Response
-import java.io.IOException
 
 
 class JobreqActivity: AppCompatActivity() {
@@ -47,17 +45,12 @@ class JobreqActivity: AppCompatActivity() {
     private val jobreqViewModel: JobreqViewModel by viewModels()
     private val partnerSmsViewModel : PartnerSmsViewModel by viewModels()
     private lateinit var mediaPlayer: MediaPlayer
-    private lateinit var  mobile_no : String
-    private lateinit var  partner_name : String
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityJobreqBinding.inflate(layoutInflater)
         val view = binding.root
         setContentView(view)
-
-        val policy = StrictMode.ThreadPolicy.Builder().permitAll().build()
-        StrictMode.setThreadPolicy(policy)
 
         mediaPlayer = MediaPlayer.create(this, R.raw.file_upload_success)
 
@@ -68,10 +61,6 @@ class JobreqActivity: AppCompatActivity() {
         reqJobExp = getIntent().extras?.getString("reqJobExp") ?: "Not available"
         jobSalary = getIntent().extras?.getString("jobSalary") ?: "Not available"
 
-        Log.d("Activity Data Received", jobId)
-        Log.d("Activity Data Received", jobRole)
-        Log.d("Activity Data Received", reqJobExp)
-        Log.d("Activity Data Received", jobSalary)
 
         jobreqViewPageAdapter = JobreqViewPagerAdapter(this)
 
@@ -90,9 +79,6 @@ class JobreqActivity: AppCompatActivity() {
         binding.apply{
             lifecycleOwner = this@JobreqActivity
             jobreqviewmodel = jobreqViewModel
-            applyJob.setOnClickListener {
-                applyToJob()
-            }
 
             cvGoback.setOnClickListener {
                 onBackPressed()
@@ -122,10 +108,7 @@ class JobreqActivity: AppCompatActivity() {
             }
 
             btnChoose.setOnClickListener {
-                val intent = Intent(Intent.ACTION_GET_CONTENT)
-                intent.type = "application/pdf"
-                intent.putExtra(Intent.EXTRA_ALLOW_MULTIPLE, true)
-                startActivityForResult(Intent.createChooser(intent, "Select Resume"), PDF_REQUEST_CODE)
+                applyToJob()
             }
 
             btnSubmit.setOnClickListener {
@@ -145,7 +128,6 @@ class JobreqActivity: AppCompatActivity() {
                         alert = false
                         alertDialog.dismiss()
                     }
-
                 }
             }
         }
@@ -162,21 +144,23 @@ class JobreqActivity: AppCompatActivity() {
 
         partnerSmsViewModel.partners_name.observe(this,{
             dialogBinding.partnerName.editText?.setText(it)
-            partner_name = it
+            jobreqViewModel.partnerName = it
         })
 
         partnerSmsViewModel.mobile_no.observe(this,{
             dialogBinding.etMobilenumber2.editText?.setText(it)
-            mobile_no = it
+            jobreqViewModel.partnerPhoneNo = it
         })
 
         partnerSmsViewModel.choice.observe(this,{
             if(it == true){
                 dialogBinding.yourself.isChecked = true
-                dialogBinding.attachResume.text = "Your resume"
+                dialogBinding.attachResume.text = getString(R.string.your_resume)
                 dialogBinding.attachResume.setBackgroundColor(getResources().getColor(R.color.violet))
                 dialogBinding.partnerName.visibility = View.GONE
                 dialogBinding.sendOtp.visibility = View.GONE
+                dialogBinding.pdfName.text = ""
+                jobreqViewModel.status = true
             }
             else{
                 dialogBinding.yourPartner.isChecked = true
@@ -184,6 +168,7 @@ class JobreqActivity: AppCompatActivity() {
                 dialogBinding.attachResume.setBackgroundColor(getResources().getColor(R.color.violet))
                 dialogBinding.partnerName.visibility = View.VISIBLE
                 dialogBinding.sendOtp.visibility = View.VISIBLE
+                jobreqViewModel.status = false
             }
         })
 
@@ -199,14 +184,39 @@ class JobreqActivity: AppCompatActivity() {
             val mob_no = dialogBinding.etMobilenumber2.editText?.text.toString()
             val name = dialogBinding.partnerName.editText?.text.toString()
             partnerSmsViewModel.update_mobile_no(mob_no,name)
-            Log.d("Name",partner_name)
-            Log.d("Mobile No",mobile_no)
-            val intent = Intent(Intent.ACTION_GET_CONTENT)
-            intent.type = "application/pdf"
-            intent.putExtra(Intent.EXTRA_ALLOW_MULTIPLE, true)
-            startActivityForResult(Intent.createChooser(intent, "Select Resume"), PDF_REQUEST_CODE)
+            if(jobreqViewModel.status == false){
+                if(jobreqViewModel.partnerName.length < 1){
+                    dialogBinding.pdfName.text = "Enter valid name"
+                }
+                else if(jobreqViewModel.partnerPhoneNo.length != 13){
+                    dialogBinding.pdfName.text = "Enter valid phone number"
+                }
+                else{
+                    val intent = Intent(Intent.ACTION_GET_CONTENT)
+                    intent.type = "application/pdf"
+                    intent.putExtra(Intent.EXTRA_ALLOW_MULTIPLE, true)
+                    startActivityForResult(Intent.createChooser(intent, "Select Resume"), PDF_REQUEST_CODE)
+                    applyBottomSheet.dismiss()
+                }
+            }
+            else{
+                val intent = Intent(Intent.ACTION_GET_CONTENT)
+                intent.type = "application/pdf"
+                intent.putExtra(Intent.EXTRA_ALLOW_MULTIPLE, true)
+                startActivityForResult(Intent.createChooser(intent, "Select Resume"), PDF_REQUEST_CODE)
+                applyBottomSheet.dismiss()
+            }
         }
+
         applyBottomSheet.show()
+    }
+
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        if (requestCode == PDF_REQUEST_CODE && resultCode == Activity.RESULT_OK){
+            jobreqViewModel.getSelectedFiles(data)
+        }
     }
 
     override fun onBackPressed() {

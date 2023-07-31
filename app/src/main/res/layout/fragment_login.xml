@@ -22,6 +22,7 @@
             android:id="@+id/ll_header"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="120dp"
             android:gravity="center"
             android:orientation="vertical">
 
@@ -59,7 +60,8 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="40dp"
             android:layout_below="@+id/ll_header"
             android:gravity="center"
             android:orientation="vertical"
@@ -145,21 +147,6 @@
 
                 </LinearLayout>
 
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="25dp"
-                    android:orientation="vertical">
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="By logging in, you agree to our Terms &amp; Conditions, and Privacy Policy of our application"
-                        android:textColor="@color/black">
-                    </TextView>
-
-                </LinearLayout>
-
                 <Button
                     android:id="@+id/btn_login"
                     android:layout_width="wrap_content"
@@ -181,24 +168,7 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="30sp"
-                android:layout_marginBottom="30sp"
-                android:gravity="center">
-
-                <TextView
-                    android:id="@+id/tv_loginotp"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/login_otp"
-                    android:textStyle="bold"
-                    android:textColor="@color/primary_red">
-                </TextView>
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_marginTop="30dp"
                 android:gravity="center">
 
                 <TextView

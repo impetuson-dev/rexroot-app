@@ -23,6 +23,7 @@
             android:id="@+id/ll_header"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="40dp"
             android:gravity="center"
             android:orientation="vertical">
 
@@ -56,10 +57,13 @@
         </LinearLayout>
 
         <LinearLayout
-            android:layout_margin="15dp"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:layout_below="@+id/ll_header"
+            android:layout_marginStart="15dp"
+            android:layout_marginTop="50dp"
+            android:layout_marginEnd="15dp"
+            android:layout_marginBottom="15dp"
             android:gravity="center"
             android:orientation="vertical">
 
@@ -176,8 +180,8 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:hint="Password"
-                            android:maxLines="1"
                             android:inputType="textPassword"
+                            android:maxLines="1"
                             android:text="@={signupViewModel.signupModel.userPassword}"
                             android:textColorHighlight="#2196F3" />
 
@@ -197,10 +201,10 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
-                        android:text="By signing up, you agree to our Terms &amp; Conditions, and Privacy Policy of our application"
-                        android:textSize="13dp"
-                        android:textColor="@color/black">
-                    </CheckBox>
+                        android:padding="5dp"
+                        android:text="By signing up in Rexroot, you agree to our Terms &amp; Conditions, and Privacy Policy of our application"
+                        android:textColor="@color/black"
+                        android:textSize="13dp"></CheckBox>
 
                 </LinearLayout>
 
@@ -208,17 +212,16 @@
                     android:id="@+id/btn_signup"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:paddingTop="14sp"
-                    android:paddingBottom="14sp"
-                    android:paddingLeft="50dp"
-                    android:paddingRight="50dp"
-                    android:text="Sign up"
                     android:backgroundTint="@color/primary_red"
+                    android:onClick="@{() -> signupFragment.btnSignUpHandler()}"
+                    android:paddingLeft="50dp"
+                    android:paddingTop="14sp"
+                    android:paddingRight="50dp"
+                    android:paddingBottom="14sp"
+                    android:text="Sign up"
                     android:textAllCaps="false"
                     android:textColor="@color/white"
-                    android:onClick="@{() -> signupFragment.btnSignUpHandler()}"
-                    android:textStyle="bold">
-                </Button>
+                    android:textStyle="bold"></Button>
 
 
             </LinearLayout>
@@ -239,10 +242,10 @@
                     android:id="@+id/tv_clickhere"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textStyle="bold"
+                    android:onClick="@{() -> signupFragment.redirectToLogIn()}"
                     android:text="@string/click_here"
                     android:textColor="#e51e26"
-                    android:onClick="@{() -> signupFragment.redirectToLogIn()}"></TextView>
+                    android:textStyle="bold"></TextView>
 
             </LinearLayout>
 

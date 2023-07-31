@@ -2,20 +2,6 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <data>
-        <variable
-            name="signupViewModel"
-            type="com.impetuson.rexroot.viewmodel.onboarding.SignupViewModel"/>
-
-        <variable
-            name="jobreqviewmodel"
-            type="com.impetuson.rexroot.viewmodel.jobreq.JobreqViewModel" />
-
-        <variable
-            name="partnersmsviewmodel"
-            type="com.impetuson.rexroot.viewmodel.jobreq.PartnerSmsViewModel" />
-    </data>
-
     <com.google.android.material.card.MaterialCardView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -150,7 +136,6 @@
                                     android:id="@+id/partner_name"
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
-                                    app:error="@{signupViewModel.userFullNameError}"
                                     app:errorEnabled="true"
                                     app:placeholderText="Eg: John Steve"
                                     app:placeholderTextColor="#A9A9A9"
@@ -163,7 +148,6 @@
                                         android:layout_height="wrap_content"
                                         android:hint="Enter Partner's Name"
                                         android:maxLines="1"
-                                        android:text="@={signupViewModel.signupModel.userFullName}"
                                         android:textColorHighlight="#2196F3"/>
 
                                 </com.google.android.material.textfield.TextInputLayout>
@@ -179,9 +163,8 @@
                                         android:id="@+id/et_mobilenumber2"
                                         android:layout_width="match_parent"
                                         android:layout_height="wrap_content"
-                                        app:error="@{signupViewModel.userMobileNumberError}"
                                         app:errorEnabled="true"
-                                        app:placeholderText="Eg: +919999999999"
+                                        app:placeholderText="Eg: +91987654321"
                                         app:placeholderTextColor="#A9A9A9"
                                         app:startIconDrawable="@drawable/baseline_phone_24"
                                         app:endIconDrawable="@drawable/icon_exit_black">
@@ -207,16 +190,8 @@
                                         android:id="@+id/pdf_name"
                                         android:layout_width="wrap_content"
                                         android:layout_height="wrap_content"
-                                        android:layout_marginRight="15dp"
-                                        android:text=""/>
-
-                                    <ImageView
-                                        android:layout_width="20sp"
-                                        android:layout_height="20sp"
-                                        android:layout_gravity="center"
-                                        android:src="@drawable/icon_exit_black"
-                                        android:visibility="invisible">
-                                    </ImageView>
+                                        android:text=""
+                                        android:textColor="@color/violet"/>
 
                                 </LinearLayout>
 
@@ -234,18 +209,9 @@
                                     android:id="@+id/attach_resume"
                                     android:layout_width="173dp"
                                     android:layout_height="55dp"
-                                    android:layout_marginRight="5dp"
                                     android:textColor="@color/white"
                                     android:backgroundTint="@color/light_grey"
-                                    android:text="Your Resume"/>
-
-                                <Button
-                                    android:id="@+id/submit_resume"
-                                    android:layout_width="163dp"
-                                    android:layout_height="55dp"
-                                    android:textColor="@color/white"
-                                    android:backgroundTint="@color/light_grey"
-                                    android:text="Submit"/>
+                                    android:text="@string/your_resume"/>
                             </LinearLayout>
 
 

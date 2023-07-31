@@ -44,10 +44,6 @@ class JobReqRecyclerViewAdapter(private val dataList: List<JobReqModelClass>) : 
                     putString("jobRole", data.jobrole)
                     putString("reqJobExp", data.reqjobexp)
                     putString("jobSalary", data.jobsalary)
-                    Log.d("Firebase Data Fetched", data.jobid)
-                    Log.d("Firebase Data Fetched", data.jobrole)
-                    Log.d("Firebase Data Fetched", data.reqjobexp)
-                    Log.d("Firebase Data Fetched", data.jobsalary)
                 }
                 intent.putExtras(extras)
                 itemView.context.startActivity(intent)

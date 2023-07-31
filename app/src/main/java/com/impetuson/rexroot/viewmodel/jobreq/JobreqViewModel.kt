@@ -52,19 +52,22 @@ class JobreqViewModel : ViewModel() {
 
     private val _uploadProgress = MutableLiveData<Int>()
 
+    private lateinit var userdetails : Map<String,String>
     var userId: String = ""
     var userName: String = ""
+    var partnerName: String = ""
+    var partnerPhoneNo: String = ""
+    var userPhoneNo: String = ""
     var jobId: String = ""
     var jobRole: String = ""
     var reqjobExp: String = ""
     var jobSalary: String = ""
+    var status : Boolean = true
+
 
     suspend fun fetchRealtimeDB() = withContext(Dispatchers.IO){
         realtimeDB = Firebase.database.reference
         Log.d("Firebase RealtimeDB","Jobid: ${jobId}")
-        Log.d("ViewModel Data Received", jobRole)
-        Log.d("ViewModel Data Received", reqjobExp)
-        Log.d("ViewModel Data Received", jobSalary)
 
         try {
             realtimeDB.child("jobreq").child(jobId).get().addOnSuccessListener { dataSnapshot ->
@@ -83,6 +86,7 @@ class JobreqViewModel : ViewModel() {
             Log.d("Firebase RealtimeDB","Error: ${e.message}")
         }
     }
+
 
     fun fetchDataSharedPref(sharedPreferences: SharedPreferences){
         userId = sharedPreferences.getString("userid","").toString()
@@ -122,9 +126,27 @@ class JobreqViewModel : ViewModel() {
             }
         }
 
+        fetchPhoneNumber()
         _btnChooseText.value = "Reselect Resume(s)"
         _btnSubmitStatus.value = selectedFilesUri.isNotEmpty()
         return selectedFilesUri.isNotEmpty()
+    }
+
+    fun fetchPhoneNumber(){
+        val docRef = firestoreDB.collection("users").document(userId)
+        docRef.get()
+            .addOnSuccessListener { document ->
+                if (document != null) {
+                    userdetails = document.data?.getValue("profiledata") as Map<String, String>
+                    userPhoneNo = userdetails["mobilenumber"].toString()
+                    Log.d("Data", userPhoneNo)
+                } else {
+                    Log.d("Doc error", "No such document")
+                }
+            }
+            .addOnFailureListener { exception ->
+                Log.d("Phone Exception", "get failed with ", exception)
+            }
     }
 
     suspend fun btnSubmitHandler(contentResolver: ContentResolver): String{
@@ -166,7 +188,12 @@ class JobreqViewModel : ViewModel() {
                 Log.d("Firebase Storage","Resume Download URL: $downloadUrl")
 
                 storeDataToFirestore(fileName, resumeName, downloadUrl, index)
-                sendEmail2(userName,jobRole,reqjobExp,jobSalary,downloadUrl)
+                if(partnerName.equals("") && partnerPhoneNo.equals("")){
+                    candidateMail(userName,userPhoneNo,jobRole,reqjobExp,jobSalary,downloadUrl)
+                }
+                else{
+                    partnerMail(userName,userPhoneNo,partnerName,partnerPhoneNo,jobRole,reqjobExp,jobSalary,downloadUrl)
+                }
             } catch(e: Exception) {
                 uploadMsg = "Database error occurred"
                 Log.d("Firebase Storage","Error: ${e.message}")
@@ -264,23 +291,35 @@ class JobreqViewModel : ViewModel() {
         editor.apply()
     }
 
-    fun sendEmail2(userName: String, jobRole: String, reqjobExp: String, jobSalary: String, resumeURL: String){
+    fun candidateMail(userName: String, userPhoneNo: String,jobRole: String, reqjobExp: String, jobSalary: String, resumeURL: String){
         val mailData = hashMapOf(
             "to" to arrayListOf("ryanbritto001@gmail.com"),
             "message" to "Hello",
         )
 
         val nestedMailData = hashMapOf(
-            "subject" to "New Resume Uploaded",
-            "html" to "Name: <strong>${userName}</strong><br><br>Applied Job: <strong>${jobRole}</strong><br><br>Job Experience Required: <strong>${reqjobExp}</strong><br><br>Salary Package: <strong>${jobSalary}</strong><br><br>Click this link to view his Resume:<br>${resumeURL}",
+            "subject" to "Candidate Resume Uploaded",
+            "html" to "Candidate Name: <strong>${userName}</strong><br><br>Candidate Phone Number: <strong>${userPhoneNo}</strong><br><br>Applied Job: <strong>${jobRole}</strong><br><br>Job Experience Required: <strong>${reqjobExp}</strong><br><br>Salary Package: <strong>${jobSalary}</strong><br><br>Click this link to view Candidate's Resume:<br>${resumeURL}",
         )
 
         mailData["message"] = nestedMailData
 
         firestoreDB.collection("mail").add(mailData)
-        Log.d("Firebase Data Moved",userName)
-        Log.d("Firebase Data Moved", jobRole)
-        Log.d("Firebase Data Moved", reqjobExp)
-        Log.d("Firebase Data Moved", jobSalary)
+    }
+
+    fun partnerMail(userName: String, userPhoneNo: String,partnerName: String, partnerNo: String,jobRole: String, reqjobExp: String, jobSalary: String, resumeURL: String){
+        val mailData = hashMapOf(
+            "to" to arrayListOf("ryanbritto001@gmail.com"),
+            "message" to "Hello",
+        )
+
+        val nestedMailData = hashMapOf(
+            "subject" to "Partner Resume Uploaded",
+            "html" to "Partner Name: <strong>${partnerName}</strong><br><br>Partner Phone Number: <strong>${partnerNo}</strong><br><br>Candidate Name: <strong>${userName}</strong><br><br>Candidate Phone No: <strong>${userPhoneNo}</strong><br><br>Applied Job: <strong>${jobRole}</strong><br><br>Job Experience Required: <strong>${reqjobExp}</strong><br><br>Salary Package: <strong>${jobSalary}</strong><br><br>Click this link to view Partner's Resume:<br>${resumeURL}",
+        )
+
+        mailData["message"] = nestedMailData
+
+        firestoreDB.collection("mail").add(mailData)
     }
 }
