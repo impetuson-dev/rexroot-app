@@ -155,7 +155,7 @@
                                     app:placeholderText="Eg: John Steve"
                                     app:placeholderTextColor="#A9A9A9"
                                     app:startIconDrawable="@drawable/baseline_account_circle_24"
-                                    android:visibility="gone">
+                                    android:visibility="visible">
 
                                     <com.google.android.material.textfield.TextInputEditText
                                         android:id="@+id/et_fullname"
@@ -173,11 +173,11 @@
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
                                     android:orientation="horizontal"
-                                    android:visibility="gone">
+                                    android:visibility="visible">
 
                                     <com.google.android.material.textfield.TextInputLayout
                                         android:id="@+id/et_mobilenumber2"
-                                        android:layout_width="220dp"
+                                        android:layout_width="match_parent"
                                         android:layout_height="wrap_content"
                                         app:error="@{signupViewModel.userMobileNumberError}"
                                         app:errorEnabled="true"
@@ -194,53 +194,6 @@
                                             android:textColorHighlight="#2196F3" />
 
                                     </com.google.android.material.textfield.TextInputLayout>
-
-                                    <Button
-                                        android:id="@+id/send_otp_button"
-                                        android:layout_width="115dp"
-                                        android:layout_height="50dp"
-                                        android:layout_marginLeft="5dp"
-                                        android:text="Send OTP"
-                                        android:textColor="@color/white"
-                                        android:backgroundTint="@color/light_grey" />
-
-                                </LinearLayout>
-
-                                <LinearLayout
-                                    android:id="@+id/verify_otp"
-                                    android:layout_width="match_parent"
-                                    android:layout_height="wrap_content"
-                                    android:orientation="horizontal"
-                                    android:visibility="gone">
-
-                                    <com.google.android.material.textfield.TextInputLayout
-                                        android:id="@+id/et_otpnumber"
-                                        android:layout_width="220dp"
-                                        android:layout_height="wrap_content"
-                                        app:error="@{signupViewModel.userMobileNumberError}"
-                                        app:errorEnabled="true"
-                                        app:placeholderText="Eg: 123456"
-                                        app:placeholderTextColor="#A9A9A9"
-                                        app:startIconDrawable="@drawable/baseline_lock_24">
-
-                                        <com.google.android.material.textfield.TextInputEditText
-                                            android:layout_width="match_parent"
-                                            android:layout_height="wrap_content"
-                                            android:hint="Partner's OTP No"
-                                            android:maxLines="1"
-                                            android:textColorHighlight="#2196F3" />
-
-                                    </com.google.android.material.textfield.TextInputLayout>
-
-                                    <Button
-                                        android:id="@+id/verify_otp_button"
-                                        android:layout_width="115dp"
-                                        android:layout_height="50dp"
-                                        android:layout_marginLeft="5dp"
-                                        android:text="Verify"
-                                        android:textColor="@color/white"
-                                        android:backgroundTint="@color/light_grey"
-                                        android:enabled="false"/>
 
                                 </LinearLayout>
 

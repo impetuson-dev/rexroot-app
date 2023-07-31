@@ -47,9 +47,8 @@ class JobreqActivity: AppCompatActivity() {
     private val jobreqViewModel: JobreqViewModel by viewModels()
     private val partnerSmsViewModel : PartnerSmsViewModel by viewModels()
     private lateinit var mediaPlayer: MediaPlayer
-    private val mClient = OkHttpClient()
     private lateinit var  mobile_no : String
-    private lateinit var  otp_no : String
+    private lateinit var  partner_name : String
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -163,15 +162,12 @@ class JobreqActivity: AppCompatActivity() {
 
         partnerSmsViewModel.partners_name.observe(this,{
             dialogBinding.partnerName.editText?.setText(it)
+            partner_name = it
         })
 
         partnerSmsViewModel.mobile_no.observe(this,{
             dialogBinding.etMobilenumber2.editText?.setText(it)
             mobile_no = it
-        })
-
-        partnerSmsViewModel.otp_no.observe(this,{
-            dialogBinding.etOtpnumber.editText?.setText(it)
         })
 
         partnerSmsViewModel.choice.observe(this,{
@@ -181,7 +177,6 @@ class JobreqActivity: AppCompatActivity() {
                 dialogBinding.attachResume.setBackgroundColor(getResources().getColor(R.color.violet))
                 dialogBinding.partnerName.visibility = View.GONE
                 dialogBinding.sendOtp.visibility = View.GONE
-                dialogBinding.verifyOtp.visibility = View.GONE
             }
             else{
                 dialogBinding.yourPartner.isChecked = true
@@ -189,39 +184,7 @@ class JobreqActivity: AppCompatActivity() {
                 dialogBinding.attachResume.setBackgroundColor(getResources().getColor(R.color.violet))
                 dialogBinding.partnerName.visibility = View.VISIBLE
                 dialogBinding.sendOtp.visibility = View.VISIBLE
-                dialogBinding.verifyOtp.visibility = View.VISIBLE
             }
-        })
-
-        partnerSmsViewModel.send_button_status.observe(this,{
-            if(it == true){
-                dialogBinding.sendOtpButton.setBackgroundColor(getResources().getColor(R.color.violet))
-                dialogBinding.verifyOtpButton.setBackgroundColor(getResources().getColor(R.color.light_grey))
-                dialogBinding.sendOtpButton.isEnabled = true
-                dialogBinding.verifyOtpButton.isEnabled = false
-            }
-            else{
-                dialogBinding.sendOtpButton.setBackgroundColor(getResources().getColor(R.color.light_grey))
-                dialogBinding.verifyOtpButton.setBackgroundColor(getResources().getColor(R.color.violet))
-                dialogBinding.sendOtpButton.isEnabled = false
-                dialogBinding.verifyOtpButton.isEnabled = true
-                dialogBinding.sendOtpButton.text = "Sent"
-            }
-        })
-
-        partnerSmsViewModel.verify_button_status.observe(this,{
-            if(it == true){
-                dialogBinding.verifyOtpButton.setBackgroundColor(getResources().getColor(R.color.violet))
-                dialogBinding.verifyOtpButton.isEnabled = true
-            }
-            else{
-                dialogBinding.verifyOtpButton.setBackgroundColor(getResources().getColor(R.color.light_grey))
-                dialogBinding.verifyOtpButton.isEnabled = false
-            }
-        })
-
-        partnerSmsViewModel.verify_status.observe(this,{
-            dialogBinding.verifyOtpButton.text = it
         })
 
         dialogBinding.yourself.setOnClickListener {
@@ -230,92 +193,20 @@ class JobreqActivity: AppCompatActivity() {
 
         dialogBinding.yourPartner.setOnClickListener {
             partnerSmsViewModel.update_choice(false)
-            dialogBinding.partnerName.visibility = View.VISIBLE
-            dialogBinding.sendOtp.visibility = View.VISIBLE
-            dialogBinding.verifyOtp.visibility = View.VISIBLE
         }
 
         dialogBinding.attachResume.setOnClickListener {
+            val mob_no = dialogBinding.etMobilenumber2.editText?.text.toString()
+            val name = dialogBinding.partnerName.editText?.text.toString()
+            partnerSmsViewModel.update_mobile_no(mob_no,name)
+            Log.d("Name",partner_name)
+            Log.d("Mobile No",mobile_no)
             val intent = Intent(Intent.ACTION_GET_CONTENT)
             intent.type = "application/pdf"
             intent.putExtra(Intent.EXTRA_ALLOW_MULTIPLE, true)
             startActivityForResult(Intent.createChooser(intent, "Select Resume"), PDF_REQUEST_CODE)
         }
-
-        dialogBinding.sendOtpButton.setOnClickListener {
-            val mob_no = dialogBinding.etMobilenumber2.editText?.text.toString()
-            val name = dialogBinding.partnerName.editText?.text.toString()
-            partnerSmsViewModel.update_mobile_no(mob_no,name)
-            Log.d("Mobile No",mob_no)
-            if(mob_no.length == 13){
-                try{
-                    val response = post(mob_no)
-                    if (response != null) {
-                        Log.d("SMS Response",response)
-                    }
-                    partnerSmsViewModel.update_verify_button(true)
-                }
-                catch (e: IOException){
-                    Log.d("Send Msg Exception",e.printStackTrace().toString())
-                }
-            }
-            else{
-                Toast.makeText(getApplicationContext(),"Invalid Number Format",Toast.LENGTH_LONG).show();
-            }
-        }
-
-        dialogBinding.verifyOtpButton.setOnClickListener {
-            val ot_no = dialogBinding.etOtpnumber.editText?.text.toString()
-            partnerSmsViewModel.update_otp_no(ot_no)
-            Log.d("OTP no",ot_no)
-            if(ot_no.length == 6){
-                try{
-                    val response = otp(mobile_no,ot_no)
-                    if (response != null) {
-                        Log.d("OTP Response",response)
-                    }
-                    partnerSmsViewModel.update_verify_button(false)
-                }
-                catch (e: IOException){
-                    Log.d("OTP Exception",e.printStackTrace().toString())
-                }
-            }
-            else{
-                Toast.makeText(getApplicationContext(),"Enter 6 digits",Toast.LENGTH_LONG).show();
-            }
-        }
         applyBottomSheet.show()
-    }
-
-    @Throws(IOException::class)
-    fun post(mobile_no:String):String?{
-        val client = OkHttpClient().newBuilder().build()
-        val mediaType = MediaType.parse("text/plain")
-        val body = RequestBody.create(mediaType, "")
-        val request = Request.Builder()
-            .url("https://2factor.in/API/V1/15a2d98c-2dea-11ee-addf-0200cd936042/SMS/${mobile_no}/AUTOGEN/OTP1")
-            .method("POST", body)
-            .build()
-        val response = client.newCall(request).execute()
-        val response_body = response.body()?.string()
-        response.body()?.close()
-        return response_body
-    }
-
-    @Throws(IOException::class)
-    fun otp(mobile_no: String,otp_no:String):String?{
-        val client = OkHttpClient().newBuilder()
-            .build()
-        val mediaType = MediaType.parse("text/plain")
-        val body = RequestBody.create(mediaType, "")
-        val request = Request.Builder()
-            .url("https://2factor.in/API/V1/15a2d98c-2dea-11ee-addf-0200cd936042/SMS/VERIFY3/${mobile_no}/${otp_no}")
-            .method("POST", body)
-            .build()
-        val response: Response = client.newCall(request).execute()
-        val response_body = response.body()?.string()
-        response.body()?.close()
-        return response_body
     }
 
     override fun onBackPressed() {
