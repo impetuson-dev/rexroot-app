@@ -1,0 +1,310 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+        <variable
+            name="signupViewModel"
+            type="com.impetuson.rexroot.viewmodel.onboarding.SignupViewModel"/>
+
+        <variable
+            name="jobreqviewmodel"
+            type="com.impetuson.rexroot.viewmodel.jobreq.JobreqViewModel" />
+
+        <variable
+            name="partnersmsviewmodel"
+            type="com.impetuson.rexroot.viewmodel.jobreq.PartnerSmsViewModel" />
+    </data>
+
+    <com.google.android.material.card.MaterialCardView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:strokeWidth="0sp"
+        app:cardCornerRadius="25sp"
+        app:cardElevation="0sp"
+        app:behavior_draggable="false"
+        style="@style/Widget.Material3.BottomSheet"
+        app:layout_behavior="com.google.android.material.bottomsheet.BottomSheetBehavior"
+        android:backgroundTint="@color/white"
+        android:background="@color/white"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/white"
+            android:orientation="vertical">
+
+            <com.google.android.material.bottomsheet.BottomSheetDragHandleView
+                android:id="@+id/drag_handle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <TextView
+                    android:id="@+id/tv_header"
+                    android:gravity="center"
+                    android:textSize="18sp"
+                    android:textStyle="bold"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Are you applying as a?"></TextView>
+
+                <RelativeLayout
+                    android:padding="10sp"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical">
+
+                    <com.google.android.material.card.MaterialCardView
+                        android:id="@+id/ll_exp_payment"
+                        android:backgroundTint="@color/white"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentStart="true"
+                        android:layout_alignParentTop="true"
+                        android:layout_alignParentEnd="true">
+
+                        <LinearLayout
+                            android:padding="15sp"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:gravity="center"
+                            android:orientation="vertical">
+
+                            <LinearLayout
+                                android:paddingTop="5sp"
+                                android:paddingBottom="5sp"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="vertical">
+
+                                <LinearLayout
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:orientation="horizontal"
+                                    android:layout_gravity="center">
+
+                                    <RadioGroup
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:orientation="horizontal">
+
+                                        <ImageView
+                                            android:layout_width="20sp"
+                                            android:layout_height="20sp"
+                                            android:layout_gravity="center"
+                                            android:src="@drawable/icon_user">
+                                        </ImageView>
+
+                                        <RadioButton
+                                            android:id="@+id/yourself"
+                                            android:layout_width="wrap_content"
+                                            android:layout_marginRight="50dp"
+                                            android:layout_height="20dp"
+                                            android:layout_gravity="center"
+                                            android:text="Candidate"
+                                            android:textColor="@color/black"
+                                            android:textSize="14sp"
+                                            android:textStyle="bold"
+                                            android:checked="true">
+                                        </RadioButton>
+
+                                        <ImageView
+                                            android:layout_width="20sp"
+                                            android:layout_height="20sp"
+                                            android:layout_gravity="center"
+                                            android:src="@drawable/icon_user">
+                                        </ImageView>
+
+                                        <RadioButton
+                                            android:id="@+id/your_partner"
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="20dp"
+                                            android:layout_gravity="center"
+                                            android:text="Partner"
+                                            android:textColor="@color/black"
+                                            android:textSize="14sp"
+                                            android:textStyle="bold"></RadioButton>
+
+                                    </RadioGroup>
+
+                                </LinearLayout>
+
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:paddingTop="5sp"
+                                android:paddingBottom="5sp"
+                                android:layout_marginTop="10dp"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="vertical"
+                                android:gravity="center">
+
+                                <com.google.android.material.textfield.TextInputLayout
+                                    android:id="@+id/partner_name"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    app:error="@{signupViewModel.userFullNameError}"
+                                    app:errorEnabled="true"
+                                    app:placeholderText="Eg: John Steve"
+                                    app:placeholderTextColor="#A9A9A9"
+                                    app:startIconDrawable="@drawable/baseline_account_circle_24"
+                                    android:visibility="gone">
+
+                                    <com.google.android.material.textfield.TextInputEditText
+                                        android:id="@+id/et_fullname"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:hint="Enter Partner's Name"
+                                        android:maxLines="1"
+                                        android:text="@={signupViewModel.signupModel.userFullName}"
+                                        android:textColorHighlight="#2196F3"/>
+
+                                </com.google.android.material.textfield.TextInputLayout>
+
+                                <LinearLayout
+                                    android:id="@+id/send_otp"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:orientation="horizontal"
+                                    android:visibility="gone">
+
+                                    <com.google.android.material.textfield.TextInputLayout
+                                        android:id="@+id/et_mobilenumber2"
+                                        android:layout_width="220dp"
+                                        android:layout_height="wrap_content"
+                                        app:error="@{signupViewModel.userMobileNumberError}"
+                                        app:errorEnabled="true"
+                                        app:placeholderText="Eg: +919999999999"
+                                        app:placeholderTextColor="#A9A9A9"
+                                        app:startIconDrawable="@drawable/baseline_phone_24"
+                                        app:endIconDrawable="@drawable/icon_exit_black">
+
+                                        <com.google.android.material.textfield.TextInputEditText
+                                            android:layout_width="match_parent"
+                                            android:layout_height="wrap_content"
+                                            android:hint="Partner's Mobile No"
+                                            android:maxLines="1"
+                                            android:textColorHighlight="#2196F3" />
+
+                                    </com.google.android.material.textfield.TextInputLayout>
+
+                                    <Button
+                                        android:id="@+id/send_otp_button"
+                                        android:layout_width="115dp"
+                                        android:layout_height="50dp"
+                                        android:layout_marginLeft="5dp"
+                                        android:text="Send OTP"
+                                        android:textColor="@color/white"
+                                        android:backgroundTint="@color/light_grey" />
+
+                                </LinearLayout>
+
+                                <LinearLayout
+                                    android:id="@+id/verify_otp"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:orientation="horizontal"
+                                    android:visibility="gone">
+
+                                    <com.google.android.material.textfield.TextInputLayout
+                                        android:id="@+id/et_otpnumber"
+                                        android:layout_width="220dp"
+                                        android:layout_height="wrap_content"
+                                        app:error="@{signupViewModel.userMobileNumberError}"
+                                        app:errorEnabled="true"
+                                        app:placeholderText="Eg: 123456"
+                                        app:placeholderTextColor="#A9A9A9"
+                                        app:startIconDrawable="@drawable/baseline_lock_24">
+
+                                        <com.google.android.material.textfield.TextInputEditText
+                                            android:layout_width="match_parent"
+                                            android:layout_height="wrap_content"
+                                            android:hint="Partner's OTP No"
+                                            android:maxLines="1"
+                                            android:textColorHighlight="#2196F3" />
+
+                                    </com.google.android.material.textfield.TextInputLayout>
+
+                                    <Button
+                                        android:id="@+id/verify_otp_button"
+                                        android:layout_width="115dp"
+                                        android:layout_height="50dp"
+                                        android:layout_marginLeft="5dp"
+                                        android:text="Verify"
+                                        android:textColor="@color/white"
+                                        android:backgroundTint="@color/light_grey"
+                                        android:enabled="false"/>
+
+                                </LinearLayout>
+
+
+                                <LinearLayout
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:orientation="horizontal">
+
+                                    <TextView
+                                        android:id="@+id/pdf_name"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_marginRight="15dp"
+                                        android:text=""/>
+
+                                    <ImageView
+                                        android:layout_width="20sp"
+                                        android:layout_height="20sp"
+                                        android:layout_gravity="center"
+                                        android:src="@drawable/icon_exit_black"
+                                        android:visibility="invisible">
+                                    </ImageView>
+
+                                </LinearLayout>
+
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="horizontal"
+                                android:layout_marginTop="10dp"
+                                android:layout_marginBottom="10dp"
+                                android:gravity="center">
+
+                                <Button
+                                    android:id="@+id/attach_resume"
+                                    android:layout_width="173dp"
+                                    android:layout_height="55dp"
+                                    android:layout_marginRight="5dp"
+                                    android:textColor="@color/white"
+                                    android:backgroundTint="@color/light_grey"
+                                    android:text="Your Resume"/>
+
+                                <Button
+                                    android:id="@+id/submit_resume"
+                                    android:layout_width="163dp"
+                                    android:layout_height="55dp"
+                                    android:textColor="@color/white"
+                                    android:backgroundTint="@color/light_grey"
+                                    android:text="Submit"/>
+                            </LinearLayout>
+
+
+                        </LinearLayout>
+
+                    </com.google.android.material.card.MaterialCardView>
+
+                </RelativeLayout>
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </com.google.android.material.card.MaterialCardView>
+</layout>

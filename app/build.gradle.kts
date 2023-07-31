@@ -63,7 +63,6 @@ dependencies {
     testImplementation("org.junit.jupiter:junit-jupiter:5.8.1")
     androidTestImplementation(libs.androidx.test.ext.junit)
     androidTestImplementation(libs.espresso.core)
-
     // Firebase BOM
     implementation(platform("com.google.firebase:firebase-bom:32.1.1"))
 
@@ -72,6 +71,8 @@ dependencies {
 
     // Firebase Storage
     implementation("com.google.firebase:firebase-storage-ktx")
+
+    implementation("com.squareup.okhttp3:okhttp:3.9.0")
 
     // Livedata
     implementation("androidx.lifecycle:lifecycle-livedata-ktx:2.4.1")
