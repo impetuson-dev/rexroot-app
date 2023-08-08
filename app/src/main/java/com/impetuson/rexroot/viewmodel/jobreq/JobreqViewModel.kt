@@ -18,7 +18,6 @@ import com.google.firebase.firestore.SetOptions
 import com.google.firebase.firestore.ktx.firestore
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
-import com.impetuson.rexroot.BuildConfig
 import com.impetuson.rexroot.model.jobreq.JobReqModelClass
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
@@ -32,7 +31,6 @@ class JobreqViewModel : ViewModel() {
     private lateinit var realtimeDB: DatabaseReference
     private lateinit var mediaPlayer: MediaPlayer
 
-    val mail = BuildConfig.MAIL
     private var selectedFilesUri = mutableListOf<Uri>()
     private var selectedFilesNames = mutableListOf<String>()
     private var selectedUUIDFilesNames = mutableListOf<String>()
@@ -283,7 +281,7 @@ class JobreqViewModel : ViewModel() {
 
     fun candidateMail(userName: String, userPhoneNo: String,jobRole: String, reqjobExp: String, jobSalary: String, resumeURL: String){
         val mailData = hashMapOf(
-            "to" to arrayListOf(mail),
+            "to" to arrayListOf("rexrootcorp@gmail.com"),
             "message" to "Hello",
         )
 
@@ -299,7 +297,7 @@ class JobreqViewModel : ViewModel() {
 
     fun partnerMail(userName: String, userPhoneNo: String,partnerName: String, partnerNo: String,jobRole: String, reqjobExp: String, jobSalary: String, resumeURL: String){
         val mailData = hashMapOf(
-            "to" to arrayListOf(mail),
+            "to" to arrayListOf("rexrootcorp@gmail.com"),
             "message" to "Hello",
         )
 
