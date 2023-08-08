@@ -18,6 +18,7 @@ import com.google.firebase.firestore.SetOptions
 import com.google.firebase.firestore.ktx.firestore
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
+import com.impetuson.rexroot.BuildConfig
 import com.impetuson.rexroot.model.jobreq.JobReqModelClass
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
@@ -31,6 +32,7 @@ class JobreqViewModel : ViewModel() {
     private lateinit var realtimeDB: DatabaseReference
     private lateinit var mediaPlayer: MediaPlayer
 
+    val mail = BuildConfig.MAIL
     private var selectedFilesUri = mutableListOf<Uri>()
     private var selectedFilesNames = mutableListOf<String>()
     private var selectedUUIDFilesNames = mutableListOf<String>()
@@ -52,8 +54,8 @@ class JobreqViewModel : ViewModel() {
 
     private val _uploadProgress = MutableLiveData<Int>()
 
-    private lateinit var userdetails : Map<String,String>
     var userId: String = ""
+    var userMail: String = ""
     var userName: String = ""
     var partnerName: String = ""
     var partnerPhoneNo: String = ""
@@ -62,6 +64,7 @@ class JobreqViewModel : ViewModel() {
     var jobRole: String = ""
     var reqjobExp: String = ""
     var jobSalary: String = ""
+    var price: String = ""
     var status : Boolean = true
 
 
@@ -91,6 +94,8 @@ class JobreqViewModel : ViewModel() {
     fun fetchDataSharedPref(sharedPreferences: SharedPreferences){
         userId = sharedPreferences.getString("userid","").toString()
         userName = sharedPreferences.getString("username","").toString()
+        userMail = sharedPreferences.getString("useremail","").toString()
+        userPhoneNo = sharedPreferences.getString("usermobilenumber","").toString()
     }
 
     private fun convertMapToObject(jobDataMap: Map<String,Any>): JobReqModelClass{
@@ -126,27 +131,9 @@ class JobreqViewModel : ViewModel() {
             }
         }
 
-        fetchPhoneNumber()
         _btnChooseText.value = "Reselect Resume(s)"
         _btnSubmitStatus.value = selectedFilesUri.isNotEmpty()
         return selectedFilesUri.isNotEmpty()
-    }
-
-    fun fetchPhoneNumber(){
-        val docRef = firestoreDB.collection("users").document(userId)
-        docRef.get()
-            .addOnSuccessListener { document ->
-                if (document != null) {
-                    userdetails = document.data?.getValue("profiledata") as Map<String, String>
-                    userPhoneNo = userdetails["mobilenumber"].toString()
-                    Log.d("Data", userPhoneNo)
-                } else {
-                    Log.d("Doc error", "No such document")
-                }
-            }
-            .addOnFailureListener { exception ->
-                Log.d("Phone Exception", "get failed with ", exception)
-            }
     }
 
     suspend fun btnSubmitHandler(contentResolver: ContentResolver): String{
@@ -189,10 +176,13 @@ class JobreqViewModel : ViewModel() {
 
                 storeDataToFirestore(fileName, resumeName, downloadUrl, index)
                 if(partnerName.equals("") && partnerPhoneNo.equals("")){
+                    val candPrice = ((price.toInt())/2).toString()
                     candidateMail(userName,userPhoneNo,jobRole,reqjobExp,jobSalary,downloadUrl)
+                    candidateSucessMail(userName,jobRole,candPrice)
                 }
                 else{
                     partnerMail(userName,userPhoneNo,partnerName,partnerPhoneNo,jobRole,reqjobExp,jobSalary,downloadUrl)
+                    partnerSucessMail(userName,partnerName,jobRole,price)
                 }
             } catch(e: Exception) {
                 uploadMsg = "Database error occurred"
@@ -293,7 +283,7 @@ class JobreqViewModel : ViewModel() {
 
     fun candidateMail(userName: String, userPhoneNo: String,jobRole: String, reqjobExp: String, jobSalary: String, resumeURL: String){
         val mailData = hashMapOf(
-            "to" to arrayListOf("ryanbritto001@gmail.com"),
+            "to" to arrayListOf(mail),
             "message" to "Hello",
         )
 
@@ -309,13 +299,54 @@ class JobreqViewModel : ViewModel() {
 
     fun partnerMail(userName: String, userPhoneNo: String,partnerName: String, partnerNo: String,jobRole: String, reqjobExp: String, jobSalary: String, resumeURL: String){
         val mailData = hashMapOf(
-            "to" to arrayListOf("ryanbritto001@gmail.com"),
+            "to" to arrayListOf(mail),
             "message" to "Hello",
         )
 
         val nestedMailData = hashMapOf(
             "subject" to "Partner Resume Uploaded",
-            "html" to "Partner Name: <strong>${partnerName}</strong><br><br>Partner Phone Number: <strong>${partnerNo}</strong><br><br>Candidate Name: <strong>${userName}</strong><br><br>Candidate Phone No: <strong>${userPhoneNo}</strong><br><br>Applied Job: <strong>${jobRole}</strong><br><br>Job Experience Required: <strong>${reqjobExp}</strong><br><br>Salary Package: <strong>${jobSalary}</strong><br><br>Click this link to view Partner's Resume:<br>${resumeURL}",
+            "html" to "Partner Name: <strong>${partnerName}</strong><br><br>Partner Phone Number: <strong>${partnerNo}</strong><br><br>Candidate Name: <strong>${userName}</strong><br><br>Candidate Phone No: <strong>${userPhoneNo}</strong><br><br>Applied Job: <strong>${jobRole}</strong><br><br>Job Experience Required: <strong>${reqjobExp}</strong><br><br>Salary Package: <strong>${jobSalary}</strong><br><br>Click this link to view the referred Partner's Resume:<br>${resumeURL}",
+        )
+
+        mailData["message"] = nestedMailData
+
+        firestoreDB.collection("mail").add(mailData)
+    }
+
+    fun candidateSucessMail(userName: String, jobRole: String, price:String){
+        val mailData = hashMapOf(
+            "to" to arrayListOf(userMail),
+            "message" to "Hello",
+        )
+
+        val nestedMailData = hashMapOf(
+            "subject" to "Application Received",
+            "html" to "Dear ${userName},<br><br> Thank you for taking the time to apply for our <strong>${jobRole}</strong> position." +
+                    " We're currently in the process of taking applications and if you are selected to continue to the interview " +
+                    "process, our human resources department will be in contact with you within 1-3 weeks. You will be rewared " +
+                    "an amount of <strong>₹${price}</strong> after your completion of 3 months of work experience as <strong>${jobRole}</strong> " +
+                    "in the respective company.<br><br>Thank you,<br><br>Your best regards,<br>Team REXROOT",
+        )
+
+        mailData["message"] = nestedMailData
+
+        firestoreDB.collection("mail").add(mailData)
+    }
+
+    fun partnerSucessMail(userName: String, partnerName: String,jobRole: String, price:String){
+        val mailData = hashMapOf(
+            "to" to arrayListOf(userMail),
+            "message" to "Hello",
+        )
+
+        val nestedMailData = hashMapOf(
+            "subject" to "Application Received",
+            "html" to "Dear ${userName},<br><br> Thank you for taking the time to apply for our <strong>${jobRole}</strong> position" +
+                    " for your partner <strong>${partnerName}</strong>. We're currently in the process of taking applications and if he/she" +
+                    " got selected to continue to the interview process, our human resources department will be in contact with you and your" +
+                    " Partner within 1-3 weeks. You will be rewarded an amount of <strong>₹${price}</strong> when your partner completes 3 months" +
+                    " of work experience as <strong>${jobRole}</strong> in the respective company.<br><br>Thank you,<br><br>Your best regards,<br>" +
+                    "Team REXROOT",
         )
 
         mailData["message"] = nestedMailData

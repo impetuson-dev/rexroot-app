@@ -44,6 +44,7 @@ class JobReqRecyclerViewAdapter(private val dataList: List<JobReqModelClass>) : 
                     putString("jobRole", data.jobrole)
                     putString("reqJobExp", data.reqjobexp)
                     putString("jobSalary", data.jobsalary)
+                    putString("price", data.priceperclosure)
                 }
                 intent.putExtras(extras)
                 itemView.context.startActivity(intent)

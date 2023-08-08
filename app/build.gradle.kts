@@ -1,3 +1,5 @@
+import java.util.Properties
+
 @Suppress("DSL_SCOPE_VIOLATION") // TODO: Remove once KTIJ-19369 is fixed
 plugins {
     alias(libs.plugins.androidApplication)
@@ -12,14 +14,22 @@ android {
     namespace = "com.impetuson.rexroot"
     compileSdk = 33
 
+    buildFeatures {
+        buildConfig = true
+    }
+
     defaultConfig {
         applicationId = "com.impetuson.rexroot"
         minSdk = 26
         targetSdk = 33
-        versionCode = 4   // Have to be incremented by 1 for each prod release
+        versionCode = 5   // Have to be incremented by 1 for each prod release
         versionName = "@string/versionName"  // Have to be changed for each prod release
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+        val properties = Properties()
+        properties.load(project.rootProject.file("local.properties").inputStream())
+
+        buildConfigField("String","MAIL","\"${properties.getProperty("MAIL")}\"")
     }
 
     buildTypes {
@@ -98,4 +108,8 @@ dependencies {
     implementation("androidx.viewpager2:viewpager2:1.0.0")
 
     implementation("androidx.swiperefreshlayout:swiperefreshlayout:1.1.0")
+
+    //In-App Update
+    implementation("com.google.android.play:app-update:2.1.0")
+    implementation("com.google.android.play:app-update-ktx:2.1.0")
 }

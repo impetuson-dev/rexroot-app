@@ -37,6 +37,7 @@ class JobreqActivity: AppCompatActivity() {
     var jobRole: String = ""
     var reqJobExp: String = ""
     var jobSalary: String = ""
+    var price: String = ""
 
     private lateinit var alertDialog: Dialog
     private lateinit var dialogBinding: BottomsheetApplyResumeBinding
@@ -60,6 +61,7 @@ class JobreqActivity: AppCompatActivity() {
         jobRole = getIntent().extras?.getString("jobRole") ?: "Not available"
         reqJobExp = getIntent().extras?.getString("reqJobExp") ?: "Not available"
         jobSalary = getIntent().extras?.getString("jobSalary") ?: "Not available"
+        price = getIntent().extras?.getString("price") ?: "Not available"
 
 
         jobreqViewPageAdapter = JobreqViewPagerAdapter(this)
@@ -74,6 +76,7 @@ class JobreqActivity: AppCompatActivity() {
         jobreqViewModel.jobRole = jobRole
         jobreqViewModel.reqjobExp = reqJobExp
         jobreqViewModel.jobSalary = jobSalary
+        jobreqViewModel.price = price
         Log.d("jobid",jobId)
 
         binding.apply{
@@ -164,7 +167,7 @@ class JobreqActivity: AppCompatActivity() {
             }
             else{
                 dialogBinding.yourPartner.isChecked = true
-                dialogBinding.attachResume.text = "Partner's resume"
+                dialogBinding.attachResume.text = "Partner's Resume"
                 dialogBinding.attachResume.setBackgroundColor(getResources().getColor(R.color.violet))
                 dialogBinding.partnerName.visibility = View.VISIBLE
                 dialogBinding.sendOtp.visibility = View.VISIBLE
@@ -188,8 +191,14 @@ class JobreqActivity: AppCompatActivity() {
                 if(jobreqViewModel.partnerName.length < 1){
                     dialogBinding.pdfName.text = "Enter valid name"
                 }
-                else if(jobreqViewModel.partnerPhoneNo.length != 13){
+                else if(jobreqViewModel.partnerName.length < 3){
+                    dialogBinding.pdfName.text = "Name should be more than 2 letters"
+                }
+                else if(jobreqViewModel.partnerPhoneNo.length != 10){
                     dialogBinding.pdfName.text = "Enter valid phone number"
+                }
+                else if(jobreqViewModel.partnerPhoneNo.equals(jobreqViewModel.userPhoneNo)){
+                    dialogBinding.pdfName.text = "Enter your partner's mobile number, Not yours!"
                 }
                 else{
                     val intent = Intent(Intent.ACTION_GET_CONTENT)

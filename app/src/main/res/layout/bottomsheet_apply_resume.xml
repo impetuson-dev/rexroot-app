@@ -146,7 +146,7 @@
                                         android:id="@+id/et_fullname"
                                         android:layout_width="match_parent"
                                         android:layout_height="wrap_content"
-                                        android:hint="Enter Partner's Name"
+                                        android:hint="Partner's Name"
                                         android:maxLines="1"
                                         android:textColorHighlight="#2196F3"/>
 
@@ -164,7 +164,7 @@
                                         android:layout_width="match_parent"
                                         android:layout_height="wrap_content"
                                         app:errorEnabled="true"
-                                        app:placeholderText="Eg: +91987654321"
+                                        app:placeholderText="Eg: 987654321"
                                         app:placeholderTextColor="#A9A9A9"
                                         app:startIconDrawable="@drawable/baseline_phone_24"
                                         app:endIconDrawable="@drawable/icon_exit_black">
@@ -172,7 +172,7 @@
                                         <com.google.android.material.textfield.TextInputEditText
                                             android:layout_width="match_parent"
                                             android:layout_height="wrap_content"
-                                            android:hint="Partner's Mobile No"
+                                            android:hint="Partner's 10 digit Mobile No"
                                             android:maxLines="1"
                                             android:textColorHighlight="#2196F3" />
 
